@@ -22,13 +22,13 @@
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
-
+// 在主机上执行相加运算
 void sumArraysOnHost(float *A, float *B, float *C, const int N){
     for (int idx=0; idx<N; idx++){
         C[idx] = A[idx] + B[idx];
     }
 }
-
+// 初始化数据值
 void initialData(float *ip, int size){
     // generate different seed for random number
     time_t t;
@@ -38,7 +38,7 @@ void initialData(float *ip, int size){
         ip[i] = (float)(rand() & 0xFF)/10.0f;
     }
 }
-
+// 打印数组
 void print(float *array, const int N){
     for (int idx=0; idx<N; idx++){
         printf(" %f", array[idx]);
