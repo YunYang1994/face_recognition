@@ -5,7 +5,7 @@
 
 [<img src="image/cuda-c-programming.png" alt="logo" height="300" align="right" />](https://book.douban.com/subject/27108836/)
 
-# 《CUDA C编程权威指南》
+# 《CUDA C 编程权威指南》
 
 ![](https://img.shields.io/badge/version-v2-green.svg)
 [![](https://img.shields.io/badge/language-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-red.svg)](./README.md)
