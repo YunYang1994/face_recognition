@@ -86,11 +86,23 @@ $ ./sumCPU
 ####  1.2 在GPU上运算
 现在， 你可以在GPU上修改代码来进行数组加法运算， 用`cudaMalloc`在GPU上申请内存。
 ```bashrc
-    float *d_A, *d_B, *d_C;
-    cudaMalloc((float**)&d_A, nBytes);
-    cudaMalloc((float**)&d_B, nBytes);
-    cudaMalloc((float**)&d_C, nBytes);
+float *d_A, *d_B, *d_C;
+cudaMalloc((float**)&d_A, nBytes);
+cudaMalloc((float**)&d_B, nBytes);
+cudaMalloc((float**)&d_C, nBytes);
 ```
+然后使用`cudaMemcpy`函数把数据从主机内存拷贝到GPU的全局内存中，参数`cudaMemcpyHostToDevice`指定了数据的拷贝方向。
+```bashrc
+cudaMemcpy(d_A, h_A, nBytes, cudaMemcpyHostToDevice);
+cudaMemcpy(d_B, h_B, nBytes, cudaMemcpyHostToDevice);
+```
+当数据被转移到**GPU的全局内存后**，主机段调用核函数在GPU上进行数组求和运算。**一旦内核被调用，控制权立刻被传回主机，这样的话，内核与
+主机的是异步进行。**
+```bashrc
+__global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){...}
+```
+
+
 
 
 
