@@ -76,4 +76,5 @@ helloFromGPU <<<1, 10>>>();
 
 在上述代码中， 你只看到了第三步: 调用内核。
 
+[下一章](https://github.com/YunYang1994/cuda-tutorial/edit/master/src/chapter02/README.md)**: CUDA 编程模型**
 
