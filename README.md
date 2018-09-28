@@ -2,10 +2,6 @@
 
 # 《CUDA C编程权威指南》
 
-|Author|YunYang1994|
-|---|---
-|E-mail|dreameryangyun@sjtu.edu.cn
-
 ![](https://img.shields.io/badge/version-v2-green.svg)
 [![](https://img.shields.io/badge/language-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-red.svg)](./README.md)
 [![](https://img.shields.io/badge/chat-%E4%BA%A4%E6%B5%81-667ed5.svg)](./assets/community.md) 
