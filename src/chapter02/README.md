@@ -94,7 +94,7 @@ cudaMalloc((float**)&d_A, nBytes);  //申请n个字节的内存后，返回地�
 cudaMalloc((float**)&d_B, nBytes);
 cudaMalloc((float**)&d_C, nBytes);
 ```
-然后使用`cudaMemcpy`函数把数据从主机内存拷贝到GPU的全局内存中，参数`cudaMemcpyHostToDevice`指定了数据的拷贝方向。
+然后使用`cudaMemcpy`函数把数据从**主机内存拷贝到GPU的全局内存中**，参数`cudaMemcpyHostToDevice`指定了数据的拷贝方向。
 ```bashrc
 cudaMemcpy(d_A, h_A, nBytes, cudaMemcpyHostToDevice);
 cudaMemcpy(d_B, h_B, nBytes, cudaMemcpyHostToDevice);
