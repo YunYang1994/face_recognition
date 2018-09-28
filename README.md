@@ -1,4 +1,4 @@
-<img src="image/cuda-c-programming.png" alt="logo" height="300" align="right" />
+<img src="image/cuda-c-programming.png" alt="logo" height="300" align="right" /> ![](https://book.douban.com/subject/27108836/)
 
 # 《CUDA C编程权威指南》
 
