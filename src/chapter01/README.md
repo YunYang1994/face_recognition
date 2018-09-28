@@ -31,7 +31,6 @@ int main(void)
     printf("Hello World from CPU!\n");
 
     helloFromGPU <<<1, 10>>>();
-    // <<<1, 10>>
     cudaDeviceReset();
     return 0;
 }
@@ -52,7 +51,7 @@ Hello World from GPU!
 Hello World from GPU!
 Hello World from GPU!
 ```
-在上面的代码中，修饰符`__global__`告诉编译器这是一个内核函数，它将从CPU中调用，然后在GPU上执行，在CPU上通过下面的代码启动内核函数
+在上面的代码中，`cudaDeviceReset`表示重置当前线程所关联过的当前设备的所有资源；修饰符`__global__`告诉编译器这是一个内核函数，它将从CPU中调用，然后在GPU上执行，在CPU上通过下面的代码启动内核函数
 
 ```bash
 helloFromGPU <<<1, 10>>>();
