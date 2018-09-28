@@ -1,3 +1,6 @@
+|Author|YunYang1994|
+|---|---
+|E-mail|dreameryangyun@sjtu.edu.cn
 
 # 第 1 章 基于CUDA的异构并行计算
 
