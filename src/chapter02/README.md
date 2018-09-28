@@ -86,8 +86,8 @@ $ ./sumCPU
 ####  1.2 在GPU上运算
 现在， 你可以在GPU上修改代码来进行数组加法运算， 用`cudaMalloc`在GPU上申请内存。
 ```bashrc
-float *d_A, *d_B, *d_C;
-cudaMalloc((float**)&d_A, nBytes);
+float *d_A, *d_B, *d_C;             //先定义数值指针，用来存放地址
+cudaMalloc((float**)&d_A, nBytes);  //申请n个字节的内存后，返回地址
 cudaMalloc((float**)&d_B, nBytes);
 cudaMalloc((float**)&d_C, nBytes);
 ```
@@ -101,6 +101,32 @@ cudaMemcpy(d_B, h_B, nBytes, cudaMemcpyHostToDevice);
 ```bashrc
 __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){...}
 ```
+当内核在GPU上完成了对所有数组元素的处理后，其结果将通过```cudaMemcpy```函数复制回到CPU内存中去。
+```bashrc
+cudaMemcpy(h_C, d_C, nBytes, cudaMemcpyDeviceToHost); # cudaMemcpyDeviceToHost, GPU-->CPU
+```
+最后，一定别忘了调用`cudaFree`函数来释放GPU的内存。
+```bashrc
+cudaFree(d_A);
+cudaFree(d_B);
+cudaFree(d_C);
+```
+详细代码已完成，现在使用以下命令来编译和执行
+```bashrc
+$ nvcc -arch sm_20 sumArraysOnGPU.cu -o sumGPU
+$ ./sumGPU
+malloc memory on Host
+initialize data on Host
+ 3.900000 19.000000 18.700001 7.900000
+ 3.900000 19.000000 18.700001 7.900000
+malloc memory on GPU
+copying inputs from Host to Device
+copying output from Device to Host
+Caculating On GPU
+ 7.800000 38.000000 37.400002 15.800000
+```
+
+
 
 
 
