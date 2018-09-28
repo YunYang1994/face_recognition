@@ -69,7 +69,7 @@ int main(){
     return 0;
 }
 ```
-这是一个纯C语言编写的程序，请见[sumArraysOnHost.c](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnHost.c)，可以使用像下面这样用`nvcc`进行编译
+这是一个纯C语言编写的程序，请见[`sumArraysOnHost.c`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnHost.c)，可以使用像下面这样用`nvcc`进行编译
 ```bash
 $ nvcc -Xcompiler -std=c99 sumArraysOnHost.c -o sumCPU
 $ ./sumCPU
@@ -111,7 +111,7 @@ cudaFree(d_A);
 cudaFree(d_B);
 cudaFree(d_C);
 ```
-关于在GPU上进行数组相加运算请见[sumArraysOnGPU.cu](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)，现在使用以下命令来编译和执行
+关于在GPU上进行数组相加运算，请见[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)，现在使用以下命令来编译和执行
 ```bashrc
 $ nvcc -arch sm_20 sumArraysOnGPU.cu -o sumGPU
 $ ./sumGPU
