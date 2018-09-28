@@ -111,7 +111,7 @@ cudaFree(d_A);
 cudaFree(d_B);
 cudaFree(d_C);
 ```
-详细代码已完成，现在使用以下命令来编译和执行
+[详细代码](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)已完成，现在使用以下命令来编译和执行
 ```bashrc
 $ nvcc -arch sm_20 sumArraysOnGPU.cu -o sumGPU
 $ ./sumGPU
