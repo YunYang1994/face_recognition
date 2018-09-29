@@ -6,7 +6,7 @@
 __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
 
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    C[idx] = A[idx] + B[idx];
+    if (idx < N) C[idx] = A[idx] + B[idx]; // 检查是否越界
     printf("%f + %f = %f Caculated On GPU: block %d thread %d\n", 
             A[idx], B[idx], C[idx], blockIdx.x, threadIdx.x);
 }
