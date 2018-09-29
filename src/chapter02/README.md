@@ -197,6 +197,9 @@ iy = threadIdx.y + blockIdx.y * blockDim.y
 
 坐标索引: (ix, iy)
 ```
+<div align=center><img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/thread-index.png" alt="logo" height="400"></div>
+
+
 - **第二步，可以用以下公式把矩阵坐标映射到全局内存的索引/存储单元上，称为全局索引:**
 ```bashrc
 idx = iy*nx + ix // nx 表示在x维度上元素个数, 对于(4,4)矩阵而言, nx=4
