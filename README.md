@@ -22,9 +22,11 @@ CUDA是一种通用的并行计算平台和编程模型，是在C语言上扩展
 <div align=center><img src="image/GPU-CPU.jpg" alt="logo" height="200"></div>
 
 ### CUDA内存结构
-在CUDA的并行运行环境中，涉及到**线程块**和**线程**的概念。每个线程有自己的私有本地内存（Local Memory），而每个线程块有包含共享内存（Shared Memory）,可以被线程块中所有线程共享，其生命周期与线程块一致。此外，所有的线程都可以访问全局内存（Global Memory）。还可以访问一些只读内存块：常量内存（Constant Memory）和纹理内存（Texture Memory）
 
 <img src="image/cuda-memory-structure.jpg" alt="logo" height="300" align="right" />
+
+在CUDA的并行运行环境中，涉及到**线程块**和**线程**的概念。每个线程有自己的私有本地内存（Local Memory），而每个线程块有包含共享内存（Shared Memory）,可以被线程块中所有线程共享，其生命周期与线程块一致。此外，所有的线程都可以访问全局内存（Global Memory）。还可以访问一些只读内存块：常量内存（Constant Memory）和纹理内存（Texture Memory）
+
 
 ## 目录结构
 - [**第 1 章 基于CUDA的异构并行计算**](./src/chapter01/README.md)
