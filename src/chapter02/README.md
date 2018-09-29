@@ -220,7 +220,7 @@ idx = iy*nx + ix // nx 表示在x维度上元素个数, 对于(4,4)矩阵而言,
 
 <div align=center><img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/block-index.png" alt="logo" height="250"></div>
 
-
+从上图中也可以看出: `block`也有两个维度，分别是`blockIdx.x`和`blockIdx.y`，即`block`的索引坐标表示为(`blockIdx.x`,`blockIdx.y`)。类似地，在每个`block`中，线程`thread`也有两个维度。
 
 
 
