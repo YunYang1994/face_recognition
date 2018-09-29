@@ -19,7 +19,7 @@ CUDA (Compute Unified Device Architecture, 统一计算设备架构) 是NIVIDIA�
 
 GPU并不是一个独立运行的计算平台，而需要与CPU协同工作，可以看成是CPU的协处理器，因此当我们在说GPU并行计算时，其实是指的基于CPU+GPU的异构计算架构。在异构计算架构中，GPU与CPU通过PCIe总线连接在一起来协同工作，CPU所在位置称为为主机端（host），而GPU所在位置称为设备端（device），如下图所示。
 
-<img src="image/GPU-CPU.jpg" alt="logo" height="200">
+<div align=center><img src="image/GPU-CPU.jpg" alt="logo" height="200"></div>
 
 
 ## 目录结构
