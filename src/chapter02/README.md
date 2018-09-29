@@ -152,6 +152,4 @@ __global__ void kernel_name(argument list); // 核函数必须要有一个void�
 | `__device__`   | 在设备端执行   | 仅能从设备端调用 | |
 | `__host__`  | 在主机端执行 | 仅能从主机端上调用 | 可以省略不写 |
 
-考虑一个简单的例子，将两个大小为N为向量**A**和**B**相加，主机端的向量加法的**C**代码如下:
-
-
+考虑一个简单的例子，将两个大小为6为向量**A**和**B**相加。由于每个元素相加过程不存在相关性，现在使考虑使用两个块，每个块包含3个线程来计算该过程。因此来说，每个线程的计算就是每个元素的相加过程。在代码[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)的基础上，我们作出以下几点改动。
