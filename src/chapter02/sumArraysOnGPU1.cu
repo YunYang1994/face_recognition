@@ -31,11 +31,10 @@ void print(float *array, const int N){
 int main(){
     int nElem = 6;
     size_t nBytes = nElem * sizeof(float);
-    float *h_A, *h_B, *h_C;
+    float *h_A, *h_B;
 
     h_A = (float *)malloc(nBytes);
     h_B = (float *)malloc(nBytes);
-    h_C = (float *)malloc(nBytes);
 
     initialData(h_A, nElem);
     initialData(h_B, nElem);
@@ -60,7 +59,6 @@ int main(){
 
     free(h_A);
     free(h_B);
-    free(h_C);
 
     cudaFree(d_A);
     cudaFree(d_B);
