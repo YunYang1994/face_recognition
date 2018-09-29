@@ -137,7 +137,7 @@ Caculating On GPU
 kernel_name <<<block, thread>>>(argument list);
 ```
 `block`是指网格维度，表示启动块的数目；`thread`表示的是块的维度，也就是每个块中线程的数目。每个线程的坐标表里以`blockIdx`和`threadIdx`来表示,因此我们可以得到总线程数量为`block*thread`。例如，在下图中有4096个线程块，因此网格维度gridDim=4096；每个块中有256个线程，因此块维度blockDim=256，因此一共有4096*256个线程。
-<img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/block-thread.jpg" alt="logo" height="200" align="center" />
+<div align=center><img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/block-thread.jpg" alt="logo" height="200"></div>
 
 
 
