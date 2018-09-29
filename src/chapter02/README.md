@@ -77,11 +77,11 @@ int main(){
 ```
 这是一个纯C语言编写的程序，请见[`sumArraysOnHost.c`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnHost.c)，可以使用像下面这样用`nvcc`进行编译
 ```bash
-$ nvcc -Xcompiler -std=c99 sumArraysOnHost.c -o sumCPU
-$ ./sumCPU
- 18.900000 22.400000 19.600000 22.700001
- 18.900000 22.400000 19.600000 22.700001
- 37.799999 44.799999 39.200001 45.400002
+$ nvcc -Xcompiler -std=c99 sumArraysOnHost.c -o sumArraysOnHost
+$ ./sumArraysOnHost
+ 22.400000 24.799999 20.000000 14.200000
+ 22.400000 24.799999 20.000000 14.200000
+ 44.799999 49.599998 40.000000 28.400000
 ```
 在上述命令行中，需要注意:
 
@@ -119,17 +119,17 @@ cudaFree(d_C);
 ```
 关于在GPU上进行数组相加运算，详细代码请见[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)，现在使用以下命令来编译和执行
 ```bashrc
-$ nvcc -arch sm_20 sumArraysOnGPU.cu -o sumGPU
-$ ./sumGPU
+$ nvcc -arch=sm_20 sumArraysOnGPU.cu -o sumArraysOnGPU
+$ ./sumArraysOnGPU
 malloc memory on Host
 initialize data on Host
- 3.900000 19.000000 18.700001 7.900000
- 3.900000 19.000000 18.700001 7.900000
+ 8.900000 23.000000 14.100000 12.200000
+ 8.900000 23.000000 14.100000 12.200000
 malloc memory on GPU
 copying inputs from Host to Device
 copying output from Device to Host
 Caculating On GPU
- 7.800000 38.000000 37.400002 15.800000
+ 17.799999 46.000000 28.200001 24.400000
 ```
 
 ### 2.2 编写核函数
@@ -174,17 +174,17 @@ __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
 #### 3. 执行和编译
 完整代码见[`sumArraysOnGPU1.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU1.cu)，最终通过以下命令编译执行，得到
 ```bashrc
-$ nvcc -arch=sm_20 sumArraysOnGPU1.cu -o sumGPU1
-$ ./sumGPU1
-向量 A: 0.300000 16.299999 7.100000 3.500000 21.200001 3.800000
-向量 B: 0.300000 16.299999 7.100000 3.500000 21.200001 3.800000
+$  nvcc -arch=sm_20 sumArraysOnGPU1.cu -o sumArraysOnGPU1
+$ ./sumArraysOnGPU1
+向量 A: 20.400000 25.299999 1.000000 12.300000 17.700001 18.299999
+向量 B: 20.400000 25.299999 1.000000 12.300000 17.700001 18.299999
 向量 C 的每个元素计算过程:
-0.300000 + 0.300000 = 0.600000 Caculated On GPU: block 0 thread 0
-16.299999 + 16.299999 = 32.599998 Caculated On GPU: block 0 thread 1
-7.100000 + 7.100000 = 14.200000 Caculated On GPU: block 0 thread 2
-3.500000 + 3.500000 = 7.000000 Caculated On GPU: block 1 thread 0
-21.200001 + 21.200001 = 42.400002 Caculated On GPU: block 1 thread 1
-3.800000 + 3.800000 = 7.600000 Caculated On GPU: block 1 thread 2
+20.400000 + 20.400000 = 40.799999 Caculated On GPU: block 0 thread 0
+25.299999 + 25.299999 = 50.599998 Caculated On GPU: block 0 thread 1
+1.000000 + 1.000000 = 2.000000 Caculated On GPU: block 0 thread 2
+12.300000 + 12.300000 = 24.600000 Caculated On GPU: block 1 thread 0
+17.700001 + 17.700001 = 35.400002 Caculated On GPU: block 1 thread 1
+18.299999 + 18.299999 = 36.599998 Caculated On GPU: block 1 thread 2
 ```
 ### 2.3 矩阵运算
 
