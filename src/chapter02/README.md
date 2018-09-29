@@ -165,8 +165,30 @@ __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
              A[idx], B[idx], C[idx], blockIdx.x, threadIdx.x);
 }
 ```
-
-
+#### 1. 定义块和线程
+```cpp
+dim3 block(2);
+dim3 thread(3);
+```
+完整代码见[`sumArraysOnGPU1.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU1.cu)，最终通过以下命令编译执行，得到
+```bashrc
+$ nvcc -arch=sm_20 sumArraysOnGPU1.cu -o sumGPU1
+$ ./sumGPU1
+malloc memory on Host
+initialize data on Host
+ 23.799999 12.100000 8.500000 0.900000 4.600000 2.900000
+ 23.799999 12.100000 8.500000 0.900000 4.600000 2.900000
+malloc memory on GPU
+copying inputs from Host to Device
+copying output from Device to Host
+23.799999 + 23.799999 = 47.599998 Caculated On GPU: block 0 thread 0
+12.100000 + 12.100000 = 24.200001 Caculated On GPU: block 0 thread 1
+8.500000 + 8.500000 = 17.000000 Caculated On GPU: block 0 thread 2
+0.900000 + 0.900000 = 1.800000 Caculated On GPU: block 1 thread 0
+4.600000 + 4.600000 = 9.200000 Caculated On GPU: block 1 thread 1
+2.900000 + 2.900000 = 5.800000 Caculated On GPU: block 1 thread 2
+ 47.599998 24.200001 17.000000 1.800000 9.200000 5.800000
+```
 
 
 
