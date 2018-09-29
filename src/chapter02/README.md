@@ -175,15 +175,15 @@ __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
 ```bashrc
 $ nvcc -arch=sm_20 sumArraysOnGPU1.cu -o sumGPU1
 $ ./sumGPU1
-向量 A: 1.100000 8.500000 16.900000 14.600000 15.800000 6.900000
-向量 B: 1.100000 8.500000 16.900000 14.600000 15.800000 6.900000
+向量 A: 0.400000 18.500000 7.900000 15.800000 24.500000 2.300000
+向量 B: 0.400000 18.500000 7.900000 15.800000 24.500000 2.300000
 向量 C 的每个元素计算过程:
-1.100000 + 1.100000 = 2.200000 Caculated On GPU: block 0 thread 0
-8.500000 + 8.500000 = 17.000000 Caculated On GPU: block 0 thread 1
-16.900000 + 16.900000 = 33.799999 Caculated On GPU: block 0 thread 2
-14.600000 + 14.600000 = 29.200001 Caculated On GPU: block 1 thread 0
-15.800000 + 15.800000 = 31.600000 Caculated On GPU: block 1 thread 1
-6.900000 + 6.900000 = 13.800000 Caculated On GPU: block 1 thread 2
+0.400000 + 0.400000 = 0.800000 Caculated On GPU: block 0 thread 0
+18.500000 + 18.500000 = 37.000000 Caculated On GPU: block 0 thread 1
+7.900000 + 7.900000 = 15.800000 Caculated On GPU: block 0 thread 2
+15.800000 + 15.800000 = 31.600000 Caculated On GPU: block 1 thread 0
+24.500000 + 24.500000 = 49.000000 Caculated On GPU: block 1 thread 1
+2.300000 + 2.300000 = 4.600000 Caculated On GPU: block 1 thread 2
 ```
 
 
