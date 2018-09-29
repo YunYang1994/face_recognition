@@ -130,6 +130,20 @@ Caculating On GPU
  7.800000 38.000000 37.400002 15.800000
 ```
 
+### 2.1 编写核函数
+
+核函数是在设备端执行的代码，它的调用形式表现为
+```bashrc
+kernel_name <<<block, thread>>>(argument list);
+```
+`block`是指网格维度，表示启动块的数目；`thread`表示的是块的维度，也就是每个块中线程的数目。每个线程的坐标表里以`blockIdx`和`threadIdx`来表示。
+
+
+
+
+
+
+
 
 
 
