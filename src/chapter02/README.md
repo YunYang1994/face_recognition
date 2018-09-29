@@ -115,7 +115,7 @@ cudaFree(d_A);
 cudaFree(d_B);
 cudaFree(d_C);
 ```
-关于在GPU上进行数组相加运算，请见[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)，现在使用以下命令来编译和执行
+关于在GPU上进行数组相加运算，详细代码请见[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)，现在使用以下命令来编译和执行
 ```bashrc
 $ nvcc -arch sm_20 sumArraysOnGPU.cu -o sumGPU
 $ ./sumGPU
