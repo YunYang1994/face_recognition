@@ -206,6 +206,7 @@ idx = iy*nx + ix // nx 表示在x维度上元素个数, 对于(4,4)矩阵而言,
 
 全局索引: idx
 ```
+
 例如,对于维度为(4,4)的矩阵而言, 
 ```bashrc
                                 0,  1,  2,  3,
@@ -215,7 +216,9 @@ idx = iy*nx + ix // nx 表示在x维度上元素个数, 对于(4,4)矩阵而言,
                                 
 那么，对于元素'9' --> 坐标索引 (1,2)， 全局内存索引为 idx = 2*4 + 1 = 9
 ```
+再比如，对于一个(6,8)维度的矩阵而言，假如划分为6个块，每个块有8个线程，那么就如下图所示
 
+<div align=center><img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/block-index.png" alt="logo" height="250"></div>
 
 
 
