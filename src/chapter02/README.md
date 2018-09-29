@@ -133,7 +133,7 @@ Caculating On GPU
 
 ### 2.2 编写核函数
 
-核函数是在设备端执行的代码，它的调用形式表现为
+不妨先来介绍下核函数、块和线程的概念。核函数是在设备端执行的代码，它描述的是在GPU上运行计算的任务，它的调用形式具体表现为
 ```bashrc
 kernel_name <<<block, thread>>>(argument list);
 ```
