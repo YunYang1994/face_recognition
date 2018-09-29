@@ -133,11 +133,11 @@ Caculating On GPU
 
 ### 2.2 编写核函数
 
-核函数是在设备端执行的代码，它的调用形式表现为
+不妨先来介绍下核函数、块和线程的概念。核函数是在设备端执行的代码，它描述的是在GPU上运行计算的任务，它的调用形式具体表现为
 ```bashrc
 kernel_name <<<block, thread>>>(argument list);
 ```
-`argument list`是形参，其调用值需要在设备端上事先声明。`block`是指网格维度，表示启动块的数目；`thread`表示的是块的维度，也就是每个块中线程的数目。每个线程的坐标表里以`blockIdx`和`threadIdx`来表示,因此我们可以得到总线程数量为`block*thread`。例如，在下图中有4096个线程块，因此网格维度gridDim=4096；每个块中有256个线程，因此块维度blockDim=256，因此一共有4096*256个线程。
+`argument list`是形参，`block`是指网格维度，表示启动块的数目；`thread`表示的是块的维度，也就是每个块中线程的数目。每个线程的坐标表里以`blockIdx`和`threadIdx`来表示,因此我们可以得到总线程数量为`block*thread`。例如，在下图中有4096个线程块，因此网格维度gridDim=4096；每个块中有256个线程，因此块维度blockDim=256，因此一共有4096*256个线程。
 <div align=center><img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/block-thread.jpg" alt="logo" height="200"></div>
 
 当核函数被调用时，许多不同的CUDA线程并行执行同一个计算任务，以下用`__global`声明定义核函数:
@@ -152,6 +152,41 @@ __global__ void kernel_name(argument list); // 核函数必须要有一个void�
 | `__device__`   | 在设备端执行   | 仅能从设备端调用 | |
 | `__host__`  | 在主机端执行 | 仅能从主机端上调用 | 可以省略不写 |
 
-考虑一个简单的例子，将两个大小为N为向量**A**和**B**相加，主机端的向量加法的**C**代码如下:
+考虑一个简单的例子，将两个大小为6为向量**A**和**B**相加为例。由于每个元素相加过程不存在相关性，现在使考虑使用两个块，每个块包含3个线程来计算该过程。因此来说，每个线程的计算就是每个元素的相加过程。在代码[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)的基础上，我们需要
+
+#### 1. 定义块和线程
+```cpp
+dim3 block(2);
+dim3 thread(3);
+```
+#### 2. 定义核函数
+在这里，每个线程都将调用同一个核函数。因此可以考虑基于给定块索引和线程索引来计算全局数据访问的唯一索引:
+```cpp
+__global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
+
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    C[idx] = A[idx] + B[idx];
+    printf("%f + %f = %f Caculated On GPU: block %d thread %d\n", 
+             A[idx], B[idx], C[idx], blockIdx.x, threadIdx.x);
+}
+```
+#### 3. 执行和编译
+完整代码见[`sumArraysOnGPU1.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU1.cu)，最终通过以下命令编译执行，得到
+```bashrc
+$ nvcc -arch=sm_20 sumArraysOnGPU1.cu -o sumGPU1
+$ ./sumGPU1
+向量 A: 25.000000 15.200000 7.900000 21.500000 2.200000 13.400000
+向量 B: 25.000000 15.200000 7.900000 21.500000 2.200000 13.400000
+向量 C 的每个元素计算过程:
+25.000000 + 25.000000 = 50.000000 Caculated On GPU: block 0 thread 0
+15.200000 + 15.200000 = 30.400000 Caculated On GPU: block 0 thread 1
+7.900000 + 7.900000 = 15.800000 Caculated On GPU: block 0 thread 2
+21.500000 + 21.500000 = 43.000000 Caculated On GPU: block 1 thread 0
+2.200000 + 2.200000 = 4.400000 Caculated On GPU: block 1 thread 1
+13.400000 + 13.400000 = 26.799999 Caculated On GPU: block 1 thread 2
+```
+
+
+
 
 
