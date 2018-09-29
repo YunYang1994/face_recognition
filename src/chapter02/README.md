@@ -152,14 +152,14 @@ __global__ void kernel_name(argument list); // 核函数必须要有一个void�
 | `__device__`   | 在设备端执行   | 仅能从设备端调用 | |
 | `__host__`  | 在主机端执行 | 仅能从主机端上调用 | 可以省略不写 |
 
-考虑一个简单的例子，将两个大小为6为向量**A**和**B**相加为例。由于每个元素相加过程不存在相关性，现在使考虑使用两个块，每个块包含3个线程来计算该过程。因此来说，每个线程的计算就是每个元素的相加过程。在代码[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)的基础上，我们作出以下几点改动。
+考虑一个简单的例子，将两个大小为6为向量**A**和**B**相加为例。由于每个元素相加过程不存在相关性，现在使考虑使用两个块，每个块包含3个线程来计算该过程。因此来说，每个线程的计算就是每个元素的相加过程。在代码[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)的基础上，我们需要
 
 #### 1. 定义块和线程
 ```cpp
 dim3 block(2);
 dim3 thread(3);
 ```
-#### 1. 定义核函数
+#### 2. 定义核函数
 在这里，每个线程都将调用同一个核函数。因此可以考虑基于给定块索引和线程索引来计算全局数据访问的唯一索引:
 ```cpp
 __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
@@ -174,20 +174,15 @@ __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
 ```bashrc
 $ nvcc -arch=sm_20 sumArraysOnGPU1.cu -o sumGPU1
 $ ./sumGPU1
-malloc memory on Host
-initialize data on Host
- 23.799999 12.100000 8.500000 0.900000 4.600000 2.900000
- 23.799999 12.100000 8.500000 0.900000 4.600000 2.900000
-malloc memory on GPU
-copying inputs from Host to Device
-copying output from Device to Host
-23.799999 + 23.799999 = 47.599998 Caculated On GPU: block 0 thread 0
-12.100000 + 12.100000 = 24.200001 Caculated On GPU: block 0 thread 1
-8.500000 + 8.500000 = 17.000000 Caculated On GPU: block 0 thread 2
-0.900000 + 0.900000 = 1.800000 Caculated On GPU: block 1 thread 0
-4.600000 + 4.600000 = 9.200000 Caculated On GPU: block 1 thread 1
-2.900000 + 2.900000 = 5.800000 Caculated On GPU: block 1 thread 2
- 47.599998 24.200001 17.000000 1.800000 9.200000 5.800000
+向量 A: 25.000000 15.200000 7.900000 21.500000 2.200000 13.400000
+向量 B: 25.000000 15.200000 7.900000 21.500000 2.200000 13.400000
+向量 C 的每个元素计算过程:
+25.000000 + 25.000000 = 50.000000 Caculated On GPU: block 0 thread 0
+15.200000 + 15.200000 = 30.400000 Caculated On GPU: block 0 thread 1
+7.900000 + 7.900000 = 15.800000 Caculated On GPU: block 0 thread 2
+21.500000 + 21.500000 = 43.000000 Caculated On GPU: block 1 thread 0
+2.200000 + 2.200000 = 4.400000 Caculated On GPU: block 1 thread 1
+13.400000 + 13.400000 = 26.799999 Caculated On GPU: block 1 thread 2
 ```
 
 
