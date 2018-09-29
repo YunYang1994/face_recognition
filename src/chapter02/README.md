@@ -170,6 +170,7 @@ __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
              A[idx], B[idx], C[idx], blockIdx.x, threadIdx.x);
 }
 ```
+#### 3. 执行和编译
 完整代码见[`sumArraysOnGPU1.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU1.cu)，最终通过以下命令编译执行，得到
 ```bashrc
 $ nvcc -arch=sm_20 sumArraysOnGPU1.cu -o sumGPU1
