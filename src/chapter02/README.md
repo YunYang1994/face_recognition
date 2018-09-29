@@ -139,8 +139,17 @@ kernel_name <<<block, thread>>>(argument list);
 `block`是指网格维度，表示启动块的数目；`thread`表示的是块的维度，也就是每个块中线程的数目。每个线程的坐标表里以`blockIdx`和`threadIdx`来表示,因此我们可以得到总线程数量为`block*thread`。例如，在下图中有4096个线程块，因此网格维度gridDim=4096；每个块中有256个线程，因此块维度blockDim=256，因此一共有4096*256个线程。
 <div align=center><img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/block-thread.jpg" alt="logo" height="200"></div>
 
+当核函数被调用时，许多不同的CUDA线程并行执行同一个计算任务，以下用`__global`声明定义核函数:
+```bashrc
+__global__ void kernel_name(argument list); // 核函数必须要有一个void返回类型
+```
+下表总结了 CUDA C 程序中函数类型的限定符。函数限定符将指定一个函数在主机上执行还是在设备上执行，以及可被主机调用还是被设备调用。
 
-
+| 限定符  | 执行 | 调用 | 备注 |
+| ---------- | -----------| ---------- | -----------|
+| `__global__`   | 表格单元   | 可从主机、设备端调用 | 必须有一个void返回类型 |
+| `__device__`   | 表格单元   | 仅能从设备端调用 | |
+| `__host__`  | 在主机端上执行 | 仅能从主机端上调用 | 可以省略不写 |
 
 
 
