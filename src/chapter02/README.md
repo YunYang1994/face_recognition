@@ -241,6 +241,30 @@ __global__ void sumMatrixOnGPU2D(int *MatA, int *MatB, int *MatC, int nx, int ny
 ```bashrc
 $ nvcc -arch=sm_20 sumMatrixOnGPU-2D-grid-2D-block.cu -o sumMatrixOnGPU-2D-grid-2D-block
 $ ./sumMatrixOnGPU-2D-grid-2D-block
+
+Matrix: (4.4)
+  3  7  9  8
+  7 10 12  9
+ 17 10 12 18
+ 12 22 17 21
+
+
+Matrix: (4.4)
+  0  7  4  9
+  5 13 13 16
+ 10  9 12 14
+ 19 18 23 17
+
+sumMatrixOnHost elapsed 0.000001 sec
+sumMatrixOnGPU2D <<<(1, 1), (32, 32)>>> elapsed 0.000021 sec
+
+Matrix: (4.4)
+  3 14 13 17
+ 12 23 25 25
+ 27 19 24 32
+ 31 40 40 38
+
+Arrays match!
 ```
 
 
