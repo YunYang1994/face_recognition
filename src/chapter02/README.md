@@ -230,7 +230,7 @@ idx = iy*nx + ix // nx 表示在x维度上元素个数, 对于(4,4)矩阵而言,
 __global__ void sumMatrixOnGPU2D(int *MatA, int *MatB, int *MatC, int nx, int ny){
     unsigned int ix = threadIdx.x + blockIdx.x * blockDim.x;
     unsigned int iy = threadIdx.y + blockIdx.y * blockDim.y;
-    unsigned int idx = iy * nx + ix;
+    unsigned int idx = iy * nx + ix;    // 矩阵的存储都是通过一维数组的形式存储，因此我们需要计算全局索引位置
     
     if(ix < nx && iy < ny)
         MatC[idx] = MatA[idx] + MatB[idx];
