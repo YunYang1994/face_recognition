@@ -226,6 +226,25 @@ idx = iy*nx + ix // nx 表示在x维度上元素个数, 对于(4,4)矩阵而言,
 ####  2.3.2 求和运算
 在本小节中，我们将对二维矩阵的求和运算作并行处理。由于矩阵是二维的，不妨考虑将使用一个二维网格和二维块来编写一个矩阵加法的核函数。
 
+```cpp
+__global__ void sumMatrixOnGPU2D(int *MatA, int *MatB, int *MatC, int nx, int ny){
+    unsigned int ix = threadIdx.x + blockIdx.x * blockDim.x;
+    unsigned int iy = threadIdx.y + blockIdx.y * blockDim.y;
+    unsigned int idx = iy * nx + ix;
+    
+    if(ix < nx && iy < ny)
+        MatC[idx] = MatA[idx] + MatB[idx];
+}
+```
+
+然后我们通过以下命令编译和执行文件[`sumMatrixOnGPU-2D-grid-2D-block.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumMatrixOnGPU-2D-grid-2D-block.cu)
+```bashrc
+$ nvcc -arch=sm_20 sumMatrixOnGPU-2D-grid-2D-block.cu -o sumMatrixOnGPU-2D-grid-2D-block
+$ ./sumMatrixOnGPU-2D-grid-2D-block
+```
+
+
+
 
 
 
