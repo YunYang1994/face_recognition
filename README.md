@@ -29,6 +29,6 @@ CUDA是一种通用的并行计算平台和编程模型，是在C语言上扩展
 
 
 ## 目录结构
-- [**第 1 章 基于CUDA的异构并行计算**](./src/chapter01/README.md)
-- [**第 2 章 CUDA 编程模型**](./src/chapter02/README.md)
-- [**第 3 章 CUDA 执行模型**](./src/chapter03/README.md)
+- [**第 1 章 基于CUDA的异构并行计算**](./chapter01/README.md)
+- [**第 2 章 CUDA 编程模型**](./chapter02/README.md)
+- [**第 3 章 CUDA 执行模型**](./chapter03/README.md)
