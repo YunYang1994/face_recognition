@@ -75,7 +75,7 @@ int main(){
     return 0;
 }
 ```
-这是一个纯C语言编写的程序，请见[`sumArraysOnHost.c`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnHost.c)，可以使用像下面这样用`nvcc`进行编译
+这是一个纯C语言编写的程序，请见[`sumArraysOnHost.c`](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter02/sumArraysOnHost.c)，可以使用像下面这样用`nvcc`进行编译
 ```bash
 $ nvcc -Xcompiler -std=c99 sumArraysOnHost.c -o sumArraysOnHost
 $ ./sumArraysOnHost
@@ -117,7 +117,7 @@ cudaFree(d_A);
 cudaFree(d_B);
 cudaFree(d_C);
 ```
-关于在GPU上进行数组相加运算，详细代码请见[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)，现在使用以下命令来编译和执行
+关于在GPU上进行数组相加运算，详细代码请见[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter02/sumArraysOnGPU.cu)，现在使用以下命令来编译和执行
 ```bashrc
 $ nvcc -arch=sm_20 sumArraysOnGPU.cu -o sumArraysOnGPU
 $ ./sumArraysOnGPU
@@ -153,7 +153,7 @@ __global__ void kernel_name(argument list); // 核函数必须要有一个void�
 | `__device__`   | 在设备端执行   | 仅能从设备端调用 |
 | `__host__`  | 在主机端执行 | 仅能从主机端上调用 | 可以省略不写 |
 
-考虑一个简单的例子，将两个大小为6为向量**A**和**B**相加为例。由于每个元素相加过程不存在相关性，现在使考虑使用两个块，每个块包含3个线程来计算该过程。因此来说，**每个线程的计算就是每个元素的相加过程**。在代码[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU.cu)的基础上，我们需要
+考虑一个简单的例子，将两个大小为6为向量**A**和**B**相加为例。由于每个元素相加过程不存在相关性，现在使考虑使用两个块，每个块包含3个线程来计算该过程。因此来说，**每个线程的计算就是每个元素的相加过程**。在代码[`sumArraysOnGPU.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter02/sumArraysOnGPU.cu)的基础上，我们需要
 
 #### 1. 定义块和线程
 ```cpp
@@ -172,7 +172,7 @@ __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
 }
 ```
 #### 3. 执行和编译
-完整代码见[`sumArraysOnGPU1.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/sumArraysOnGPU1.cu)，最终通过以下命令编译执行，得到
+完整代码见[`sumArraysOnGPU1.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter02/sumArraysOnGPU1.cu)，最终通过以下命令编译执行，得到
 ```bashrc
 $  nvcc -arch=sm_20 sumArraysOnGPU1.cu -o sumArraysOnGPU1
 $ ./sumArraysOnGPU1
@@ -273,8 +273,8 @@ Arrays match!
 | `CPU`   | 0.000001 s  | 0.000004 s | 0.000206 s | 0.000797 s | 0.003192 s | 0.012736 s | 0.051285 s |
 | `GPU`   | 0.000021 s  | 0.000021 s | 0.000113 s | 0.000449 s | 0.000923 s | 0.001989 s | 0.006241 s |
 
-上一章: [**基于CUDA的异构并行计算**](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter01/README.md)<br>
-下一章: [**CUDA执行模型**](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter03/README.md)
+上一章: [**基于CUDA的异构并行计算**](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter01/README.md)<br>
+下一章: [**CUDA执行模型**](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter03/README.md)
 
 
 

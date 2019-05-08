@@ -35,7 +35,7 @@ int main(void)
     return 0;
 }
 ```
-在linux终端下使用以下命令进行编译[`hello.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter01/hello.cu)，然后执行程序得到
+在linux终端下使用以下命令进行编译[`hello.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter01/hello.cu)，然后执行程序得到
 ```bash
 $ nvcc -arch sm_20 hello.cu -o hello
 $ ./hello
@@ -76,5 +76,5 @@ helloFromGPU <<<1, 10>>>();
 
 在上述代码中， 你只看到了第三步: 调用内核。
 
-下一章: [**CUDA 编程模型**](https://github.com/YunYang1994/cuda-tutorial/blob/master/src/chapter02/README.md)
+下一章: [**CUDA 编程模型**](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter02/README.md)
 
