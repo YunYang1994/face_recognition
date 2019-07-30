@@ -45,3 +45,4 @@ obj:
 clean:
 	rm -rf $(OBJS) $(SLIB) $(ALIB) $(EXEC) $(EXOBJS) $(OBJDIR) result.jpg
 
+
