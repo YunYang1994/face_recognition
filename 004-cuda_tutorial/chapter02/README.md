@@ -1,4 +1,4 @@
-# 第 2 章 CUDA 编程模型
+# 第 2 章 矩阵求和运算
 
 
 目录
@@ -139,7 +139,8 @@ Caculating On GPU
 kernel_name <<<block, thread>>>(argument list);
 ```
 `argument list`是形参，`block`是指网格维度，表示启动块的数目；`thread`表示的是块的维度，也就是每个块中线程的数目。每个线程的坐标表里以`blockIdx`和`threadIdx`来表示,因此我们可以得到总线程数量为`block*thread`。例如，在下图中有4096个线程块，因此网格维度gridDim=4096；每个块中有256个线程，因此块维度blockDim=256，因此一共有4096*256个线程。
-<div align=center><img src="https://github.com/YunYang1994/CodeFun/tree/master/004-cuda_tutorial/image/block-thread.jpg" alt="logo" height="200"></div>
+
+<div align=center><img src="https://github.com/YunYang1994/CodeFun/blob/master/004-cuda_tutorial/image/block-thread.jpg" alt="logo" height="200"></div>
 
 当核函数被调用时，许多不同的CUDA线程并行执行同一个计算任务，以下用`__global`声明定义核函数:
 ```bashrc
@@ -198,6 +199,7 @@ iy = threadIdx.y + blockIdx.y * blockDim.y
 
 坐标索引: (ix, iy)
 ```
+
 <div align=center><img src="https://github.com/YunYang1994/CodeFun/tree/master/004-cuda_tutorial/image/thread-index.png" alt="logo" height="250"></div>
 
 
