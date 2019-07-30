@@ -275,8 +275,8 @@ Arrays match!
 | `CPU`   | 0.000001 s  | 0.000004 s | 0.000206 s | 0.000797 s | 0.003192 s | 0.012736 s | 0.051285 s |
 | `GPU`   | 0.000021 s  | 0.000021 s | 0.000113 s | 0.000449 s | 0.000923 s | 0.001989 s | 0.006241 s |
 
-上一章: [**基于CUDA的异构并行计算**](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter01/README.md)<br>
-下一章: [**CUDA执行模型**](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter03/README.md)
+上一章: [**了解CUDA编程**](https://github.com/YunYang1994/CodeFun/blob/master/004-cuda_tutorial/chapter01/README.md)<br>
+下一章: [**矩阵相乘运算**](https://github.com/YunYang1994/CodeFun/blob/master/004-cuda_tutorial/chapter03/README.md)
 
 
 
