@@ -139,7 +139,7 @@ Caculating On GPU
 kernel_name <<<block, thread>>>(argument list);
 ```
 `argument list`是形参，`block`是指网格维度，表示启动块的数目；`thread`表示的是块的维度，也就是每个块中线程的数目。每个线程的坐标表里以`blockIdx`和`threadIdx`来表示,因此我们可以得到总线程数量为`block*thread`。例如，在下图中有4096个线程块，因此网格维度gridDim=4096；每个块中有256个线程，因此块维度blockDim=256，因此一共有4096*256个线程。
-<div align=center><img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/block-thread.jpg" alt="logo" height="200"></div>
+<div align=center><img src="https://github.com/YunYang1994/CodeFun/tree/master/004-cuda_tutorial/image/block-thread.jpg" alt="logo" height="200"></div>
 
 当核函数被调用时，许多不同的CUDA线程并行执行同一个计算任务，以下用`__global`声明定义核函数:
 ```bashrc
@@ -172,7 +172,7 @@ __global__ void sumArraysOnGPU(float *A, float *B, float *C, const int N){
 }
 ```
 #### 3. 执行和编译
-完整代码见[`sumArraysOnGPU1.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter02/sumArraysOnGPU1.cu)，最终通过以下命令编译执行，得到
+完整代码见[`sumArraysOnGPU1.cu`](https://github.com/YunYang1994/CodeFun/tree/master/004-cuda_tutorial/chapter02/sumArraysOnGPU1.cu)，最终通过以下命令编译执行，得到
 ```bashrc
 $  nvcc -arch=sm_20 sumArraysOnGPU1.cu -o sumArraysOnGPU1
 $ ./sumArraysOnGPU1
@@ -198,7 +198,7 @@ iy = threadIdx.y + blockIdx.y * blockDim.y
 
 坐标索引: (ix, iy)
 ```
-<div align=center><img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/thread-index.png" alt="logo" height="250"></div>
+<div align=center><img src="https://github.com/YunYang1994/CodeFun/tree/master/004-cuda_tutorial/image/thread-index.png" alt="logo" height="250"></div>
 
 
 - **第二步，可以用以下公式把矩阵坐标映射到全局内存的索引/存储单元上，称为全局索引:**
@@ -219,7 +219,7 @@ idx = iy*nx + ix // nx 表示在x维度上元素个数, 对于(4,4)矩阵而言,
 ```
 再比如，对于一个(6,8)维度的矩阵而言，假如划分为6个块，每个块有8个线程，那么就如下图所示
 
-<div align=center><img src="https://github.com/YunYang1994/cuda-tutorial/blob/master/image/block-index.png" alt="logo" height="250"></div>
+<div align=center><img src="https://github.com/YunYang1994/CodeFun/tree/master/004-cuda_tutorial/image/block-index.png" alt="logo" height="250"></div>
 
 从上图中也可以看出: `block`也有两个维度，分别是`blockIdx.x`和`blockIdx.y`，即`block`的索引坐标表示为(`blockIdx.x`,`blockIdx.y`)。类似地，在每个`block`中，线程`thread`也有两个维度。
 
