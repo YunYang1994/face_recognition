@@ -10,7 +10,9 @@
 #### 5.2 [实现堆栈算法](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/5.2.实现堆栈算法.ipynb)
 #### 5.3 [二叉搜索树](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/5.3.二叉搜索树.ipynb)
 #### 5.4 [平衡二叉树](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/5.4.平衡二叉树.ipynb)
-#### 6.1 [图的基本概念](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/6.1 图的基本概念.ipynb)
+#### 6.1 [图的基本概念](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/6.1.图的基本概念.ipynb)
+
+
 
 ### 图像处理算法
 --------------------
