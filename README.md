@@ -3,7 +3,7 @@
 >> 这是一份很用心的个人学习笔记，只有我能看得懂。<br>
 >>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------- 2019 年 7 月 31 日
 
-### Python与数据结构
+### 那些年，我学过的Python与数据结构.
 --------------------
 #### 1. [什么是线性表](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/1.什么是线性表.ipynb)
 #### 2. [学习栈和队列](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/2.学习栈和队列.ipynb)
@@ -16,18 +16,18 @@
 #### 6.1 [图的基本概念](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/6.1.图的基本概念.ipynb)
 
 
-### 图像处理算法
+### 纯C语言底层实现的图像处理算法，不用安装任何第三方依赖库.
 --------------------
 #### 1. [利用stb头文件读写图片](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
 #### 2. [彩色图像转化成灰度图像](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#rgb2gray)
 #### 3. [图像二值化](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#thresh_binary)
 #### 4. [线性插值和最近邻插值](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
 
-### 深度学习算法
+### 深度学习踩过的坑
 --------------------
 #### 1. [如何实现pytorch与tf之间的相互转化？](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
 
-### 学习CUDA 编程
+### 既然要学深度学习，那么CUDA 编程肯定是加分项了.
 --------------------
 #### 1. [了解CUDA编程](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter01)
 #### 2. [矩阵求和运算](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter02)
