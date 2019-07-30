@@ -239,7 +239,7 @@ __global__ void sumMatrixOnGPU2D(int *MatA, int *MatB, int *MatC, int nx, int ny
 }
 ```
 
-然后我们通过以下命令编译和执行文件[`sumMatrixOnGPU-2D-grid-2D-block.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter02/sumMatrixOnGPU-2D-grid-2D-block.cu)
+然后我们通过以下命令编译和执行文件[`sumMatrixOnGPU-2D-grid-2D-block.cu`](https://github.com/YunYang1994/CodeFun/blob/master/004-cuda_tutorial/chapter02/sumMatrixOnGPU-2D-grid-2D-block.cu)
 ```bashrc
 $ nvcc -arch=sm_20 sumMatrixOnGPU-2D-grid-2D-block.cu -o sumMatrixOnGPU-2D-grid-2D-block
 $ ./sumMatrixOnGPU-2D-grid-2D-block
