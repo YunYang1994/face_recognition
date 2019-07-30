@@ -1,5 +1,7 @@
 ![image](./docs/daydayup.png)
 
+>> 这是一份很用心的个人学习笔记，只有我能看得懂，你们千万别看。
+
 ### Python与数据结构
 --------------------
 #### 1. [什么是线性表](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/1.什么是线性表.ipynb)
