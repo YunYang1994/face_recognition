@@ -75,7 +75,7 @@ int main(){
     return 0;
 }
 ```
-这是一个纯C语言编写的程序，请见[`sumArraysOnHost.c`](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter02/sumArraysOnHost.c)，可以使用像下面这样用`nvcc`进行编译
+这是一个纯C语言编写的程序，请见[`sumArraysOnHost.c`](https://github.com/YunYang1994/CodeFun/blob/master/004-cuda_tutorial/chapter02/sumArraysOnHost.c)，可以使用像下面这样用`nvcc`进行编译
 ```bash
 $ nvcc -Xcompiler -std=c99 sumArraysOnHost.c -o sumArraysOnHost
 $ ./sumArraysOnHost
