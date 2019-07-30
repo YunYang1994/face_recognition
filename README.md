@@ -1,6 +1,6 @@
 ![image](./docs/daydayup.png)
 
-### 数据结构
+### Python与数据结构
 --------------------
 #### 1. [什么是线性表](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
 #### 2. [学习栈和队列](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#rgb2gray)
