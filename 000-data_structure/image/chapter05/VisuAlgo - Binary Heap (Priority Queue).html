@@ -1,0 +1,2732 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)https://visualgo.net/zh/heap -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="description" content="A Binary (Max) Heap is a complete binary tree that maintains the Max Heap property. Binary Heap is one possible data structure to model an efficient Priority Queue (PQ) Abstract Data Type (ADT). In a PQ, each element has a &quot;priority&quot; and an element with higher priority is served before an element with lower priority (ties are broken with standard First-In First-Out/FIFO rule as with normal Queue). Try clicking ExtractMax() for a sample animation on extracting the max value of random Binary Heap above. To focus the discussion scope, we design this visualization to show a Binary Max Heap that contains distinct integers only.Click &#39;Next&#39; (on the top right)/press &#39;Page Down&#39; to advance this e-Lecture slide, use the drop down list/press &#39;Space&#39; to jump to a specific slide, or Click &#39;X&#39; (on the bottom right)/press &#39;Esc&#39; to go to Exploration mode.">
+<meta name="keywords" content="Binary Max Min Heap Priority Queue">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="Y9iyR7siHRKW0CzEGAAm65Xe3lAQbbRLjtDCigJi">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<meta property="og:image" content="https://visualgo.net/img/png/heap.png">
+<title>VisuAlgo - Binary Heap (Priority Queue)</title>
+<link rel="icon" href="https://visualgo.net/img/favicon.png" type="image/x-icon">
+<link rel="shortcut icon" href="https://visualgo.net/img/favicon.png" type="image/x-icon">
+<link rel="apple-touch-icon" href="https://visualgo.net/img/favicon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://visualgo.net/img/favicon.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://visualgo.net/img/favicon.png">
+<link rel="stylesheet" type="text/css" href="./VisuAlgo - Binary Heap (Priority Queue)_files/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="./VisuAlgo - Binary Heap (Priority Queue)_files/common.css">
+<link rel="stylesheet" href="./VisuAlgo - Binary Heap (Priority Queue)_files/viz-1.0.1.css">
+<link rel="stylesheet" href="./VisuAlgo - Binary Heap (Priority Queue)_files/visual.css">
+<link rel="stylesheet" href="./VisuAlgo - Binary Heap (Priority Queue)_files/drawgraph.css">
+<style>
+#e-lecture {
+  top: 45px;
+  right: 130px;
+  width: 400px;
+  display: block;
+  background: none;
+  /*overflow: normal;*/
+  white-space: normal;
+  text-align: right;
+  color: black; font-weight: bold; font-size: 20px;
+}
+.electure-prev, .electure-next { /* force update, copied from viz.css */
+  position: absolute;
+  /* bottom: -12px; */
+  top: -20px;
+  /*bottom: '';*/
+  padding: 3px 8px;
+  background: #999;
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.electure-prev {
+  left: -10px;
+  /* right: 30px; */
+}
+.electure-next {
+  right: -10px;
+  color: white;
+}
+</style>
+<style>
+.execAction { padding: 5px 8px; }
+.err { padding: 5px 0px; }
+#actions-extras input {
+  width: 35px;
+  padding: 5px 8px 7px;
+}
+
+#createNlogN-input input, #createN-input input { width: 200px; }
+
+.createNlogN { bottom: 173px; }
+.createN { bottom: 146px; }
+.insert { bottom: 119px; }
+.extractmax { bottom: 92px; }
+.heapsort { bottom: 65px; }
+</style>
+<script async="" src="./VisuAlgo - Binary Heap (Priority Queue)_files/analytics.js"></script><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-1566631-4', 'auto');
+ga('send', 'pageview');
+
+function changeURL() {
+  var URL = window.location.href.split('/');
+  var val = document.getElementById("Language").value;
+  URL[3] = val;
+  window.location.assign(URL.join('/'));
+}
+</script>
+</head>
+<body style="zoom: 100%;">
+<div id="top-bar">
+<a href="http://www.comp.nus.edu.sg/~stevenha"><span class="colour" style="border: 1px solid green; border-radius: 25px; color: rgb(254, 197, 21);">7</span></a>&nbsp;&nbsp;&nbsp;
+<a id="home" href="https://visualgo.net/">Visu<span class="colour" style="color: rgb(254, 197, 21);">Algo</span><span style="font-size: 40%">.net</span></a>
+/
+<select id="Language" onchange="changeURL()">
+<option value="en">en</option>
+<option value="zh" selected="">zh</option>
+<option value="es">es</option>
+<option value="pt">pt</option>
+<option value="ru">ru</option>
+<option value="id">id</option>
+<option value="de">de</option>
+<option value="bn">bn</option>
+<option value="ja">ja</option>
+<option value="ko">ko</option>
+<option value="vi">vi</option>
+</select>
+/heap
+<span class="right-links" id="useraccount" style="background: rgb(254, 197, 21);"><a href="https://visualgo.net/login">登录<br></a></span>
+<span id="title">
+<a id="title-heap" class="selected-viz">Binary Heap</a>
+</span>
+<div id="mode-menu">
+<div id="mode-button" title="exploration">示例模式 ▿</div>
+<div id="other-modes" style="display: none;">
+<a title="e-Lecture" style="background: black;">电子讲座模式</a>
+</div>
+</div>
+</div>
+<div id="dark-overlay"></div>
+<div id="status" class="panel" style="background-color: rgb(46, 187, 209); width: 370px;"><p>已经成功从数组A创建了最大二叉堆: 2,7,26,25,19,17,1,90,3,36.</p></div>
+<div id="status-hide" class="panel-hide" style="background-color: rgb(46, 187, 209);"><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/arrow_white_right.png" alt="&gt;" title="show/hide status panel" class="rotateRight"></div>
+<div id="codetrace" class="panel" style="background-color: rgb(214, 87, 117); width: 370px;">
+<p id="code1" style="padding-top: 10px; background-color: rgb(214, 87, 117); color: rgb(255, 255, 255);">Start from an empty Binary Max Heap</p>
+<p id="code2" style="background-color: rgb(214, 87, 117); color: rgb(255, 255, 255);">for (i = 0; i &lt; A.length; i++)</p>
+<p id="code3" style="background-color: rgb(214, 87, 117); color: rgb(255, 255, 255);">&nbsp;&nbsp;插入(A[i])</p>
+<p id="code4" style="background-color: rgb(214, 87, 117); color: rgb(255, 255, 255);">// <b><a href="http://cpbook.net/#downloads" target="_blank">ch2_06_priority_queue.cpp/java</a></b></p>
+<p id="code5" style="background-color: rgb(214, 87, 117); color: rgb(255, 255, 255);"></p>
+<p id="code6" style="background-color: rgb(214, 87, 117); color: rgb(255, 255, 255);"></p>
+<p id="code7" style="padding-bottom: 10px; background-color: rgb(214, 87, 117); color: rgb(255, 255, 255);"></p>
+</div>
+<div id="codetrace-hide" class="panel-hide" style="background-color: rgb(214, 87, 117);"><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/arrow_white_right.png" alt="&gt;" title="show/hide codetrace panel" class="rotateRight"></div>
+<div id="left-bar"></div>
+<div id="right-bar"></div>
+<div id="media-controls">
+<div id="speed-control">慢<div id="speed-input" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 72.2222%;"></span></div>快</div>
+<span id="go-to-beginning" class="media-control-button" title="go to beginning" onclick="goToBeginning()"><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/goToBeginning.png" alt="go to beginning"></span>
+<span id="previous" class="media-control-button" title="step backward" onclick="stepBackward()"><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/prevFrame.png" alt="previous frame"></span>
+<span id="pause" class="media-control-button" title="pause" onclick="pause()" style="display: none;"><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/pause.png" alt="pause"></span>
+<span id="play" class="media-control-button" title="play" onclick="play()" style=""><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/replay.png" alt="replay" title="replay"></span>
+<span id="next" class="media-control-button" title="step forward" onclick="stepForward()"><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/nextFrame.png" alt="next frame"></span>
+<span id="go-to-end" class="media-control-button" title="go to end" onclick="goToEnd()"><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/goToEnd.png" alt="go to end"></span>
+<div id="progress-bar" class="media-control-button ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header ui-slider-range-min" style="width: 100%; background-color: rgb(254, 197, 21);"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span></div>
+</div>
+<div id="viz"><svg width="1000" height="600"><g id="polygon"></g><g id="edge"><path id="e2" class="ude" d="M434.2469998754255,52.800533355479914L240.75300012457453,87.19946664452009" stroke="#333" stroke-width="3"></path><path id="e3" class="ude" d="M465.7530001245745,52.800533355479914L659.2469998754254,87.19946664452009" stroke="#333" stroke-width="3"></path><path id="e4" class="ude" d="M209.92456495553375,95.36015468247689L127.57543504446625,124.63984531752311" stroke="#333" stroke-width="3"></path><path id="e5" class="ude" d="M240.07543504446625,95.36015468247689L322.42456495553375,124.63984531752311" stroke="#333" stroke-width="3"></path><path id="e6" class="ude" d="M659.9245649555337,95.36015468247689L577.5754350444663,124.63984531752311" stroke="#333" stroke-width="3"></path><path id="e7" class="ude" d="M690.0754350444663,95.36015468247689L772.4245649555337,124.63984531752311" stroke="#333" stroke-width="3"></path><path id="e8" class="ude" d="M99.46071480689992,139.27238058176005L69.28928519310008,160.72761941823995" stroke="#333" stroke-width="3"></path><path id="e9" class="ude" d="M125.53928519310008,139.27238058176005L155.71071480689992,160.72761941823995" stroke="#333" stroke-width="3"></path><path id="e10" class="ude" d="M324.46071480689994,139.27238058176005L294.2892851931001,160.72761941823995" stroke="#333" stroke-width="3"></path></g><g id="vertex"><circle class="v1" cx="56.25" cy="170" x="40.25" y="154" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v1" cx="56.25" cy="170" x="41.25" y="155" fill="#eee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle><circle class="v2" cx="562.5" cy="130" x="546.5" y="114" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v2" cx="562.5" cy="130" x="547.5" y="115" fill="#eeeeee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle><circle class="v3" cx="337.5" cy="130" x="321.5" y="114" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v3" cx="337.5" cy="130" x="322.5" y="115" fill="#eeeeee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle><circle class="v4" cx="112.5" cy="130" x="96.5" y="114" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v4" cx="112.5" cy="130" x="97.5" y="115" fill="#eeeeee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle><circle class="v5" cx="281.25" cy="170" x="265.25" y="154" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v5" cx="281.25" cy="170" x="266.25" y="155" fill="#eeeeee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle><circle class="v6" cx="675" cy="90" x="659" y="74" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v6" cx="675" cy="90" x="660" y="75" fill="#eeeeee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle><circle class="v7" cx="787.5" cy="130" x="771.5" y="114" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v7" cx="787.5" cy="130" x="772.5" y="115" fill="#eeeeee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle><circle class="v8" cx="450" cy="50" x="434" y="34" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v8" cx="450" cy="50" x="435" y="35" fill="#eeeeee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle><circle class="v9" cx="168.75" cy="170" x="152.75" y="154" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v9" cx="168.75" cy="170" x="153.75" y="155" fill="#eeeeee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle><circle class="v10" cx="225" cy="90" x="209" y="74" fill="#333333" r="16" stroke="#333333" stroke-width="2" height="32" width="32"></circle><circle class="v10" cx="225" cy="90" x="210" y="75" fill="#eeeeee" r="14" width="30" height="30" stroke="#fff" stroke-width="0"></circle></g><g id="vertexText"><text class="v1" x="56.25" y="175.33333333333334" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">2</text><text class="v1" x="56.25" y="201.33333333333334" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">8</text><text class="v2" x="562.5" y="135.33333333333334" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">7</text><text class="v2" x="562.5" y="161.33333333333334" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">6</text><text class="v3" x="337.5" y="135.33333333333334" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">26</text><text class="v3" x="337.5" y="161.33333333333334" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">5</text><text class="v4" x="112.5" y="135.33333333333334" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">25</text><text class="v4" x="112.5" y="161.33333333333334" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">4</text><text class="v5" x="281.25" y="175.33333333333334" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">19</text><text class="v5" x="281.25" y="201.33333333333334" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">10</text><text class="v6" x="675" y="95.33333333333333" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">17</text><text class="v6" x="675" y="121.33333333333333" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">3</text><text class="v7" x="787.5" y="135.33333333333334" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">1</text><text class="v7" x="787.5" y="161.33333333333334" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">7</text><text class="v8" x="450" y="55.333333333333336" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">90</text><text class="v8" x="450" y="81.33333333333334" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">1</text><text class="v9" x="168.75" y="175.33333333333334" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">3</text><text class="v9" x="168.75" y="201.33333333333334" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">9</text><text class="v10" x="225" y="95.33333333333333" fill="#333333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">36</text><text class="v10" x="225" y="121.33333333333333" fill="red" font-family="&#39;PT Sans&#39;, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">2</text></g><g id="edgeWeight"><text id="ew2" fill="#333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="0" font-weight="bold" text-anchor="middle" text-decoration="underline"><textpath href="#e2" startOffset="75%"><tspan dy="-5">1</tspan></textpath></text><text id="ew3" fill="#333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="0" font-weight="bold" text-anchor="middle" text-decoration="underline"><textpath href="#e3" startOffset="75%"><tspan dy="-5">1</tspan></textpath></text><text id="ew4" fill="#333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="0" font-weight="bold" text-anchor="middle" text-decoration="underline"><textpath href="#e4" startOffset="75%"><tspan dy="-5">1</tspan></textpath></text><text id="ew5" fill="#333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="0" font-weight="bold" text-anchor="middle" text-decoration="underline"><textpath href="#e5" startOffset="75%"><tspan dy="-5">1</tspan></textpath></text><text id="ew6" fill="#333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="0" font-weight="bold" text-anchor="middle" text-decoration="underline"><textpath href="#e6" startOffset="75%"><tspan dy="-5">1</tspan></textpath></text><text id="ew7" fill="#333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="0" font-weight="bold" text-anchor="middle" text-decoration="underline"><textpath href="#e7" startOffset="75%"><tspan dy="-5">1</tspan></textpath></text><text id="ew8" fill="#333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="0" font-weight="bold" text-anchor="middle" text-decoration="underline"><textpath href="#e8" startOffset="75%"><tspan dy="-5">1</tspan></textpath></text><text id="ew9" fill="#333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="0" font-weight="bold" text-anchor="middle" text-decoration="underline"><textpath href="#e9" startOffset="75%"><tspan dy="-5">1</tspan></textpath></text><text id="ew10" fill="#333" font-family="&#39;PT Sans&#39;, sans-serif" font-size="0" font-weight="bold" text-anchor="middle" text-decoration="underline"><textpath href="#e10" startOffset="75%"><tspan dy="-5">1</tspan></textpath></text></g><g id="edgeWeightPath"></g><g id="marker"><marker id="arrow" viewBox="0 -5 10 10" refX="9" markerWidth="3" markerHeight="3" orient="auto"><path d="M0,-5 L10,0 L0,5" fill="#333"></path></marker><marker id="backwardArrow" viewBox="-10 -5 10 10" refX="-9" markerWidth="3" markerHeight="3" orient="auto"><path d="M0,-5 L-10,0 L0,5" fill="#333"></path></marker></g></svg></div>
+<div id="current-action" class="panel" style="">创建(A) - O(N log N): 2,7,26,25,19,17,1,90,3,36</div>
+<div id="e-lecture" class="panel"></div>
+<div id="overlay" hidden="" style="opacity: 0; display: none;"></div>
+<div id="dropdown-temp-holder" hidden=""><div id="electure-dropdown">
+<select class="lecture-dropdown" style="width:100%">
+<option value="1">1. Binary (Max) Heap</option>
+<option value="1-1">&nbsp;&nbsp;&nbsp;1-1. Definitions</option>
+<option value="1-2">&nbsp;&nbsp;&nbsp;1-2. Priority Queue ADT</option>
+<option value="1-3">&nbsp;&nbsp;&nbsp;1-3. Example</option>
+<option value="1-4">&nbsp;&nbsp;&nbsp;1-4. For Live Lecture @ NUS Only</option>
+<option value="1-5">&nbsp;&nbsp;&nbsp;1-5. The Example - Continued</option>
+<option value="1-6">&nbsp;&nbsp;&nbsp;1-6. PQ Examples</option>
+<option value="1-7">&nbsp;&nbsp;&nbsp;1-7. Potential Answers</option>
+<option value="1-8">&nbsp;&nbsp;&nbsp;1-8. Linear DS for PQ?</option>
+<option value="1-9">&nbsp;&nbsp;&nbsp;1-9. The Answer - Part 1</option>
+<option value="1-10">&nbsp;&nbsp;&nbsp;1-10. The Answer - Part 2</option>
+<option value="2">2. Visualisation + Max Heap Property Revisited</option>
+<option value="2-1">&nbsp;&nbsp;&nbsp;2-1. Binary Heap has O(log N) Height</option>
+<option value="2-2">&nbsp;&nbsp;&nbsp;2-2. 1-based Compact Array</option>
+<option value="3">3. Binary (Max) Heap Operations </option>
+<option value="3-1">&nbsp;&nbsp;&nbsp;3-1. What Are The Extra Operations?</option>
+<option value="4">4. Insert(v)</option>
+<option value="4-1">&nbsp;&nbsp;&nbsp;4-1. Why it is Correct?</option>
+<option value="4-2">&nbsp;&nbsp;&nbsp;4-2. The Answer</option>
+<option value="4-3">&nbsp;&nbsp;&nbsp;4-3. Time Complexity Analysis</option>
+<option value="4-4">&nbsp;&nbsp;&nbsp;4-4. The Answer</option>
+<option value="5">5. ExtractMax()</option>
+<option value="5-1">&nbsp;&nbsp;&nbsp;5-1. Why Compare with the Larger Child?</option>
+<option value="5-2">&nbsp;&nbsp;&nbsp;5-2. The Answer</option>
+<option value="5-3">&nbsp;&nbsp;&nbsp;5-3. Time Complexity Analysis</option>
+<option value="5-4">&nbsp;&nbsp;&nbsp;5-4. The Answer</option>
+<option value="6">6. Binary Heap for Efficient PQ</option>
+<option value="7">7. Create(A) - Two Versions</option>
+<option value="7-1">&nbsp;&nbsp;&nbsp;7-1. Create(A) - O(N log N)</option>
+<option value="7-2">&nbsp;&nbsp;&nbsp;7-2. Create(A) - O(N)</option>
+<option value="7-3">&nbsp;&nbsp;&nbsp;7-3. Many Leaf Vertices</option>
+<option value="7-4">&nbsp;&nbsp;&nbsp;7-4. Why O(N)? - Part 1</option>
+<option value="7-5">&nbsp;&nbsp;&nbsp;7-5. Why O(N)? - Part 2</option>
+<option value="8">8. HeapSort()</option>
+<option value="8-1">&nbsp;&nbsp;&nbsp;8-1. Discussion</option>
+<option value="8-2">&nbsp;&nbsp;&nbsp;8-2. The Answer</option>
+<option value="9">9. Extras</option>
+<option value="9-1">&nbsp;&nbsp;&nbsp;9-1. Easy Max to Min Heap Conversion</option>
+<option value="9-2">&nbsp;&nbsp;&nbsp;9-2. Source Code</option>
+<option value="9-3">&nbsp;&nbsp;&nbsp;9-3. Online Quiz</option>
+<option value="9-4">&nbsp;&nbsp;&nbsp;9-4. Online Judge Exercises</option>
+<option value="9-5">&nbsp;&nbsp;&nbsp;9-5. Discussion</option>
+<option value="9-6">&nbsp;&nbsp;&nbsp;9-6. Shocking Stuff</option>
+<option value="9-7">&nbsp;&nbsp;&nbsp;9-7. Shocking Stuff - Continued</option>
+<option value="99">99. Status Panel</option>
+<option value="99-1">&nbsp;&nbsp;&nbsp;99-1. Codetrace Panel</option>
+<option value="99-2">&nbsp;&nbsp;&nbsp;99-2. Media Control</option>
+<option value="99-3">&nbsp;&nbsp;&nbsp;99-3. Return to 'Exploration Mode'</option>
+</select>
+</div></div>
+<div id="electure-1" class="electure-dialog" style="bottom: 60px; left: 50%; margin-left: -250px; width: 500px; display: none;">
+<p>A Binary (Max) Heap is a <a href="https://en.wikipedia.org/wiki/Binary_tree#Types_of_binary_trees" target="_blank"><u>complete binary tree</u></a> that maintains the <a href="https://en.wikipedia.org/wiki/Binary_heap" target="_blank"><u>Max Heap property</u></a>.</p> <br><p>Binary Heap is one possible data structure to model an efficient <a href="https://en.wikipedia.org/wiki/Priority_queue" target="_blank"><u>Priority Queue</u></a> (PQ) Abstract Data Type (ADT). In a PQ, each element has a "priority" and an element with higher priority is served before an element with lower priority (ties are broken with standard First-In First-Out/FIFO rule as with normal Queue). Try clicking <span class="slide-actions" onclick="doButtonAction26()">ExtractMax()</span> for a sample animation on extracting the max value of random Binary Heap above.</p> <br><p>To focus the discussion scope, we design this visualization to show a Binary <b>Max</b> Heap that contains <i>distinct integers</i> only.</p><br><p>Click 'Next' (on the top right)/press 'Page Down' to advance this e-Lecture slide, use the drop down list/press 'Space' to jump to a specific slide, or Click 'X' (on the bottom right)/press 'Esc' to go to Exploration mode.</p>
+<hr>
+<p><b>Remarks</b>: By default, we show e-Lecture Mode for first time (or non logged-in) visitor.<br>
+Please <a href="https://visualgo.net/login"><u>login</u></a> if you are a repeated visitor or <a href="https://visualgo.net/login"><u>register</u></a> for an (optional) free account first.</p>
+
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-next" data-nextid="1-1" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-1" class="electure-dialog" style="top: 290px; left: 50%; margin-left: -250px; width: 500px; display: none;">
+<p><b>Complete Binary Tree</b>: Every level in the binary tree, except possibly the last/lowest level, is completely filled, and all vertices in the last level are as far left as possible.</p><br><p><b>Binary Max Heap property</b>: The parent of each vertex - except the root - contains value greater than the value of that vertex. This is an easier-to-verify definition than the following alternative definition: The value of a vertex - except the leaf/leaves - must be greater than the value of its one (or two) child(ren).</p>
+<hr>
+<p>Pro-tip: Since you are not <a href="https://visualgo.net/login"><u>logged-in</u></a>, you may be a first time visitor who are not aware of the following keyboard shortcuts to navigate this e-Lecture mode: <b>[PageDown]</b> to advance to the next slide, <b>[PageUp]</b> to go back to the previous slide, <b>[Esc]</b> to toggle between this e-Lecture mode and exploration mode.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="1-2" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-2" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>Priority Queue (PQ) Abstract Data Type (ADT) is similar to normal Queue ADT, but with these two major operations:</p><ol><li>Enqueue(<b>x</b>): Put a new element (key) <b>x</b> into the PQ (in some order)</li><li><b>y</b> = Dequeue(): Return an existing element <b>y</b> that has the highest priority (key) in the PQ and if ties, return the one that is inserted first, i.e. back to First-In First-Out (FIFO) behavior of a normal <a href="https://visualgo.net/zh/list?mode=Queue"><u>Queue</u></a></li></ol>
+<hr>
+<p>Another pro-tip: We designed this visualization and this e-Lecture mode to look good on 1366x768 resolution <b>or larger</b> (typical modern laptop resolution in 2017). We recommend using Google Chrome to access VisuAlgo. Go to full screen mode (<b>F11</b>) to enjoy this setup. However, you can use zoom-in (<b>Ctrl +</b>) or zoom-out (<b>Ctrl -</b>) to calibrate this.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="1-3" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-3" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>Imagine: You are an <a href="https://en.wikipedia.org/wiki/Air_traffic_controller" target="_blank"><u>Air Traffic Controller (ATC)</u></a> working in the control tower of an airport.</p><br><p>You have scheduled aircraft <b>X</b>/<b>Y</b> to land in the next 3/6 minutes, respectively. Both have enough fuel for at least the next 15 minutes and both are just 2 minutes away from your airport. You observe that your airport runway is clear at the moment.</p><br><p>In case you do not know, aircraft can be instructed to fly in <a href="https://en.wikipedia.org/wiki/Holding_(aeronautics)" target="_blank"><u>holding pattern</u></a> near the airport until the designated landing time.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-2" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="1-4" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-4" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>You have to attend the live lecture to figure out what happens next...</p><br><p>There will be two options presented to you and you will have to decide:</p><ol><li>Raise AND wave your hand if you choose option 1,</li><li>Raise your hand but do NOT wave it if you choose option 2,</li></ol><p>If none of the two options is reasonable for you, simply do nothing.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-3" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="1-5" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-5" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-4" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="1-6" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-6" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>There are several potential usages of PQ ADT in real-life on top of what you have seen just now (only in live lecture).</p><br><p>Discussion: Can you mention a few other real-life situations where a PQ is needed?</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-5" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="1-7" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-7" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-6" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="1-8" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-8" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>We are able to implement this PQ ADT using (circular) array or <a href="https://visualgo.net/zh/list"><u>Linked List</u></a> but we will have either slow, i.e. O(<b>N</b>) Enqueue or Dequeue operation.</p><br><p>Discussion: Why?</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-7" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="1-9" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-9" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-8" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="1-10" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-1-10" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-9" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="2" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-2" class="electure-dialog" style="top: 290px; left: 50%; margin-left: -250px; width: 500px; display: none;">
+<p>Now, let's view the visualisation of a (random) Binary (Max) Heap above. You should see a complete binary tree and all vertices except the root satisfy the Max Heap property (A[parent(i)] &gt; A[i] — remember that we disallow duplicate integers here).</p><br><input class="mcq-answer" id="mcq-answer-6" value="32" hidden=""><p>Quiz: <b>Based on this Binary (Max) Heap property, where will the largest integer be located?</b></p><form><input type="radio" name="mcq-6-choice" value="32"> At the root<br><input type="radio" name="mcq-6-choice" value="34"> Can be anywhere<br><input type="radio" name="mcq-6-choice" value="33"> At one of the leaf<br></form><button class="mcq-submit" id="submit-6">Submit</button> <span id="answer-status-6"></span>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="1-10" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="2-1" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-2-1" class="electure-dialog" style="top: 290px; left: 50%; margin-left: -250px; width: 500px; display: none;">
+<p>Important fact to memorize at this point: If we have a Binary Heap of <b>N</b> elements, since we will store it as a complete binary tree, its height will not be taller than O(log <b>N</b>)</p><br><p>Simple analysis: The size <b>N</b> of a full (more than just a complete) binary tree of height <b>h</b> is always <b>N = 2<sup>(h+1)</sup>-1</b>, therefore <b>h = log<sub>2</sub>(N+1)-1 ~= log<sub>2</sub> N</b>.</p><br><p>See example above with <b>N = 7 = 2<sup>(2+1)</sup>-1</b> or <b>h = log<sub>2</sub>(7+1)-1 = 2</b>.</p><br><p>This fact is important in the analysis of all Binary Heap-related operations.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="2" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="2-2" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-2-2" class="electure-dialog" style="top: 290px; left: 50%; margin-left: -250px; width: 500px; display: none;">
+<p>A complete binary tree can be stored efficiently as a compact array A as there is no gap between vertices of a complete binary tree/elements of a compact array. To simplify the navigation operations below, we use 1-based array. VisuAlgo displays the index of each vertex as a <span style="color: red;">red label</span> below each vertex. Read those indices in sorted order from 1 to <b>N</b>, then you will see the vertices of the complete binary tree from top to down, left to right.</p><br><p>This way, we can implement basic binary tree traversal operations with simple index manipulations (with help of <a href="https://visualgo.net/zh/bitmask"><u>bit shift manipulation</u></a>):</p><ol><li>parent(i) = i&gt;&gt;1, index i divided by 2 (integer division),</li><li>left(i) = i&lt;&lt;1, index i multiplied by 2,</li><li>right(i) = (i&lt;&lt;1)+1, index i multiplied by 2 and added by 1.</li></ol>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="2-1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="3" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-3" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p>In this visualization, you can perform five (5) standard Binary (Max) Heap operations:</p><ol><li><b>Insert(v)</b> in O(log <b>N</b>)</li><li><b>ExtractMax()</b> in O(log <b>N</b>)</li><li><b>Create(A)</b> - O(<b>N</b> log <b>N</b>) version</li><li><b>Create(A)</b> - O(<b>N</b>) version</li><li><b>HeapSort()</b> - in O(<b>N</b> log <b>N)</b></li></ol><p>There are others possible Binary (Max) Heap operations, but currently we do not elaborate them for pedagogical reason in a certain NUS module.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="2-2" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="3-1" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-3-1" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="3" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="4" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-4" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p><b>Insert(v)</b>: Insertion of a new item <b>v</b> into a Binary Max Heap can only be done at the <i>last index <b>N</b> plus 1</i> to maintain the compact array = complete binary tree property. However, the Max Heap property <i>may</i> still be violated. This operation then fixes Max Heap property from the insertion point <b>upwards</b> (if necessary) and stop when there is no more Max Heap property violation. Now try clicking <span class="slide-actions" onclick="doButtonAction27()">Insert(v)</span> several times to insert a few random <b>v</b> to the currently displayed Binary (Max Heap).</p><br><p>The fix Max Heap property upwards operation has no standard name, we call it <b>ShiftUp</b> but others may call it <b>BubbleUp</b> or <b>IncreaseKey</b> operation.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="3-1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="4-1" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-4-1" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p>Do you understand why starting from the insertion point (index <b>N</b>+1) upwards (at most until the root) and swapping a vertex with its parent when there is a Max Heap property violation during insertion is always a correct strategy?</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="4" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="4-2" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-4-2" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="4-1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="4-3" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-4-3" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p>The time complexity of this <b>Insert(v)</b> operation is O(log <b>N</b>).</p><br><p>Do you understand the derivation?</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="4-2" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="4-4" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-4-4" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="4-3" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="5" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-5" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p><b>ExtractMax()</b>: The reporting and then the deletion of the maximum element (the root) of a Binary Max Heap requires an existing element to replace the root, otherwise the Binary Max Heap (a single complete binary tree, or 林/Lín in Chinese/tree) becomes two disjoint subtrees (two copies of 木/mù in Chinese/wood). That element must be the <i>last index</i> <b>N</b> for the same reason: To maintain the compact array = complete binary tree property.</p><br><p>Because we promote a leaf vertex to the root vertex of a Binary Max Heap, it will very likely violates the Max Heap property. ExtractMax() operation then fixes Binary Max Heap property from the root <b>downwards</b> by comparing the current value with the its child/the larger of its two children (if necessary). Now try <span class="slide-actions" onclick="doButtonAction26()">ExtractMax()</span> on the currently displayed Binary (Max) Heap.</p><br><p>The fix Max Heap property downwards operation has no standard name, we call it <b>ShiftDown</b> but others may call it <b>BubbleDown</b> or <b>Heapify</b> operation.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="4-4" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="5-1" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-5-1" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p>Why if a vertex has two children, we have to check (and possibly swap) that vertex with <i>the larger</i> of its two children during the downwards fix of Max Heap property?</p><br><p>Why can't we just compare with the left (or right, if exists) vertex only?</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="5" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="5-2" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-5-2" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="5-1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="5-3" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-5-3" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p>The time complexity of this <b>ExtractMax()</b> operation is O(log <b>N</b>).</p><br><p>Do you understand the derivation?</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="5-2" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="5-4" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-5-4" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="5-3" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="6" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-6" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>Up to here, we have a data structure that can implement the two major operations of Priority Queue (PQ) ADT efficiently:</p><ol><li>For <b>Enqueue(x)</b>, we can use <b>Insert(x)</b> in O(log <b>N</b>) time, and</li><li>For <b>y</b> = Dequeue(), we can use <b>y = ExtractMax()</b> in O(log <b>N</b>) time.</li></ol><p>However, we can do a few more operations with Binary Heap.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="5-4" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="7" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-7" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p><b>Create(A)</b>: Creates a valid Binary (Max) Heap from an input array <b>A</b> of <b>N</b> integers (comma separated) into an initially empty Binary Max Heap.</p><br><p>There are two variants for this operations, one that is simpler but runs in O(<b>N</b> log <b>N</b>) and a more advanced technique that runs in O(<b>N</b>).</p><br><p>Pro tip: Try opening two copies of VisuAlgo on two browser windows. Execute different Create(A) versions on the worst case 'Sorted example' to see the <i>somewhat dramatic</i> differences of the two.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="6" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="7-1" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-7-1" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p><b>Create(A) - O(N log N)</b>: Simply insert (that is, by calling <b>Insert(v) </b>operation) all <b>N</b> integers of the input array into an initially empty Binary Max Heap one by one.</p><br><p><b>Analysis</b>: This operation is clearly O(<b>N</b> log <b>N</b>) as we call O(log <b>N</b>) <b>Insert(v)</b> operation <b>N</b> times. Let's examine the 'Sorted example' which is one of the hard case of this operation (Now try the <span class="slide-actions" onclick="doButtonAction23()">Hard Case - O(N log N)</span> where we show a case where <b>A=[1,2,3,4,5,6,7]</b> -- please be patient as this example will take some time to complete). If we insert values in increasing order into an initially empty Binary Max Heap, then every insertion triggers a path from the insertion point (a new leaf) upwards to the root.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="7" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="7-2" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-7-2" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p><b>Create(A) - O(N)</b>: This faster version of <b>Create(A)</b> operation was invented by Robert W. Floyd in 1964. It takes advantage of the fact that a compact array = complete binary tree and all leaves (i.e. half of the vertices — see the next slide) are Binary Max Heap by default. This operation then fixes Binary Max Heap property (if necessary) only from the last internal vertex back to the root.</p><br><p><b>Analysis</b>: A loose analysis gives another O(<b>N</b>/2 log <b>N</b>) = O(<b>N</b> log <b>N</b>) complexity but it is actually just O(2*<b>N</b>) = O(<b>N</b>) — details in the next few slides. Now try the <span class="slide-actions" onclick="doButtonAction24()">Hard Case - O(N)</span> on the same input array <b>A=[1,2,3,4,5,6,7]</b> and see that on the same hard case as with the previous slide (but not the one that generates maximum number of swaps), this operation is far superior than the O(<b>N</b> log <b>N</b>) version.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="7-1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="7-3" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-7-3" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p>Simple proof on why half of Binary (Max) Heap of <b>N</b> (without loss of generality, let's assume that <b>N</b> is even) items are leaves are as follows:</p><br><p>Suppose that the last leaf is at index <b>N</b>, then the parent of that last leaf is at index <b>i = N/2</b>. The left child of vertex <b>i+1</b>, if exists (it actually does not exist), will be <b>2*(i+1) = 2*(N/2+1) = N+2</b>, which exceeds index <b>N</b> (the last leaf) so index <b>i+1</b> must also be a leaf vertex that has no child. As Binary Heap indexing is consecutive, basically indices [<b>i+1 = N/2+1</b>, <b>i+2 = N/2+2</b>, ..., <b>N</b>], or half of the vertices, are leaves.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="7-2" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="7-4" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-7-4" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p>First, we need to recall that the height of a full binary tree of size <b>N</b> is log<sub>2</sub> <b>N</b>.</p><br><p>Second, we need to realise that the cost to run <samp>shiftDown(i)</samp> operation is not the gross upper bound O(log <b>N</b>), but O(<b>h</b>) where <b>h</b> is the height of the subtree rooted at <b>i</b>.</p><br><p>Third, there are <samp>ceil(N/2<sup>h+1</sup>)</samp> vertices at height <b>h</b> in a full binary tree.</p><br><p>On the example full binary tree above with <b>N = 7</b> and <b>h = 2</b>, there are:<br><samp>ceil(7/2<sup>0+1</sup>) = 4</samp> vertices: {44,35,26,17} at height <b>h = 0</b>,<br><samp>ceil(7/2<sup>1+1</sup>) = 2</samp> vertices: {62,53} at height <b>h = 1</b>, and<br><samp>ceil(7/2<sup>2+1</sup>) = 1</samp> vertex: {71} at height <b>h = 2</b>.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="7-3" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="7-5" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-7-5" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p>Cost of Create(A), the O(<b>N</b>) version is thus:</p><br><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/createheapanalysis.png" width="500" alt="analysis"><br><p>If the formula is too complicated, a modern student can also use <a href="https://www.wolframalpha.com/input/?i=0%2F1%2B1%2F2%2B2%2F4%2B3%2F8%2B4%2F16%2B..." target="_blank"><u>WolframAlpha</u></a> instead.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="7-4" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="8" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-8" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p><b>HeapSort()</b>: John William Joseph Williams invented <b>HeapSort()</b> algorithm in 1964, together with this Binary Heap data structure. <b>HeapSort()</b> operation (assuming the Binary Max Heap has been created in O(<b>N</b>)) is very easy. Simply call the O(log <b>N</b>) <b>ExtractMax()</b> operation <b>N</b> times. Now try <span class="slide-actions" onclick="doButtonAction25()">HeapSort()</span> on the currently displayed Binary (Max) Heap.</p><br><p><b>Simple Analysis</b>: <b>HeapSort()</b> clearly runs in O(<b>N</b> log <b>N</b>) — an optimal comparison-based sorting algorithm.</p><br><input class="msq-answer" id="msq-answer-7" value="36,37,38" hidden=""><p>Quiz: <b>In worst case scenario, HeapSort() is asymptotically faster than...</b></p><input type="checkbox" class="msq-choice" id="msq-7-choice-37"> Bubble Sort<br><input type="checkbox" class="msq-choice" id="msq-7-choice-35"> Merge Sort<br><input type="checkbox" class="msq-choice" id="msq-7-choice-36"> Selection Sort<br><input type="checkbox" class="msq-choice" id="msq-7-choice-38"> Insertion Sort<br><button class="msq-submit" id="submit-7">Submit</button> <span id="answer-status-7"></span>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="7-5" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="8-1" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-8-1" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<p>Although <b>HeapSort()</b> runs in θ(<b>N</b> log <b>N</b>) time for all (best/average/worst) cases, is it really the best <i>comparison-based</i> sorting algorithm?</p><br><p>Discussion point: How about caching performance of <b>HeapSort()</b>?</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="8" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="8-2" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-8-2" class="electure-dialog" style="bottom: 220px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="8-1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="9" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-9" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>You have reached the end of the basic stuffs of this Binary (Max) Heap data structure and we encourage you to explore further in the <b>Exploration Mode</b>.</p><br><p>However, we still have a few more interesting Binary (Max) Heap challenges for you that are outlined in this section.</p><br><p>When you have cleared them all, we invite you to study more advanced algorithms that use Priority Queue as (one of) its underlying data structure, like <a href="https://visualgo.net/zh/mst" target="_blank"><u>Prim's MST algorithm</u></a>, <a href="https://visualgo.net/zh/sssp" target="_blank"><u>Dijkstra's SSSP algorithm</u></a>, A* search algorithm (not in VisuAlgo yet), etc.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="8-2" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="9-1" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-9-1" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="9" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="9-2" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-9-2" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>If you are looking for an implementation of Binary (Max) Heap to actually model a Priority Queue, then there is a good news.</p><br><p>C++ and Java already have built-in Priority Queue implementations that very likely use this data structure. They are <a href="http://en.cppreference.com/w/cpp/container/priority_queue" target="_blank"><u>C++ STL priority_queue</u></a> (the default is a Max Priority Queue) and <a href="https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html" target="_blank"><u>Java PriorityQueue</u></a> (the default is a Min Priority Queue). However, the built-in implementation may not be suitable to do some PQ extended operations efficiently (details omitted) for pedagogical reason in a certain NUS module.</p><br><p>PS: Heap sort is likely used in C++ STL algorithm <a href="http://en.cppreference.com/w/cpp/algorithm/partial_sort" target="_blank"><u>partial_sort</u></a>.</p><hr><p>Nevertheless, here is our implementation of <a href="http://www.comp.nus.edu.sg/~stevenha/cs2040c/demos/BinaryHeapDemo.cpp" target="_blank"><u>BinaryHeapDemo.cpp</u></a>.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="9-1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="9-3" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-9-3" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>For a few more interesting questions about this data structure, please practice on <a href="https://visualgo.net/training?diff=Medium&amp;n=7&amp;tl=0&amp;module=heap"><u>Binary Heap</u></a> training module (no login is required, but short and of medium difficulty setting only).</p><br><p>However, for registered users, you should login and then go to the <a href="https://visualgo.net/training"><u>Main Training Page</u></a> to officially clear this module and such achievement will be recorded in your user account.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="9-2" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="9-4" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-9-4" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<p>We also have a few programming problems that somewhat requires the usage of this Binary Heap data structure: <a href="https://uva.onlinejudge.org/external/12/1203.pdf" title="" target="_blank"><u>UVa 01203 - Argus</u></a> and <a href="https://open.kattis.com/problems/numbertree" title="" target="_blank"><u>Kattis - numbertree</u></a>.</p><br><p>Try them to consolidate and improve your understanding about this data structure. You are allowed to use C++ STL priority_queue or Java PriorityQueue if that simplifies your implementation.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="9-3" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="9-5" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-9-5" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="9-4" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="9-6" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-9-6" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="9-5" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="9-7" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-9-7" class="electure-dialog" style="top: 60px; left: 60px; width: 500px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="9-6" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="99" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-99" class="electure-dialog" style="right: 150px; bottom: 335px; width: 500px; display: none;">
+当操作进行时，状态面板将会有每个步骤的描述。
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="9-7" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="99-1" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-99-1" class="electure-dialog" style="right: 170px; bottom: 275px; width: 180px; display: none;">
+<div style="background-color: white; color: black;">
+<p>e-Lecture: The content of this slide is hidden and only available for legitimate CS lecturer worldwide. Drop an email to visualgo.info at gmail dot com if you want to activate this CS lecturer-only feature <b>and you are really a CS lecturer (show your University staff profile)</b>.</p>
+</div>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="99" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="99-2" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-99-2" class="electure-dialog" style="bottom: 70px; left: 50%; margin-left: -120px; width: 260px; display: none;">
+<p>Control the animation with the player controls! Keyboard shortcuts are:<br></p><div style="margin-top: 8px;"><strong>Spacebar:</strong> play/pause/replay</div><strong>Left/right arrows:</strong> step backward/step forward<br><strong>-/+:</strong> decrease/increase speed<br>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="99-1" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+<div class="electure-next" data-nextid="99-3" style="background-color: rgb(254, 197, 21);">下一个 <u>PgDn</u></div>
+</div>
+<div id="electure-99-3" class="electure-dialog" style="top: 70px; right: 60px; width: 300px; display: none;">
+<p>Return to 'Exploration Mode' to start exploring!</p><br><p>Note that if you notice any bug in this visualization or if you want to request for a new visualization feature, do not hesitate to drop an email to the project leader: Dr Steven Halim via his email address: stevenhalim at gmail dot com.</p>
+<div class="electure-end" style="background-color: rgb(254, 197, 21);">X <u>Esc</u></div>
+<div class="electure-prev" data-nextid="99-2" style="background-color: rgb(254, 197, 21);">上一个 <u>PgUp</u></div>
+</div>
+<div id="popup" hidden="">
+<div id="popup-content"></div>
+<span id="hide-popup" hidden="" style="background-color: rgb(254, 197, 21);">X <u>Close</u></span>
+</div>
+<div id="actions" class="panel" style="height: 145px; width: 0px; background-color: rgb(82, 188, 105);">
+<p id="createNlogN">创建(A) - O(<b>N</b> log <b>N</b>)</p>
+<p id="createN">创建(A) - O(<b>N</b>)</p>
+<p id="insert">插入(v)</p>
+<p id="extractmax" class="execAction" onclick="extractmax()">摘除最大元素()</p>
+<p id="heapsort" class="execAction" onclick="heapsort()">堆排序()</p>
+</div>
+<div id="actions-hide" class="panel-hide" style="padding-top: 64px; padding-bottom: 65px; background-color: rgb(82, 188, 105);"><img src="./VisuAlgo - Binary Heap (Priority Queue)_files/arrow_white_right.png" alt="&gt;" title="show/hide actions panel" class="rotateLeft"></div>
+<div id="actions-extras">
+<div class="createNlogN action-menu-pullout" style="left: 193px; display: none;">
+<div id="createNlogN-input" class="new-menu-option" style="float: left;">A = <input type="text" id="arrv1" autocomplete="off" value="2,7,26,25,19,17,1,90,3,36"></div>
+<div id="createNlogN-go" class="execAction coloured-menu-option" onclick="createNlogN()" style="float: left; background-color: rgb(82, 188, 105); color: rgb(255, 255, 255);"><p>执行</p></div>
+<div id="createNlogN-sample" class="execAction new-menu-option coloured-menu-option" onclick="createNlogNSample()" style="float: left; background-color: rgb(82, 188, 105); color: rgb(255, 255, 255);"><p>Sorted Example</p></div>
+<div id="createNlogN-random" class="execAction new-menu-option coloured-menu-option" onclick="createNlogNRandom()" style="float: left; background-color: rgb(82, 188, 105); color: rgb(255, 255, 255);"><p>随机</p></div>
+<div id="createNlogN-err" class="err" style="float: left;"></div>
+</div>
+<div class="createN action-menu-pullout" style="left: 193px;">
+<div id="createN-input" class="new-menu-option" style="float: left;">A = <input type="text" id="arrv2" autocomplete="off" value="2,7,26,25,19,17,1,90,3,36"></div>
+<div id="createN-go" class="execAction coloured-menu-option" onclick="createN()" style="float: left; background-color: rgb(82, 188, 105); color: rgb(255, 255, 255);"><p>执行</p></div>
+<div id="createN-sample" class="execAction new-menu-option coloured-menu-option" onclick="createNSample()" style="float: left; background-color: rgb(82, 188, 105); color: rgb(255, 255, 255);"><p>Sorted Example</p></div>
+<div id="createN-random" class="execAction new-menu-option coloured-menu-option" onclick="createNRandom()" style="float: left; background-color: rgb(82, 188, 105); color: rgb(255, 255, 255);"><p>随机</p></div>
+<div id="createN-err" class="err" style="float: left;"></div>
+</div>
+<div class="insert action-menu-pullout" style="left: 193px;">
+<div id="insert-input" class="new-menu-option" style="float: left;">v = <input type="number" id="v" autocomplete="off" min="0" value="26"></div>
+<div id="insert-go" class="execAction coloured-menu-option" onclick="insert()" style="float: left; background-color: rgb(82, 188, 105); color: rgb(255, 255, 255);"><p>执行</p></div>
+<div id="insert-err" class="err" style="float: left;"></div>
+</div>
+<div class="extractmax action-menu-pullout" style="left: 193px;">
+<div id="extractmax-err" class="err" style="float: left;"></div>
+</div>
+<div class="heapsort action-menu-pullout" style="left: 193px;">
+<div id="heapsort-err" class="err" style="float: left;"></div>
+</div>
+</div>
+<div id="bottom-bar">
+<a id="trigger-about">关于</a>
+<a id="trigger-team">团队</a>
+<a id="trigger-terms">使用条款</a>
+</div>
+<div id="about" class="overlays">
+<h4 style="background-color: rgb(254, 197, 21);">关于</h4><span class="close-overlay">✕</span>
+<div class="content">
+VisuAlgo在2011年由Steven Halim博士概念化，作为一个工具，帮助他的学生更好地理解数据结构和算法，让他们自己和自己的步伐学习基础。<br>VisuAlgo包含许多高级算法，这些算法在Steven Halim博士的书（“竞争规划”，与他的兄弟Felix Halim博士合作）和其他书中讨论。今天，一些高级算法的可视化/动画只能在VisuAlgo中找到。<br>虽然专门为新加坡国立大学（NUS）学生采取各种数据结构和算法类（例如CS1010，CS1020，CS2010，CS2020，CS3230和CS3230），作为在线学习的倡导者，我们希望世界各地的好奇心发现这些可视化也很有用。<br>VisuAlgo不是从一开始就设计为在小触摸屏（例如智能手机）上工作良好，因为需要满足许多复杂的算法可视化，需要大量的像素和点击并拖动手势进行交互。一个令人尊敬的用户体验的最低屏幕分辨率为1024x768，并且只有着陆页相对适合移动设备。<br>VisuAlgo是一个正在进行的项目，更复杂的可视化仍在开发中。<br>最令人兴奋的发展是自动问题生成器和验证器（在线测验系统），允许学生测试他们的基本数据结构和算法的知识。这些问题是通过一些规则随机生成的，学生的答案会在提交给我们的评分服务器后立即自动分级。这个在线测验系统，当它被更多的世界各地的CS教师采用，应该技术上消除许多大学的典型计算机科学考试手动基本数据结构和算法问题。通过在通过在线测验时设置小（但非零）的重量，CS教练可以（显着地）增加他/她的学生掌握这些基本问题，因为学生具有几乎无限数量的可以立即被验证的训练问题他们参加在线测验。培训模式目前包含12个可视化模块的问题。我们将很快添加剩余的8个可视化模块，以便VisuAlgo中的每个可视化模块都有在线测验组件。<br>另一个积极的发展分支是VisuAlgo的国际化子项目。我们要为VisuAlgo系统中出现的所有英语文本准备一个CS术语的数据库。这是一个很大的任务，需要众包。一旦系统准备就绪，我们将邀请VisuAlgo游客贡献，特别是如果你不是英语母语者。目前，我们还以各种语言写了有关VisuAlgo的公共注释：<br>
+<a href="https://weibo.com/p/230418436e9ee80102v4rk" target="_blank"><u>zh</u></a>, <a href="https://www.facebook.com/notes/steven-halim/httpidvisualgonet-visualisasi-struktur-data-dan-algoritma-dengan-animasi/10153236934439689" target="_blank"><u>id</u></a>, <a href="http://blog.naver.com/visualgo_nus" target="_blank"><u>kr</u></a>, <a href="https://www.facebook.com/groups/163215593699283/permalink/824003417620494/" target="_blank"><u>vn</u></a>, <a href="http://pantip.com/topic/32736343" target="_blank"><u>th</u></a>.<p></p>
+</div>
+</div>
+<div id="team" class="overlays">
+<h4 style="background-color: rgb(254, 197, 21);">团队</h4><span class="close-overlay">✕</span>
+<div class="content">
+<p>
+<strong><span style="line-height: 150%;">项目领导和顾问（2011年7月至今）</span></strong><br>
+<a href="http://www.comp.nus.edu.sg/~stevenha/" target="_blank">Dr Steven Halim</a>, Senior Lecturer, School of Computing (SoC), National University of Singapore (NUS)<br>
+<a href="http://felix-halim.net/" target="_blank">Dr Felix Halim</a>, Software Engineer, Google (Mountain View)
+</p>
+<p>
+<strong><span style="line-height: 150%;">本科生研究人员 1 (Jul 2011-Apr 2012)</span></strong><br>
+Koh Zi Chun, <a href="http://roticv.rantx.com/" target="_blank">Victor Loh Bo Huai</a>
+</p>
+<p>
+<strong><span style="line-height: 150%;">最后一年项目/ UROP学生 1 (Jul 2012-Dec 2013)</span></strong><br>
+Phan Thi Quynh Trang, Peter Phandi, Albert Millardo Tjindradinata, Nguyen Hoang Duy
+</p>
+<p>
+<strong><span style="line-height: 150%;">最后一年项目/ UROP学生 2 (Jun 2013-Apr 2014)</span></strong><br>
+<a href="http://www.rosemarietan.com/" target="_blank">Rose Marie Tan Zhao Yun</a>, Ivan Reinaldo
+</p>
+<p>
+<strong><span style="line-height: 150%;">本科生研究人员 2 (May 2014-Jul 2014)</span></strong><br>
+Jonathan Irvin Gunawan, Nathan Azaria, Ian Leow Tze Wei, Nguyen Viet Dung, Nguyen Khac Tung, Steven Kester Yuwono, Cao Shengze, Mohan Jishnu
+</p>
+<p>
+<strong><span style="line-height: 150%;">最后一年项目/ UROP学生 3 (Jun 2014-Apr 2015)</span></strong><br>
+Erin Teo Yi Ling, Wang Zi
+</p>
+<p>
+<strong><span style="line-height: 150%;">最后一年项目/ UROP学生 4 (Jun 2016-Dec 2017)</span></strong><br>
+Truong Ngoc Khanh, John Kevin Tjahjadi, Gabriella Michelle, Muhammad Rais Fathin Mudzakir
+</p>
+<p>
+List of translators who have contributed ≥100 translations can be found at <a href="https://visualgo.net/statistics">statistics</a> page.
+</p>
+<p>
+<strong><span style="line-height: 150%;">致谢</span></strong><br>
+这个项目是由来自NUS教学与学习发展中心（CDTL）的慷慨的教学增进赠款提供的。
+</p>
+</div>
+</div>
+<div id="termsofuse" class="overlays">
+<h4 style="background-color: rgb(254, 197, 21);">使用条款</h4><span class="close-overlay">✕</span>
+<div class="content">
+VisuAlgo是地球上的计算机科学社区免费。如果你喜欢VisuAlgo，我们对你的唯一的要求就是通过你知道的方式，比如：Facebook、Twitter、课程网页、博客评论、电子邮件等<b>告诉其他计算机方面的学生/教师：VisuAlgo网站的神奇存在</b>。<br>如果您是数据结构和算法<b>学生/教师</b>，您可以直接将此网站用于您的课程。如果你从这个网站拍摄截图（视频），你可以使用屏幕截图（视频）在其他地方，只要你引用本网站的网址（http://visualgo.net）或出现在下面的出版物列表中作为参考。但是，您不能下载VisuAlgo（客户端）文件并将其托管在您自己的网站上，因为它是剽窃。到目前为止，我们不允许其他人分叉这个项目并创建VisuAlgo的<b>变体</b>。使用（客户端）的VisuAlgo的离线副本作为您的个人使用是很允许的。<br>请注意，VisuAlgo的在线测验组件本质上具有沉重的服务器端组件，并且没有简单的方法来在本地保存服务器端脚本和数据库。目前，公众只能使用“培训模式”来访问这些在线测验系统。目前，“测试模式”是一个更受控制的环境，用于使用这些随机生成的问题和自动验证在NUS的实际检查。其他感兴趣的CS教练应该联系史蒂文如果你想尝试这样的“测试模式”。<br><b>出版物名单</b><br>这项工作在2012年ACM ICPC世界总决赛（波兰，华沙）和IOI 2012年IOI大会（意大利Sirmione-Montichiari）的CLI讲习班上进行了简要介绍。您可以点击此链接阅读我们2012年关于这个系统的文章（它在2012年还没有被称为VisuAlgo）。<br>这项工作主要由我过去的学生完成。最近的最后报告是：Erin，Wang Zi，Rose，Ivan。<br><b>错误申报或请求添加新功能</b><br>VisuAlgo不是一个完成的项目。 Steven Halim博士仍在积极改进VisuAlgo。如果您在使用VisuAlgo并在我们的可视化页面/在线测验工具中发现错误，或者如果您想要求添加新功能，请联系Dr Steven Halim博士。他的联系邮箱是他的名字加谷歌邮箱后缀：StevenHalim@gmail.com。<br>
+</div>
+</div>
+<script src="./VisuAlgo - Binary Heap (Priority Queue)_files/jquery-3.1.1.min.js"></script>
+<script>
+var PHP_DOMAIN = "";
+
+// surprise colour!
+// Referenced to in  home.js and viz.js also
+var colourArray = ["#52bc69", "#d65775"/*"#ed5a7d"*/, "#2ebbd1", "#d9513c", "#fec515", "#4b65ba", "#ff8a27", "#a7d41e"]; // green, pink, blue, red, yellow, indigo, orange, lime
+
+function disableScroll() { $('html').css('overflow', 'hidden'); }
+
+function enableScroll() { $('html').css('overflow', 'visible'); }
+
+function replaceAll(find, replace, str) { return str.replace(new RegExp(find, 'g'), replace); }
+
+function getColours() {
+  var generatedColours = new Array();
+  while (generatedColours.length < 4) {
+    var n = (Math.floor(Math.random() * colourArray.length));
+    if ($.inArray(n, generatedColours) == -1)
+      generatedColours.push(n);
+  }
+  return generatedColours;
+}
+
+function isOn(value, position) {
+  return (value>>position) & 1 === 1;
+}
+
+function customAlert(msg) {
+  $('#custom-alert p').html(msg);
+  var m = -1 * ($('#custom-alert').outerHeight()/2);
+  $('#custom-alert').css('margin-top', m+'px');
+  $('#dark-overlay').fadeIn(function() {
+    $('#custom-alert').fadeIn(function() {
+      setTimeout(function() {
+        $('#custom-alert').fadeOut(function() {
+          $('#dark-overlay').fadeOut();
+        });
+      }, 1000);
+    });
+  });
+}
+
+function showLoadingScreen() {
+  $('#loading-overlay').show();
+  $('#loading-message').show();
+}
+
+function hideLoadingScreen() {
+  $('#loading-overlay').hide();
+}
+
+function commonAction(retval, msg) {
+  //setTimeout(function() {
+    if (retval) { // mode == "exploration" && // now not only for exploration mode, but check if this opens other problems
+      $('#current-action').show();
+      $('#current-action').html(mode == "exploration" ? msg : ("e-Lecture Example (auto play until done)<br>" + msg));
+      $('#progress-bar').slider("option", "max", gw.getTotalIteration()-1);
+      triggerRightPanels();
+      isPlaying = true;
+    }
+  //}, 500);
+}
+
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split('&');
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split('=');
+    if (decodeURIComponent(pair[0]) == variable)
+      return decodeURIComponent(pair[1]);
+  }
+  return "";
+}
+
+var generatedColours = getColours();
+var surpriseColour = colourArray[generatedColours[0]];
+var colourTheSecond = colourArray[generatedColours[1]];
+var colourTheThird = colourArray[generatedColours[2]];
+var colourTheFourth = colourArray[generatedColours[3]];
+
+$(function() {
+  $('.links').css('background', surpriseColour);
+  $('.right-links').css('background', surpriseColour);
+  $('#login-go').css('background', surpriseColour);
+
+  $('.colour').css("color", surpriseColour); // name
+  $('h4').css("background-color", surpriseColour); // about, contact us etc. button background
+
+  // title
+  $('#title a').click(function() {
+    $('#title a').removeClass('selected-viz');
+    $(this).addClass('selected-viz');
+    // temporary quick fix for Google Chrome Aug 2016 issue...
+    setTimeout(function(){ document.body.style.zoom = "100.1%"; }, 100); // force resize/redraw...
+    setTimeout(function(){ document.body.style.zoom = "100%"; }, 600);
+  });
+
+  // overlays stuffs
+  $('#trigger-about').click(function() {
+    if ($(window).width() > 600) {
+      $('#dark-overlay').fadeIn(function() {
+        $('#about').fadeIn();
+      });
+    }
+    else
+      alert('Sorry, this dialog is too big. Please load it on bigger screen');
+  });
+
+  $('#trigger-team').click(function() {
+    if ($(window).width() > 600) {
+      $('#dark-overlay').fadeIn(function() {
+        $('#team').fadeIn();
+      });
+    }
+    else
+      alert('Sorry, this dialog is too big. Please load it on bigger screen');
+  });
+
+  $('#trigger-terms').click(function() {
+    if ($(window).width() > 600) {
+      $('#dark-overlay').fadeIn(function() {
+        $('#termsofuse').fadeIn();
+      });
+    }
+    else
+      alert('Sorry, this dialog is too big. Please load it on bigger screen');
+  });
+
+  $('.close-overlay').click(function() {
+    $('.overlays').fadeOut(function() {
+      $('#dark-overlay').fadeOut();
+    });
+  });
+
+  $('#dark-overlay').click(function() {
+    $('.overlays').fadeOut();
+    $('#dark-overlay').fadeOut();
+  });
+
+  $.get('/isloggedin', function(data) {
+    var isLoggedIn = data['isloggedin'] == '1';
+    var element;
+    if (isLoggedIn) {
+      // element = '<a onclick="verifyLogout()">登出</a>';
+      element = '<a href="https://visualgo.net/profile">Profile</a>'; 
+    }
+    else {
+      element = '<a href="https://visualgo.net/login">登录<br></a>'
+    }
+    $('#useraccount').html(element);
+  });
+});
+
+function verifyLogout() {
+  // Steven's remarks: use a better 'confirm' than the default :(
+  var doesLogout = confirm('Are you sure to logout?');
+  if (doesLogout == true) {
+    window.location = "https://visualgo.net/logout";
+  }
+}
+
+function checkLogin() {
+  $.get('/checklogin', function(data) {
+    var url = data['url'];
+    window.location.href = '/' + url;
+  });
+}
+</script>
+<script src="./VisuAlgo - Binary Heap (Priority Queue)_files/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="./VisuAlgo - Binary Heap (Priority Queue)_files/d3.min.js"></script>
+<script src="./VisuAlgo - Binary Heap (Priority Queue)_files/viz-1.0.3.js"></script>
+<script src="./VisuAlgo - Binary Heap (Priority Queue)_files/graph_library.js"></script>
+<script>
+function runSlide(slide) {
+  if (slide == '1') {
+    $("#e-lecture").html("slide " + slide + " (" + 2 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-1') {
+    $("#e-lecture").html("slide " + slide + " (" + 4 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-2') {
+    $("#e-lecture").html("slide " + slide + " (" + 6 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-3') {
+    $("#e-lecture").html("slide " + slide + " (" + 8 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-4') {
+    $("#e-lecture").html("slide " + slide + " (" + 10 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-5') {
+    $("#e-lecture").html("slide " + slide + " (" + 12 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-6') {
+    $("#e-lecture").html("slide " + slide + " (" + 14 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-7') {
+    $("#e-lecture").html("slide " + slide + " (" + 16 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-8') {
+    $("#e-lecture").html("slide " + slide + " (" + 18 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-9') {
+    $("#e-lecture").html("slide " + slide + " (" + 20 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '1-10') {
+    $("#e-lecture").html("slide " + slide + " (" + 22 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '2') {
+    $("#e-lecture").html("slide " + slide + " (" + 25 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '2-1') {
+    $("#e-lecture").html("slide " + slide + " (" + 27 + "%)");
+    hw.restoreArray([999999,71,62,53,44,35,26,17]);
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '2-2') {
+    $("#e-lecture").html("slide " + slide + " (" + 29 + "%)");
+    hw.createRandom();
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '3') {
+    $("#e-lecture").html("slide " + slide + " (" + 31 + "%)");
+    
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '3-1') {
+    $("#e-lecture").html("slide " + slide + " (" + 33 + "%)");
+    
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '4') {
+    $("#e-lecture").html("slide " + slide + " (" + 35 + "%)");
+    $("#insert").click().addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '4-1') {
+    $("#e-lecture").html("slide " + slide + " (" + 37 + "%)");
+    $("#insert").click().addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '4-2') {
+    $("#e-lecture").html("slide " + slide + " (" + 39 + "%)");
+    $("#insert").click().addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '4-3') {
+    $("#e-lecture").html("slide " + slide + " (" + 41 + "%)");
+    $("#insert").click().addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '4-4') {
+    $("#e-lecture").html("slide " + slide + " (" + 43 + "%)");
+    $("#insert").click().addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '5') {
+    $("#e-lecture").html("slide " + slide + " (" + 45 + "%)");
+    closeCreateNlogN();
+closeCreateN();
+closeInsert();
+closeHeapsort();
+openExtractmax();
+$("#extractmax").addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '5-1') {
+    $("#e-lecture").html("slide " + slide + " (" + 47 + "%)");
+    closeCreateNlogN();
+closeCreateN();
+closeInsert();
+closeHeapsort();
+openExtractmax();
+$("#extractmax").addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '5-2') {
+    $("#e-lecture").html("slide " + slide + " (" + 50 + "%)");
+    closeCreateNlogN();
+closeCreateN();
+closeInsert();
+closeHeapsort();
+openExtractmax();
+$("#extractmax").addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '5-3') {
+    $("#e-lecture").html("slide " + slide + " (" + 52 + "%)");
+    closeCreateNlogN();
+closeCreateN();
+closeInsert();
+closeHeapsort();
+openExtractmax();
+$("#extractmax").addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '5-4') {
+    $("#e-lecture").html("slide " + slide + " (" + 54 + "%)");
+    closeCreateNlogN();
+closeCreateN();
+closeInsert();
+closeHeapsort();
+openExtractmax();
+$("#extractmax").addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '6') {
+    $("#e-lecture").html("slide " + slide + " (" + 56 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '7') {
+    $("#e-lecture").html("slide " + slide + " (" + 58 + "%)");
+    $("#createNlogN").addClass("menu-highlighted");
+$("#createN").addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '7-1') {
+    $("#e-lecture").html("slide " + slide + " (" + 60 + "%)");
+    $("#createNlogN").click().addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '7-2') {
+    $("#e-lecture").html("slide " + slide + " (" + 62 + "%)");
+    $("#createN").click().addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '7-3') {
+    $("#e-lecture").html("slide " + slide + " (" + 64 + "%)");
+    $("#createN").click().addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '7-4') {
+    $("#e-lecture").html("slide " + slide + " (" + 66 + "%)");
+    $("#createN").click().addClass("menu-highlighted");
+hw.restoreArray([999999,71,62,53,44,35,26,17]);
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '7-5') {
+    $("#e-lecture").html("slide " + slide + " (" + 68 + "%)");
+    $("#createN").click().addClass("menu-highlighted");
+hw.restoreArray([999999,71,62,53,44,35,26,17]);
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '8') {
+    $("#e-lecture").html("slide " + slide + " (" + 70 + "%)");
+    $("#heapsort").addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '8-1') {
+    $("#e-lecture").html("slide " + slide + " (" + 72 + "%)");
+    $("#heapsort").addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '8-2') {
+    $("#e-lecture").html("slide " + slide + " (" + 75 + "%)");
+    $("#heapsort").addClass("menu-highlighted");
+    showActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '9') {
+    $("#e-lecture").html("slide " + slide + " (" + 77 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '9-1') {
+    $("#e-lecture").html("slide " + slide + " (" + 79 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '9-2') {
+    $("#e-lecture").html("slide " + slide + " (" + 81 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '9-3') {
+    $("#e-lecture").html("slide " + slide + " (" + 83 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '9-4') {
+    $("#e-lecture").html("slide " + slide + " (" + 85 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '9-5') {
+    $("#e-lecture").html("slide " + slide + " (" + 87 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '9-6') {
+    $("#e-lecture").html("slide " + slide + " (" + 89 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '9-7') {
+    $("#e-lecture").html("slide " + slide + " (" + 91 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '99') {
+    $("#e-lecture").html("slide " + slide + " (" + 93 + "%)");
+    
+    hideEntireActionsPanel();
+ 
+    showStatusPanel();
+    showCodetracePanel();
+
+  }
+  if (slide == '99-1') {
+    $("#e-lecture").html("slide " + slide + " (" + 95 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '99-2') {
+    $("#e-lecture").html("slide " + slide + " (" + 97 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+  if (slide == '99-3') {
+    $("#e-lecture").html("slide " + slide + " (" + 100 + "%)");
+    
+    hideEntireActionsPanel();
+    hideStatusPanel();
+    hideCodetracePanel();
+
+  }
+}
+
+window.onpopstate = function(event) {
+  var slide = event.state['slide'];
+  openSlide(slide, function() {
+    runSlide(slide);
+  });
+};
+
+function getUrlParameter(sParam) {
+  var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+  sURLVariables = sPageURL.split('&'), sParameterName, i;
+
+  for (i = 0; i < sURLVariables.length; i++) {
+    sParameterName = sURLVariables[i].split('=');
+    if (sParameterName[0] === sParam) return sParameterName[1] === undefined ? true : sParameterName[1];
+  }
+};
+
+function pushState(slideValue) {
+  var url = '/zh/heap';
+  if (typeof slideValue != 'undefined' && slideValue != null) url += '?slide=' + slideValue;
+  window.history.pushState({slide: slideValue}, "slide " + slideValue, url);
+}
+
+function showPopup(callback) {
+  $('#popup').fadeIn(100, callback);
+}
+
+function hidePopup(callback) {
+  $('#popup').fadeOut(100, callback);
+}
+
+function showOverlay() {
+  $('#overlay').css('opacity', 0.5); 
+  $('#overlay').show();
+}
+
+function hideOverlay() {
+  $('#overlay').hide();
+  $("#e-lecture").html("");
+}
+
+function makeOverlayTransparent() {
+  $('#overlay').css('opacity', 0);
+}
+
+function hideSlide(callback) {
+  isPlaying = true;
+  closeSlide(cur_slide, function() {
+    makeOverlayTransparent();
+    setTimeout(callback, 700); // don't immediately run the animation, wait for 500ms+ first
+  });
+}
+
+function showSlide() {
+  isPlaying = false;
+  openSlide(cur_slide);
+  showOverlay();
+}
+
+$(function() {
+  var slide = getUrlParameter('slide');
+  
+  $.get('/hasvisited' + '/heap', function(data) {
+    var hasVisited = data['hasvisited'] == '1';
+    if (!hasVisited) {
+      var postData = {
+        '_token': 'Y9iyR7siHRKW0CzEGAAm65Xe3lAQbbRLjtDCigJi',
+        'page': '/heap'.substring(1),
+      };
+
+      $.post("/visitpage", postData, function(data) {
+        // non critical request...
+      });
+
+      if (typeof slide != undefined && slide != null) {
+        cur_slide = slide;
+      }
+
+      $("#mode-menu a").trigger("click");
+    }
+    else {
+      if (typeof slide != undefined && slide != null) {
+        cur_slide = slide;
+        $('#mode-menu a').click();
+      }    
+    }
+  }).fail(function() {
+    if (typeof slide != undefined && slide != null) {
+      cur_slide = slide;
+      $('#mode-menu a').click();
+    }
+  });
+
+  $('.mcq-submit').click(function() {
+    var questionId = parseInt($(this).attr('id').split('-')[1]);
+    var answer = $('#mcq-answer-' + questionId).val();
+    var userAnswer = $('input[type=radio][name=mcq-'+questionId+'-choice]:checked').val();
+
+    if (answer === userAnswer) {
+      $('#answer-status-' + questionId).html('<font color="green"><b>Correct!</b></font>');
+    }
+    else {
+      $('#answer-status-' + questionId).html('<font color="red"><b>Wrong Answer! Try again...</b></font>');
+    }
+    $('#answer-status-' + questionId).show();
+    setTimeout(function() {
+      $('#answer-status-' + questionId).fadeOut(1000);
+    }, 1000);
+  });
+
+  $('.msq-submit').click(function() {
+    var questionId = parseInt($(this).attr('id').split('-')[1]);
+    var answer = $('#msq-answer-' + questionId).val();
+
+    var answers = [];
+    $('input[type=checkbox][class=msq-choice]:checked').each(function() {
+      answers.push($(this).attr('id').split('-')[3]);
+    });
+    answers.sort();
+    var userAnswer = answers.join(',');
+
+    if (answer === userAnswer) {
+      $('#answer-status-' + questionId).html('<font color="green">Correct!</font>');
+    }
+    else {
+      $('#answer-status-' + questionId).html('<font color="red">Wrong Answer! Try again...</font>');
+    }
+    $('#answer-status-' + questionId).show();
+    setTimeout(function() {
+      $('#answer-status-' + questionId).fadeOut(1000);
+    }, 1000);
+  });
+
+  $('select.lecture-dropdown').change(function() {
+    var nextSlide = $(this).val();
+    openSlide(nextSlide, function() {
+      runSlide(nextSlide);
+      pushState(nextSlide);
+    });
+  });
+
+  $('#hide-popup').click(function() {
+    hidePopup();
+  });
+
+  $('#popup').hover(function() {
+    $('#hide-popup').show();
+  }, function() {
+    $('#hide-popup').hide();
+  });
+
+  $('#electure-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-1');
+    pushState('1-1');
+  });
+
+  $('#electure-1-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-2');
+    pushState('1-2');
+  });
+  $('#electure-1-1 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1');
+    pushState('1');
+  });
+
+  $('#electure-1-2 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-3');
+    pushState('1-3');
+  });
+  $('#electure-1-2 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-1');
+    pushState('1-1');
+  });
+
+  $('#electure-1-3 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-4');
+    pushState('1-4');
+  });
+  $('#electure-1-3 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-2');
+    pushState('1-2');
+  });
+
+  $('#electure-1-4 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-5');
+    pushState('1-5');
+  });
+  $('#electure-1-4 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-3');
+    pushState('1-3');
+  });
+
+  $('#electure-1-5 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-6');
+    pushState('1-6');
+  });
+  $('#electure-1-5 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-4');
+    pushState('1-4');
+  });
+
+  $('#electure-1-6 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-7');
+    pushState('1-7');
+  });
+  $('#electure-1-6 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-5');
+    pushState('1-5');
+  });
+
+  $('#electure-1-7 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-8');
+    pushState('1-8');
+  });
+  $('#electure-1-7 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-6');
+    pushState('1-6');
+  });
+
+  $('#electure-1-8 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-9');
+    pushState('1-9');
+  });
+  $('#electure-1-8 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-7');
+    pushState('1-7');
+  });
+
+  $('#electure-1-9 .electure-next').click(function() {
+    hidePopup();
+    runSlide('1-10');
+    pushState('1-10');
+  });
+  $('#electure-1-9 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-8');
+    pushState('1-8');
+  });
+
+  $('#electure-1-10 .electure-next').click(function() {
+    hidePopup();
+    runSlide('2');
+    pushState('2');
+  });
+  $('#electure-1-10 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-9');
+    pushState('1-9');
+  });
+
+  $('#electure-2 .electure-next').click(function() {
+    hidePopup();
+    runSlide('2-1');
+    pushState('2-1');
+  });
+  $('#electure-2 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('1-10');
+    pushState('1-10');
+  });
+
+  $('#electure-2-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('2-2');
+    pushState('2-2');
+  });
+  $('#electure-2-1 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('2');
+    pushState('2');
+  });
+
+  $('#electure-2-2 .electure-next').click(function() {
+    hidePopup();
+    runSlide('3');
+    pushState('3');
+  });
+  $('#electure-2-2 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('2-1');
+    pushState('2-1');
+  });
+
+  $('#electure-3 .electure-next').click(function() {
+    hidePopup();
+    runSlide('3-1');
+    pushState('3-1');
+  });
+  $('#electure-3 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('2-2');
+    pushState('2-2');
+  });
+
+  $('#electure-3-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('4');
+    pushState('4');
+  });
+  $('#electure-3-1 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('3');
+    pushState('3');
+  });
+
+  $('#electure-4 .electure-next').click(function() {
+    hidePopup();
+    runSlide('4-1');
+    pushState('4-1');
+  });
+  $('#electure-4 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('3-1');
+    pushState('3-1');
+  });
+
+  $('#electure-4-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('4-2');
+    pushState('4-2');
+  });
+  $('#electure-4-1 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('4');
+    pushState('4');
+  });
+
+  $('#electure-4-2 .electure-next').click(function() {
+    hidePopup();
+    runSlide('4-3');
+    pushState('4-3');
+  });
+  $('#electure-4-2 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('4-1');
+    pushState('4-1');
+  });
+
+  $('#electure-4-3 .electure-next').click(function() {
+    hidePopup();
+    runSlide('4-4');
+    pushState('4-4');
+  });
+  $('#electure-4-3 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('4-2');
+    pushState('4-2');
+  });
+
+  $('#electure-4-4 .electure-next').click(function() {
+    hidePopup();
+    runSlide('5');
+    pushState('5');
+  });
+  $('#electure-4-4 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('4-3');
+    pushState('4-3');
+  });
+
+  $('#electure-5 .electure-next').click(function() {
+    hidePopup();
+    runSlide('5-1');
+    pushState('5-1');
+  });
+  $('#electure-5 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('4-4');
+    pushState('4-4');
+  });
+
+  $('#electure-5-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('5-2');
+    pushState('5-2');
+  });
+  $('#electure-5-1 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('5');
+    pushState('5');
+  });
+
+  $('#electure-5-2 .electure-next').click(function() {
+    hidePopup();
+    runSlide('5-3');
+    pushState('5-3');
+  });
+  $('#electure-5-2 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('5-1');
+    pushState('5-1');
+  });
+
+  $('#electure-5-3 .electure-next').click(function() {
+    hidePopup();
+    runSlide('5-4');
+    pushState('5-4');
+  });
+  $('#electure-5-3 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('5-2');
+    pushState('5-2');
+  });
+
+  $('#electure-5-4 .electure-next').click(function() {
+    hidePopup();
+    runSlide('6');
+    pushState('6');
+  });
+  $('#electure-5-4 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('5-3');
+    pushState('5-3');
+  });
+
+  $('#electure-6 .electure-next').click(function() {
+    hidePopup();
+    runSlide('7');
+    pushState('7');
+  });
+  $('#electure-6 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('5-4');
+    pushState('5-4');
+  });
+
+  $('#electure-7 .electure-next').click(function() {
+    hidePopup();
+    runSlide('7-1');
+    pushState('7-1');
+  });
+  $('#electure-7 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('6');
+    pushState('6');
+  });
+
+  $('#electure-7-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('7-2');
+    pushState('7-2');
+  });
+  $('#electure-7-1 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('7');
+    pushState('7');
+  });
+
+  $('#electure-7-2 .electure-next').click(function() {
+    hidePopup();
+    runSlide('7-3');
+    pushState('7-3');
+  });
+  $('#electure-7-2 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('7-1');
+    pushState('7-1');
+  });
+
+  $('#electure-7-3 .electure-next').click(function() {
+    hidePopup();
+    runSlide('7-4');
+    pushState('7-4');
+  });
+  $('#electure-7-3 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('7-2');
+    pushState('7-2');
+  });
+
+  $('#electure-7-4 .electure-next').click(function() {
+    hidePopup();
+    runSlide('7-5');
+    pushState('7-5');
+  });
+  $('#electure-7-4 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('7-3');
+    pushState('7-3');
+  });
+
+  $('#electure-7-5 .electure-next').click(function() {
+    hidePopup();
+    runSlide('8');
+    pushState('8');
+  });
+  $('#electure-7-5 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('7-4');
+    pushState('7-4');
+  });
+
+  $('#electure-8 .electure-next').click(function() {
+    hidePopup();
+    runSlide('8-1');
+    pushState('8-1');
+  });
+  $('#electure-8 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('7-5');
+    pushState('7-5');
+  });
+
+  $('#electure-8-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('8-2');
+    pushState('8-2');
+  });
+  $('#electure-8-1 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('8');
+    pushState('8');
+  });
+
+  $('#electure-8-2 .electure-next').click(function() {
+    hidePopup();
+    runSlide('9');
+    pushState('9');
+  });
+  $('#electure-8-2 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('8-1');
+    pushState('8-1');
+  });
+
+  $('#electure-9 .electure-next').click(function() {
+    hidePopup();
+    runSlide('9-1');
+    pushState('9-1');
+  });
+  $('#electure-9 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('8-2');
+    pushState('8-2');
+  });
+
+  $('#electure-9-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('9-2');
+    pushState('9-2');
+  });
+  $('#electure-9-1 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('9');
+    pushState('9');
+  });
+
+  $('#electure-9-2 .electure-next').click(function() {
+    hidePopup();
+    runSlide('9-3');
+    pushState('9-3');
+  });
+  $('#electure-9-2 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('9-1');
+    pushState('9-1');
+  });
+
+  $('#electure-9-3 .electure-next').click(function() {
+    hidePopup();
+    runSlide('9-4');
+    pushState('9-4');
+  });
+  $('#electure-9-3 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('9-2');
+    pushState('9-2');
+  });
+
+  $('#electure-9-4 .electure-next').click(function() {
+    hidePopup();
+    runSlide('9-5');
+    pushState('9-5');
+  });
+  $('#electure-9-4 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('9-3');
+    pushState('9-3');
+  });
+
+  $('#electure-9-5 .electure-next').click(function() {
+    hidePopup();
+    runSlide('9-6');
+    pushState('9-6');
+  });
+  $('#electure-9-5 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('9-4');
+    pushState('9-4');
+  });
+
+  $('#electure-9-6 .electure-next').click(function() {
+    hidePopup();
+    runSlide('9-7');
+    pushState('9-7');
+  });
+  $('#electure-9-6 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('9-5');
+    pushState('9-5');
+  });
+
+  $('#electure-9-7 .electure-next').click(function() {
+    hidePopup();
+    runSlide('99');
+    pushState('99');
+  });
+  $('#electure-9-7 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('9-6');
+    pushState('9-6');
+  });
+
+  $('#electure-99 .electure-next').click(function() {
+    hidePopup();
+    runSlide('99-1');
+    pushState('99-1');
+  });
+  $('#electure-99 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('9-7');
+    pushState('9-7');
+  });
+
+  $('#electure-99-1 .electure-next').click(function() {
+    hidePopup();
+    runSlide('99-2');
+    pushState('99-2');
+  });
+  $('#electure-99-1 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('99');
+    pushState('99');
+  });
+
+  $('#electure-99-2 .electure-next').click(function() {
+    hidePopup();
+    runSlide('99-3');
+    pushState('99-3');
+  });
+  $('#electure-99-2 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('99-1');
+    pushState('99-1');
+  });
+
+  $('#electure-99-3 .electure-prev').click(function() {
+    hidePopup();
+    runSlide('99-2');
+    pushState('99-2');
+  });
+
+ 
+
+  // temporary quick fix for Google Chrome Aug 2016 issue..., put at last part so that everything else has been loaded
+  setTimeout(function(){ document.body.style.zoom = "100.1%"; }, 500);
+  setTimeout(function(){ document.body.style.zoom = "100%"; }, 600);
+});
+
+function doButtonAction23() {
+  CUSTOM_ACTION('createNlogN', "1,2,3,4,5,6,7");
+}
+function doButtonAction24() {
+  CUSTOM_ACTION('createN', "1,2,3,4,5,6,7");
+}
+function doButtonAction25() {
+  CUSTOM_ACTION('heapsort');
+}
+function doButtonAction26() {
+  CUSTOM_ACTION('extractmax');
+}
+function doButtonAction27() {
+  CUSTOM_ACTION('random_insert');
+}
+function doButtonAction34() {
+  CUSTOM_ACTION('insert_top');
+}
+
+function adjustPopupToImageSize() {
+  var width = $('#popup-image').prop('width');
+  var height = $('#popup-image').prop('height');
+  $('#popup').width(width + 20);
+  $('#popup').height(height + 20);
+  if (width == 0 && height == 0) {
+    setTimeout(adjustPopupToImageSize, 200);
+  } else {
+    showPopup();  
+  }
+}
+
+function POPUP_IMAGE(url) {
+  $('#popup-content').html('<img id="popup-image" src="' + url + '">');
+  adjustPopupToImageSize();
+}
+
+function URL(url) {
+  window.open(url, '_blank');
+}
+</script>
+<script> // Implement these functions in each visualisation
+  // This function will be called before entering e-Lecture Mode
+  function ENTER_LECTURE_MODE() {}
+
+  // This function will be called before returning to Explore Mode
+  function ENTER_EXPLORE_MODE() {}
+
+  // Lecture action functions
+  function CUSTOM_ACTION(action, data, mode) {}
+</script>
+<script type="text/javascript">
+// Heap Widget
+// original author: Steven Halim
+
+var Heap = function() {
+  var gw = new GraphWidget();
+
+  /*
+   * A: Internal representation of Heap in this object
+   * It is a compact 1-based 1-dimensional array (ignoring index 0)
+   * The parent/left child/right child can be computed via index manipulation
+   *
+   * Elements of A are ObjectPair objects, where first element is the value and the second element is the ID of the vertex SVG corresponding to the value
+   */
+
+  /*
+   * Edge IDs are the index of the child element, so for example edge A[1]-A[2] will have ID "e2" (edge 2)
+   * The edges will be set to not change when vertexes are interchanged
+   * This eliminates the need to maintain an Adjacency Matrix / List
+   */
+
+  var coord = new Array();
+  var A = new Array();
+  var amountVertex = 0;
+  var arr;
+
+  initArrayRandom();
+  init();
+
+  var stateList = [];
+
+  this.getGraphWidget = function() { return gw; };
+
+  function parent(i) { return i>>1; } // Math.floor(i/2);
+
+  function left(i) { return i<<1; } // i*2;
+
+  function right(i) { return (i<<1)+1; } // i*2+1;
+  
+  this.IsMaxHeap = function(array) {
+    for (var i = 1; i < array.length; i++)
+      if (array[parent(i)] < array[i])
+        return false;
+   return true;
+  }
+
+  this.generate = function(array) {
+    clearScreen();
+    array.unshift(999999);
+    A = [];
+    for (var i = 0; i < array.length; i++) {
+      A[i] = new ObjectPair(array[i], amountVertex); // testing layout, to leave the edges there for now
+      amountVertex++;
+    }
+    init();
+  };
+
+  this.saveArray = function() {
+    arr = new Array();
+    for (var i = 0; i < A.length; i++)
+      arr[i] = A[i].getFirst();
+    return arr;
+  }
+
+  this.restoreArray = function(arr) {
+    clearScreen();
+    amountVertex = arr.length;
+    A = [];
+    for (var i = 0; i < amountVertex; i++)
+      A[i] = new ObjectPair(arr[i], i);
+    init();
+  }
+
+  function initArrayRandom() {
+    A = [];
+    amountVertex = 5 + Math.floor(Math.random()*11); // [5..15]
+    A[0] = new ObjectPair(999999, 0);
+    arr = new Array();
+    for (var i = 1; i < amountVertex; i++) {
+      var lb = 20;
+           if (i == 1)           lb = 80;
+      else if (i >= 2 && i <= 3) lb = 60;
+      else if (i >= 4 && i <= 7) lb = 40;
+      var newVal = lb + Math.floor(Math.random()*20); // [lb..lb+19]
+      while ($.inArray(newVal, arr) != -1)
+        newVal = lb + Math.floor(Math.random()*20);
+      arr.push(newVal);
+      A[i] = new ObjectPair(newVal, i);
+    }
+  }
+
+  this.createRandom = function() {
+    clearScreen();
+    initArrayRandom();
+    init();
+  }
+
+  function init() {
+    var i, j;
+
+    // compute vertex coordinates  
+    var vtx_count = 1; // 1-based indexing
+    for (i = 0; i <= 4; i++) { // we limit our visualization to 4 levels only
+      var entriesInThisLevel = 1<<i; // 2^i
+      for (j = 0; j < entriesInThisLevel; j++) {
+        coord[vtx_count] = new Array();
+        coord[vtx_count][0] = (2*j + 1) * 900 / (2*entriesInThisLevel); // x Coordinate
+        coord[vtx_count][1] = 50 + 40*i; // y Coordinate
+        vtx_count++;
+      }
+    }
+
+    for (i = 1; i < A.length; i++) // add vertices first
+      gw.addVertex(coord[i][0], coord[i][1], A[i].getFirst(), A[i].getSecond(), true, i);
+
+    for (i = 2; i < A.length; i++) { // then add edges, i is edge id
+      parentVertex = A[parent(i)].getSecond();
+      childVertex = A[i].getSecond();
+      gw.addEdge(parentVertex, childVertex, i, EDGE_TYPE_UDE, 1, true);
+    }
+  }
+
+  function clearScreen() {
+    var i;
+    for (i = 2; i < A.length; i++) // remove edges first
+      gw.removeEdge(i);
+    for (i = 1; i < A.length; i++) // then afterwards, remove vertices
+      gw.removeVertex(A[i].getSecond());
+    amountVertex = 0;
+    A = []; // destroy old A, create new one
+  }
+
+  this.insert = function(vertexText, startAnimationDirectly, callback) {
+    if (A.length > 31) {
+      $('#insert-err').html('抱歉，已达到上限31');
+      if (typeof callback == 'function') callback();
+      return false;
+    }
+
+    for (i = 0; i < A.length; i++) {
+      if (A[i].getFirst() == parseInt(vertexText)) {
+        $('#insert-err').html('抱歉，堆中已经包含该值。包含重复值的堆无法演示TAT');
+        if (typeof callback == 'function') callback();
+        return false;
+      }
+    }
+
+    if (startAnimationDirectly == true) {
+      stateList = [];
+      populatePseudocode(0);
+    }
+
+    var i, key, cs;
+    if (A.length > 1) {
+      cs = createState(A);
+      cs["status"] = "当前最大二叉堆";
+      cs["lineNo"] = !startAnimationDirectly ? 2 : 0;
+      stateList.push(cs); // zero-th frame, the starting point
+    }
+
+    A[A.length] = new ObjectPair(parseInt(vertexText), amountVertex);
+    amountVertex++;
+    i = A.length-1;
+
+    cs = createState(A);
+    cs["vl"][A[i].getSecond()]["state"] = VERTEX_HIGHLIGHTED;
+    cs["status"] = vertexText + " is inserted at the back of compact array A.";
+    cs["lineNo"] = !startAnimationDirectly ? 3 : [1, 2]; // differentiate O(N log N) build vs single insert
+    stateList.push(cs); // first frame, highlight the newly inserted vertex
+
+    while (i > 1 && A[parent(i)].getFirst() < A[i].getFirst()) {
+      cs = createState(A);
+      cs["vl"][A[i].getSecond()]["state"] = VERTEX_HIGHLIGHTED;
+      cs["vl"][A[parent(i)].getSecond()]["state"] = VERTEX_TRAVERSED;
+      cs["status"] = A[parent(i)].getFirst() + ' < ' + A[i].getFirst() + ', so swap them.';
+      cs["lineNo"] = 3;
+      stateList.push(cs); // before swap
+
+      var temp = A[i];
+      A[i] = A[parent(i)];
+      A[parent(i)] = temp;
+      cs = createState(A);
+      cs["vl"][A[i].getSecond()]["state"] = VERTEX_TRAVERSED;
+      cs["vl"][A[parent(i)].getSecond()]["state"] = VERTEX_HIGHLIGHTED;
+      cs["status"] = A[parent(i)].getFirst() + ' <-> ' + A[i].getFirst() + ' have been swapped.';
+      cs["lineNo"] = !startAnimationDirectly ? 3 : 4;
+      stateList.push(cs); // record the successive vertex swap animation
+      i = parent(i);
+    }
+
+    cs = createState(A); // record the final state of the heap after insertion to stop the highlights
+    cs["vl"][A[i].getSecond()]["state"] = VERTEX_HIGHLIGHTED; // highlighted the successful insertion
+    cs["status"] = vertexText + ' has been inserted successfully.';
+    cs["lineNo"] = !startAnimationDirectly ? 3 : 0;
+    stateList.push(cs);
+
+    if (startAnimationDirectly) gw.startAnimation(stateList, callback);
+    return true;
+  }
+
+  this.shiftDown = function(i, calledFrom) {
+    while (i < A.length) {
+      var maxV = A[i].getFirst(), max_id = i;
+      if (left(i) < A.length && maxV < A[left(i)].getFirst()) {
+        maxV = A[left(i)].getFirst();
+        max_id = left(i);
+      }
+      if (right(i) < A.length && maxV < A[right(i)].getFirst()) {
+        maxV = A[right(i)].getFirst();
+        max_id = right(i);
+      }
+
+      if (max_id != i) {
+        var cs = createState(A);
+        cs["vl"][A[i].getSecond()]["state"] = VERTEX_HIGHLIGHTED;
+        cs["vl"][A[max_id].getSecond()]["state"] = VERTEX_TRAVERSED;
+        cs["status"] = A[i].getFirst() + ' < ' + A[max_id].getFirst() + ', so swap them.';
+        if (calledFrom == 'extractmax')
+          cs["lineNo"] = [4, 5];
+        else if (calledFrom == 'createN')
+          cs["lineNo"] = [2, 3];
+        else if (calledFrom == 'heapsort')
+          cs["lineNo"] = 2;
+        stateList.push(cs); // deal with affected edges first
+
+        var temp = A[i];
+        A[i] = A[max_id];
+        A[max_id] = temp;
+        cs = createState(A);
+        cs["status"] = A[i].getFirst() + ' <-> ' + A[max_id].getFirst() + ' have been swapped.';
+        if (calledFrom == 'extractmax')
+          cs["lineNo"] = 6;
+        else if (calledFrom == 'createN')
+          cs["lineNo"] = [2, 3];
+        else if (calledFrom == 'heapsort')
+          cs["lineNo"] = 2;
+        stateList.push(cs);
+
+        i = max_id;
+      }
+      else
+        break;
+    }
+  }
+
+  this.getMax = function() { return A[1].getFirst(); }
+
+  this.extractMax = function(startAnimationDirectly, callback) {
+    if (A.length == 2) {
+      $('#extractmax-err').html('Sorry, the Binary Max Heap contains only one item. This is the max item. We cannot delete any more item.');
+      if (typeof callback == 'function') callback();
+      return false;
+    }
+
+    if (startAnimationDirectly == true) {
+      stateList = [];
+      populatePseudocode(1);
+    }
+
+    var cs = createState(A);
+    cs["vl"][A[1].getSecond()]["state"] = VERTEX_HIGHLIGHTED;
+    cs["status"] = 'Root stores the max item.';
+    cs["lineNo"] = !startAnimationDirectly ? 2 : 0; // heapsort vs standard extract
+    stateList.push(cs); // highlight the root (max element)
+
+    cs = createState(A);
+    delete cs["vl"][A[1].getSecond()];
+    var maxitem = A[1].getFirst();
+    cs["status"] = 'Take out the root ' + maxitem + '.';
+    cs["lineNo"] = !startAnimationDirectly ? 2 : 1;
+    stateList.push(cs); // move the root (max element) a bit upwards (to simulate 'extract max')
+
+    if (A.length > 2) {
+      cs = createState(A);
+      delete cs["vl"][A[1].getSecond()];
+      cs["status"] = 'Replace root with the last leaf ' + A[A.length-1].getFirst() + '.';
+      cs["vl"][A[A.length-1].getSecond()]["state"] = VERTEX_HIGHLIGHTED; // highlighted the last leaf
+      cs["lineNo"] = !startAnimationDirectly ? 2 : [2, 3];
+      stateList.push(cs); // delete bottom-most right-most leaf (later, also remove its associated edge)
+    }
+
+    if (A.length > 2) {
+      A[1] = A[A.length-1];
+      A.splice(A.length-1, 1);
+      cs = createState(A);
+      cs["vl"][A[1].getSecond()]["state"] = VERTEX_HIGHLIGHTED;
+      cs["status"] = 'The new root.';
+      cs["lineNo"] = !startAnimationDirectly ? 2 : [2, 3];
+      stateList.push(cs); // highlight the new root
+    }
+
+    this.shiftDown(1, !startAnimationDirectly ? 'heapsort' : 'extractmax');
+
+    cs = createState(A);
+    cs["status"] = 'ExtractMax() has been completed<br>We return the max item: ' + maxitem + '.';
+    cs["lineNo"] = !startAnimationDirectly ? 1 : 0;
+    stateList.push(cs);
+
+    if (startAnimationDirectly) gw.startAnimation(stateList, callback);
+    return true;
+  }
+
+  this.heapSort = function(callback) {
+    if (A.length == 2) {
+      $('#heapsort-err').html('Sorry, the Binary Max Heap contains only one item. This is the max item. We cannot delete any more item.');
+      if (typeof callback == 'function') callback();
+      return false;
+    }
+
+    populatePseudocode(2);
+    res = []; // copy first
+    for (var i = 1; i < A.length; i++)
+      res[i-1] = A[i].getFirst();
+    res.sort(function(a, b) { return a-b });
+
+    stateList = [];
+    var len = A.length-1;
+    var partial = [];
+    for (var i = 0; i < len; i++)
+      partial[i] = -1;
+
+    for (var i = 0; i < len-1; i++) { // except the last item (minor bug if not stopped here)
+      partial[len-1-i] = A[1].getFirst();
+      this.extractMax(false);
+      cs = createState(A);
+      cs["status"] = 'The partial sorted order is ' + partial + '.';
+      cs["lineNo"] = 1;
+      stateList.push(cs);
+    }
+
+    cs = createState(A);
+    cs["status"] = 'The final sorted order is ' + res + '.';
+    cs["lineNo"] = 0;
+    stateList.push(cs);
+
+    gw.startAnimation(stateList, callback);
+    return true;
+  }
+
+  this.createNlogN = function(arr, callback) {
+    if (arr.length > 31) {
+      $('#createNlogN-err').html('抱歉，不支持超过31个元素的最大二叉堆.');
+      if (typeof callback == 'function') callback();
+      return false;
+    }
+
+    populatePseudocode(3);
+    clearScreen();
+    var i, initValue = [999999, parseInt(arr[0])];
+    stateList = [];
+
+    var cs = createState(A);
+    cs["status"] = 'Start from an empty Binary Max Heap.';
+    cs["lineNo"] = 1;
+    stateList.push(cs);
+
+    for (i = 0; i < initValue.length; i++) {
+      A[i] = new ObjectPair(initValue[i], amountVertex);
+      amountVertex++;
+    }
+    init();
+
+    cs = createState(A);
+    cs["status"] = arr[0] + ' is inserted.<br>It becomes the new root.';
+    cs["lineNo"] = [2, 3];
+    stateList.push(cs);
+
+    for (i = 1; i < arr.length; i++) // insert one by one
+      this.insert(parseInt(arr[i]), false);
+
+    cs = createState(A);
+    cs["status"] = '已经成功从数组A创建了最大二叉堆: ' + arr + '.';
+    cs["lineNo"] = 0;
+    stateList.push(cs);
+
+    gw.startAnimation(stateList, callback);
+    return true;
+  }
+
+  this.createN = function(arr, callback) {
+    if (arr.length > 31) {
+      $('#createN-err').html('抱歉，不支持超过31个元素的最大二叉堆.');
+      if (typeof callback == 'function') callback();
+      return false;
+    }
+
+    populatePseudocode(4);
+    clearScreen();
+    var i, initValue = [999999];
+
+    for (i = 0; i < arr.length; i++)
+      initValue[i+1] = parseInt(arr[i]);
+
+    for (i = 0; i < initValue.length; i++) {
+      A[i] = new ObjectPair(initValue[i], amountVertex);
+      amountVertex++;
+    }
+    init();
+
+    stateList = [];
+    var cs = createState(A);
+    cs["status"] = 'Leave the content of the input array A as it is (a Complete Binary Tree structure).';
+    cs["lineNo"] = 1;
+    stateList.push(cs);
+
+    for (i = Math.floor(arr.length/2); i >= 1; i--) { // check heap property one by one
+      cs = createState(A);
+      cs["vl"][A[i].getSecond()]["state"] = VERTEX_HIGHLIGHTED;
+      cs["status"] = 'shiftDown(' + i + ') to fix the Binary Max Heap property (if necessary) of sub-tree rooted at ' + A[i].getFirst() + '.';
+      cs["lineNo"] = [2, 3];
+      stateList.push(cs);
+
+      this.shiftDown(i, 'createN');
+    }
+
+    cs = createState(A);
+    cs["status"] = '已经成功从数组A创建了最大二叉堆: ' + arr + '.';
+    cs["lineNo"] = 0;
+    stateList.push(cs);
+
+    gw.startAnimation(stateList, callback);
+    return true;
+  }
+
+  function createState(iH) {
+    var s = {
+      "vl": {},
+      "el": {},
+    };
+
+    for (var i = 1; i < iH.length; i++) {
+      var key = iH[i].getSecond();
+      s["vl"][key] = {};
+      s["vl"][key]["cx"] = coord[i][0];
+      s["vl"][key]["cy"] = coord[i][1];
+      s["vl"][key]["text"] = iH[i].getFirst();
+      s["vl"][key]["extratext"] = i; // the vertex number
+      s["vl"][key]["state"] = VERTEX_DEFAULT;
+    }
+
+    for (var i = 2; i < iH.length; i++) {
+      s["el"][i] = {};
+      s["el"][i]["vertexA"] = iH[parent(i)].getSecond();
+      s["el"][i]["vertexB"] = iH[i].getSecond();
+      s["el"][i]["type"] = EDGE_TYPE_UDE;
+      s["el"][i]["weight"] = 1;
+      s["el"][i]["state"] = EDGE_DEFAULT;
+      s["el"][i]["animateHighlighted"] = false;
+    }
+
+    return s;
+  }
+
+  function populatePseudocode(act) {
+    switch (act) {
+      case 0: // Insert
+        $('#code1').html('A[A.length] = v');
+        $('#code2').html('i = A.length-1');
+        $('#code3').html('while (i > 1 &amp;&amp; A[parent(i)] &lt; A[i])');
+        $('#code4').html('&nbsp&nbspswap(A[i], A[parent(i)])');
+        $('#code5').html('// <b><a href="http://cpbook.net/#downloads" target="_blank">ch2_06_priority_queue.cpp/java</a></b>');
+        $('#code6').html('');
+        $('#code7').html('');
+        break;
+      case 1: // ExtractMax
+        $('#code1').html('take out A[1]');
+        $('#code2').html('A[1] = A[A.length-1]');
+        $('#code3').html('i = 1; A.length--');
+        $('#code4').html('while (i &lt; A.length)');
+        $('#code5').html('&nbsp&nbspif A[i] < (L = i 的两个下级中较大的)');
+        $('#code6').html('&nbsp&nbsp&nbsp&nbspswap(A[i], L)');
+        $('#code7').html('// <b><a href="http://cpbook.net/#downloads" target="_blank">ch2_06_priority_queue.cpp/java</a></b>');
+        break;
+      case 2: // HeapSort
+        $('#code1').html('for (i = 0; i &lt; A.length; i++)');
+        $('#code2').html('&nbsp&nbsp摘除最大元素()');
+        $('#code3').html('// <b><a href="http://cpbook.net/#downloads" target="_blank">ch2_06_priority_queue.cpp/java</a></b>');
+        $('#code4').html('');
+        $('#code5').html('');
+        $('#code6').html('');
+        $('#code7').html('');
+        break;
+      case 3: // Create, O(N log N)
+        $('#code1').html('Start from an empty Binary Max Heap');
+        $('#code2').html('for (i = 0; i &lt; A.length; i++)');
+        $('#code3').html('&nbsp&nbsp插入(A[i])');
+        $('#code4').html('// <b><a href="http://cpbook.net/#downloads" target="_blank">ch2_06_priority_queue.cpp/java</a></b>');
+        $('#code5').html('');
+        $('#code6').html('');
+        $('#code7').html('');
+        break;
+      case 4: // Create, O(N)
+        $('#code1').html('The input array A as it is');
+        $('#code2').html('for (i = A.length/2; i &gt;= 1; i--)');
+        $('#code3').html('&nbsp&nbspshiftDown(i)');
+        $('#code4').html('// <b><a href="http://cpbook.net/#downloads" target="_blank">ch2_06_priority_queue.cpp/java</a></b>');
+        $('#code5').html('');
+        $('#code6').html('');
+        $('#code7').html('');
+        break;
+    }
+  }
+}
+
+
+
+// Heap Actions
+var actionsWidth = 150;
+var statusCodetraceWidth = 370;
+
+var isCreateNlogNOpen = false, isCreateNOpen = false, isInsertOpen = false, isExtractmaxOpen = false, isHeapsortOpen = false;
+
+function opencreateNlogN() {
+  if (!isCreateNlogNOpen){
+    $('.createNlogN').fadeIn('fast');
+    isCreateNlogNOpen = true;
+  }
+}
+
+function closeCreateNlogN() {
+  if (isCreateNlogNOpen) {
+    $('.createNlogN').fadeOut('fast');
+    $('#createNlogN-err').html("");
+    isCreateNlogNOpen = false;
+  }
+}
+
+function opencreateN() {
+  if (!isCreateNOpen) {
+    $('.createN').fadeIn('fast');
+    isCreateNOpen = true;
+  }
+}
+
+function closeCreateN() {
+  if (isCreateNOpen) {
+    $('.createN').fadeOut('fast');
+    $('#createN-err').html("");
+    isCreateNOpen = false;
+  }
+}
+
+function openInsert() {
+  if (!isInsertOpen) {
+    $('.insert').fadeIn('fast');
+    isInsertOpen = true;
+  }
+}
+
+function closeInsert() {
+  if (isInsertOpen) {
+    $('.insert').fadeOut('fast');
+    $('#insert-err').html("");
+    isInsertOpen = false;
+  }
+}
+
+function openExtractmax() {
+  if (!isExtractmaxOpen) {
+    $('.extractmax').fadeIn('fast');
+    isExtractmaxOpen = true;
+  }
+}
+
+function closeExtractmax() {
+  if (isExtractmaxOpen) {
+    $('.extractmax').fadeOut('fast');
+    $('#extractmax-err').html("");
+    isExtractmaxOpen = false;
+  }
+}
+
+function openHeapsort() {
+  if (!isHeapsortOpen) {
+    $('.heapsort').fadeIn('fast');
+    isHeapsortOpen = true;
+  }
+}
+
+function closeHeapsort() {
+  if (isHeapsortOpen) {
+    $('.heapsort').fadeOut('fast');
+    $('#heapsort-err').html("");
+    isHeapsortOpen = false;
+  }
+}
+
+function hideEntireActionsPanel() {
+  closeCreateNlogN();
+  closeCreateN();
+  closeInsert();
+  closeExtractmax();
+  closeHeapsort();
+  hideActionsPanel();
+}
+
+
+
+// local
+$('#play').hide();
+var hw = new Heap();
+var gw = hw.getGraphWidget();
+
+$(function() {
+  var createHeap = getQueryVariable("create");
+  if (createHeap.length > 0) {
+    var newHeap = createHeap.split(",");
+    if (hw.IsMaxHeap(newHeap)) // the input parameter is already a max heap
+      hw.generate(newHeap); // just show
+    else {
+      $('#arrv2').val(createHeap);
+      createN(); // not yet a max heap, build it fast
+      stop();
+    }
+  }
+
+  $('#createNlogN').click(function() {
+    closeCreateN();
+    closeInsert();
+    closeExtractmax();
+    closeHeapsort();
+    opencreateNlogN();
+  }); 
+
+  $('#createN').click(function() {
+    closeCreateNlogN();
+    closeInsert();
+    closeExtractmax();
+    closeHeapsort();
+    opencreateN();
+  });
+
+  $('#insert').click(function() {
+    closeCreateNlogN();
+    closeCreateN();
+    closeExtractmax();
+    closeHeapsort();
+    openInsert();
+  });
+  
+  $('#extractmax').click(function() {
+    closeCreateNlogN();
+    closeCreateN();
+    closeInsert();
+    closeHeapsort();
+    openExtractmax();
+  });
+  
+  $('#heapsort').click(function() {
+    closeCreateNlogN();
+    closeCreateN();
+    closeInsert();
+    closeExtractmax();
+    openHeapsort();
+  });
+});
+
+function createNlogNWithInput(input, callback) {
+  commonAction(hw.createNlogN(input.split(","), callback), "创建(A) - O(N log N): " + input);
+}
+
+function createNlogN(callback) {
+  if (isPlaying) stop();
+  var input = $('#arrv1').val();
+  createNlogNWithInput(input, callback);
+}
+
+function createNlogNSample(callback) {
+  if (isPlaying) stop();
+  var input = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31";
+  createNlogNWithInput(input, callback);
+}
+
+function createNlogNRandom(callback) {
+  if (isPlaying) stop();
+  var n = 7 + Math.floor(17*Math.random());
+  var input = new Array();
+  while (n > 0) {
+    var newVal = 1 + Math.floor(98*Math.random());
+    if ($.inArray(newVal, input) == -1) {
+      input.push(newVal);
+      n--;
+    }
+  }
+  input = input.join(",");
+  createNlogNWithInput(input, callback);
+}
+
+function createNWithInput(input, callback) {
+  commonAction(hw.createN(input.split(","), callback), "创建(A) - O(N): " + input);
+}
+
+function createN(callback) {
+  if (isPlaying) stop();
+  var input = $('#arrv2').val();
+  createNWithInput(input, callback);
+}
+
+function createNSample(callback) {
+  if (isPlaying) stop();
+  var input = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31";
+  createNWithInput(input, callback);
+}
+
+function createNRandom(callback) {
+  if (isPlaying) stop();
+  var n = 7 + Math.floor(17*Math.random());
+  var input = new Array();
+  while (n > 0) {
+    var newVal = 1 + Math.floor(98*Math.random());
+    if ($.inArray(newVal, input) == -1) {
+      input.push(newVal);
+      n--;
+    }
+  }
+  input = input.join(",");
+  commonAction(hw.createN(input.split(","), callback), "创建(A) - O(N): " + input);
+}
+
+function insert(callback) {
+  if (isPlaying) stop();
+  var input = parseInt($("#v").val());
+  commonAction(hw.insert(input, true, callback), "插入 " + input);
+  setTimeout(function() { 
+    var existing = hw.saveArray();
+    var next_num = 1 + Math.floor(Math.random()*88);
+    while (existing.includes(next_num)) next_num = 1 + Math.floor(Math.random()*88);
+    $("#v").val(next_num); // randomized for next click between [1..89}, and it won't exist before (allow for a few more insertion of 90-99, still two digits)
+  }, 500);
+}
+
+function insert_top(callback) {
+  if (isPlaying) stop();
+  var input = hw.getMax()+1; // always increase the top value by 1
+  commonAction(hw.insert(input, true, callback), "插入 " + input);
+  setTimeout(function() { $("#v").val(1 + Math.floor(Math.random()*98)); }, 500); // randomized for next click between [1..99}
+}
+
+function extractmax(callback) {
+  if (isPlaying) stop();
+  commonAction(hw.extractMax(true, callback), "摘除最大元素");
+}
+
+function heapsort(callback) {
+  if (isPlaying) stop();
+  commonAction(hw.heapSort(callback), "堆排序");
+}
+
+var exploreModeData = [];
+
+// This function will be called before entering e-Lecture Mode
+function ENTER_LECTURE_MODE() {
+  exploreModeData = hw.saveArray();
+}
+
+// This function will be called before returning to Explore Mode
+function ENTER_EXPLORE_MODE() {
+  hw.restoreArray(exploreModeData);
+}
+
+// Lecture action functions
+function CUSTOM_ACTION(action, data, mode) {
+  if (action == 'random_insert') {
+    hideSlide(function() {
+      insert(showSlide);
+    });
+  }
+  else if (action == 'insert_top') {
+    hideSlide(function() {
+      insert_top(showSlide);
+    });
+  }
+  else if (action == 'extractmax') {
+    hideSlide(function() {
+      extractmax(showSlide);
+    });
+  }
+  else if (action == 'createN') {
+    hideSlide(function() {
+      createNWithInput(data, showSlide);
+    });
+  }
+  else if (action == 'createNlogN') {
+    hideSlide(function() {
+      createNlogNWithInput(data, showSlide);
+    });
+  }
+  else if (action == 'heapsort') {
+    hideSlide(function() {
+      heapsort(showSlide);
+    });
+  }
+}
+</script>
+
+
+</body></html>
