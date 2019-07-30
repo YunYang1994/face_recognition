@@ -1,5 +1,12 @@
 ![image](./docs/daydayup.png)
 
+### 数据结构
+--------------------
+#### 1. [什么是线性表](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
+#### 2. [学习栈和队列](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#rgb2gray)
+#### 3. [递归到底是什么](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#thresh_binary)
+#### 4. [排序和搜索算法](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
+
 ### 图像处理算法
 --------------------
 #### 1. [利用stb头文件读写图片](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
