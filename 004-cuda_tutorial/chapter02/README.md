@@ -221,7 +221,7 @@ idx = iy*nx + ix // nx 表示在x维度上元素个数, 对于(4,4)矩阵而言,
 ```
 再比如，对于一个(6,8)维度的矩阵而言，假如划分为6个块，每个块有8个线程，那么就如下图所示
 
-<div align=center><img src="https://github.com/YunYang1994/CodeFun/tree/master/004-cuda_tutorial/image/block-index.png" alt="logo" height="250"></div>
+<div align=center><img src="https://github.com/YunYang1994/CodeFun/tree/master/004-cuda_tutorial/image/block-index.png"></div>
 
 从上图中也可以看出: `block`也有两个维度，分别是`blockIdx.x`和`blockIdx.y`，即`block`的索引坐标表示为(`blockIdx.x`,`blockIdx.y`)。类似地，在每个`block`中，线程`thread`也有两个维度。
 
