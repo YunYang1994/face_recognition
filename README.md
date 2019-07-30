@@ -3,14 +3,14 @@
 ### Python与数据结构
 --------------------
 #### 1. [什么是线性表](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/1.什么是线性表.ipynb)
-#### 2. [学习栈和队列](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#rgb2gray)
-#### 3. [递归到底是什么](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#thresh_binary)
-#### 4. [排序和搜索算法](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
-#### 5.1 [二叉树的基本概念](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
-#### 5.2 [实现堆栈算法](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
-#### 5.3 [二叉搜索树](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
-#### 5.4 [平衡二叉树](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
-#### 6.1 [图的基本概念](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
+#### 2. [学习栈和队列](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/2.学习栈和队列.ipynb)
+#### 3. [递归到底是什么](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/3.递归到底是什么.ipynb)
+#### 4. [排序和搜索算法](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/4.排序和搜索算法.ipynb)
+#### 5.1 [二叉树的基本概念](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/5.1.二叉树的基本概念.ipynb)
+#### 5.2 [实现堆栈算法](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/5.2.实现堆栈算法.ipynb)
+#### 5.3 [二叉搜索树](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/5.3.二叉搜索树.ipynb)
+#### 5.4 [平衡二叉树](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/5.4.平衡二叉树.ipynb)
+#### 6.1 [图的基本概念](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/6.1 图的基本概念.ipynb)
 
 ### 图像处理算法
 --------------------
