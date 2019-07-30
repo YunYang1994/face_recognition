@@ -6,6 +6,11 @@
 #### 2. [学习栈和队列](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#rgb2gray)
 #### 3. [递归到底是什么](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#thresh_binary)
 #### 4. [排序和搜索算法](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
+#### 5.1 [二叉树的基本概念](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
+#### 5.2 [实现堆栈算法](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
+#### 5.3 [二叉搜索树](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
+#### 5.4 [平衡二叉树](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
+#### 6.1 [图的基本概念](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
 
 ### 图像处理算法
 --------------------
