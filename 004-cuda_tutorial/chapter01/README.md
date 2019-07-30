@@ -35,7 +35,7 @@ int main(void)
     return 0;
 }
 ```
-在linux终端下使用以下命令进行编译[`hello.cu`](https://github.com/YunYang1994/cuda-tutorial/blob/master/chapter01/hello.cu)，然后执行程序得到
+在linux终端下使用以下命令进行编译[`hello.cu`](https://github.com/YunYang1994/CodeFun/blob/master/004-cuda_tutorial/chapter01/hello.cu)，然后执行程序得到
 ```bash
 $ nvcc -arch sm_20 hello.cu -o hello
 $ ./hello
