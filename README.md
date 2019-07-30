@@ -21,9 +21,9 @@
 #### 3. [图像二值化](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#thresh_binary)
 #### 4. [线性插值和最近邻插值](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
 
-### 深度学习框架
+### 深度学习算法
 --------------------
-#### 1. [将pytorch模型转换成tensorflow](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
+#### 1. [如何实现pytorch与tf之间的相互转化？](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
 
 ### CUDA 编程
 --------------------
