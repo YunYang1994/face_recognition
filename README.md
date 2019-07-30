@@ -14,3 +14,7 @@
 --------------------
 #### 1. [将pytorch模型转换成tensorflow](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
 
+### CUDA 编程
+--------------------
+#### 1. [了解CUDA编程](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter01/README.md)
+#### 2. [矩阵求和运算](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter02/README.md)
