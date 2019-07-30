@@ -25,7 +25,7 @@
 --------------------
 #### 1. [如何实现pytorch与tf之间的相互转化？](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
 
-### CUDA 编程
+### 学习CUDA 编程
 --------------------
 #### 1. [了解CUDA编程](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter01)
 #### 2. [矩阵求和运算](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter02)
