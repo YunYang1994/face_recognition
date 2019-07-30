@@ -2,7 +2,7 @@
 
 ### Python与数据结构
 --------------------
-#### 1. [什么是线性表](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
+#### 1. [什么是线性表](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/1.什么是线性表.ipynb)
 #### 2. [学习栈和队列](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#rgb2gray)
 #### 3. [递归到底是什么](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#thresh_binary)
 #### 4. [排序和搜索算法](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
