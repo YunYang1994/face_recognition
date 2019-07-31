@@ -42,22 +42,22 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
     </a>
 </p>
 
-初学者咋一看，这特么什么东西？只想说，看不懂！事实上，网上很多关于YOLO系列算法的教程也喜欢拿这张图去忽悠。好了，我想从这张图片出发，讲一讲YOLO算法的**画网格**思想。
+初学者咋一看，这特么什么东西？只想说，看不懂！事实上，网上很多关于YOLO系列算法的教程也喜欢拿这张图去忽悠。好了，我想从这张图片出发，讲一讲YOLO算法的**画网格**思想。在讲这个之前，我们先来了解一下什么是 feature map 和 ROI， 以及它们之间的关系。不搞懂这些，怕是你很难听懂我在讲什么。
 
-### 1.1.1 ROI 映射到 feature map
+### 1.1.1 feature map 长什么样子
+
+
+| 2维空间|3维空间|
+|---|---|
+|![image](https://github.com/YunYang1994/SphereFace/blob/master/image/2D_Original_Softmax_Loss_embeddings.gif)|![weibo-logo](https://github.com/YunYang1994/SphereFace/blob/master/image/3D_Original_Softmax_Loss_embeddings.gif)|
+
+### 1.1.2 ROI 映射到 feature map
 
 
 <p align="center">
     <img width="60%" src="https://user-images.githubusercontent.com/30433053/62198793-e4770000-b3b4-11e9-808f-d53703455def.png" style="max-width:60%;">
     </a>
 </p>
-
-### 1.1.2 feature map 长什么样子
-
-
-| 2维空间|3维空间|
-|---|---|
-|![image](https://github.com/YunYang1994/SphereFace/blob/master/image/2D_Original_Softmax_Loss_embeddings.gif)|![weibo-logo](https://github.com/YunYang1994/SphereFace/blob/master/image/3D_Original_Softmax_Loss_embeddings.gif)|
 
 
 ### 1.1.3 YOLOv3 的画网格思想
