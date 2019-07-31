@@ -32,7 +32,7 @@
 > 既然要搞深度学习和图像，那么CUDA 编程肯定是加分项了?
 --------------------
 #### 2018-10-01 [了解CUDA编程](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter01)
-#### 2019-10-04 [矩阵求和运算](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter02)
+#### 2018-10-04 [矩阵求和运算](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter02)
 
 ### 我的个人杂谈
 > 东写写，西写写，就当写日记了.
