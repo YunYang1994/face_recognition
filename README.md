@@ -26,7 +26,7 @@
 #### 4. [线性插值和最近邻插值](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics#bilinear_resize)
 
 ### 深度学习算法
-> 深度学习太难了，把踩过的坑一点点记录下来.
+> 深度学习太难了，把我踩过的坑一点点记录下来.
 --------------------
 #### 1. [如何实现pytorch与tf之间的相互转化？](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
 
@@ -35,3 +35,7 @@
 --------------------
 #### 1. [了解CUDA编程](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter01)
 #### 2. [矩阵求和运算](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter02)
+
+### 个人杂谈
+> 东写写，西写写，就当写日记了.
+
