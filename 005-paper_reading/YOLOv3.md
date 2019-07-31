@@ -5,7 +5,7 @@
 - **YOLOv3算法是怎么训练的，损失函数理解太难了，代码写得跟一坨屎一样!** 
 - **为什么我在训练的时候loss出现了Nan，有什么办法解决它吗？** 
 
-本文的目的，就在于此。
+哈哈，本文的目的，就在于此。
 
 --------------------
 # 1. YOLOv3算法的前向传播过程
@@ -28,11 +28,11 @@
 
 - `Selective Search` 会在图片上提取2000个候选区域，每个候选区域都会喂给`CNN`进行特征提取，这个过程太冗余啦，其实这些候选区域之间很多特征其实是可以共享的；<br>
 - 由于`CNN`最后一层是全连接层，因此输入图片的尺寸大小也有限制，只能进行Crop或者Warp，这样一来图片就会扭曲、变形和失真；<br>
-- 在利用`SVM`算法进行分类的时候，每个候选框的特征向量都要保留在磁盘上，很浪费空间。<br>
+- 在利用`SVM`分类器对候选框进行分类的时候，每个候选框的特征向量都要保留在磁盘上，很浪费空间！<br>
 
 **尽管如此，但仍不可否认它具有划时代的意义，至少告诉后人我们是可以利用神经网络进行目标检测的。**
 
-后面，大神们在此基础上提出了很多改进，从 `Fast RCNN` 到 `Faster RCNN` 再到 `Mask RCNN`, 目标检测的region proposal变得越来越有针对性，提出了著名的 RPN 网络去学习如何画出高质量的候选框，然后再去判断所属物体的类别。简单说来就是: 提供候选框 ---> 然后分类，这就是我们常说的two-stage算法。two-stage 算法的好处就是精度较高，但是检测速度满足不了实时性(real time)的要求。在这样的背景下，YOLO算法应运而生。
+后面，一些大神们在此基础上提出了很多改进，从 `Fast RCNN` 到 `Faster RCNN` 再到 `Mask RCNN`, 目标检测的region proposal变得越来越有针对性，提出了著名的 RPN 网络去学习如何画出高质量的候选框，然后再去判断所属物体的类别。简单说来就是: 提供候选框 ---> 然后分类，这就是我们常说的two-stage算法。two-stage 算法的好处就是精度较高，但是检测速度满足不了实时性(real time)的要求。在这样的背景下，YOLO算法应运而生。
 
 ## 1.1 不妨先给图片画网格
 
@@ -46,8 +46,21 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
 
 ### 1.1.1 ROI 映射到 feature map
 
-这里的理解很关键哦，它贯穿整个神经网络的前世今生。
 
+<p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/62198793-e4770000-b3b4-11e9-808f-d53703455def.png" style="max-width:60%;">
+    </a>
+</p>
+
+### 1.1.2 feature map 长什么样子
+
+
+| 2维空间|3维空间|
+|---|---|
+|![image](https://github.com/YunYang1994/SphereFace/blob/master/image/2D_Original_Softmax_Loss_embeddings.gif)|![weibo-logo](https://github.com/YunYang1994/SphereFace/blob/master/image/3D_Original_Softmax_Loss_embeddings.gif)|
+
+
+### 1.1.3 YOLOv3 的画网格思想
 
 
 
