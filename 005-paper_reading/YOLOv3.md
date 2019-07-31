@@ -41,14 +41,27 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
     </a>
 </p>
 
-初学者咋一看，这特么什么东西？只想说，看不懂！事实上，网上很多关于YOLO系列算法的教程也喜欢拿这张图去忽悠。好了，我想从这张图片出发，讲一讲YOLO算法的**画网格**思想。在讲这个之前，我们先来了解一下什么是 feature map 和 ROI， 以及它们之间的关系。不搞懂这些，怕是你很难听懂我在讲什么。
+初学者咋一看，这特么什么东西？只想说，看不懂！事实上，网上很多关于YOLO系列算法的教程也喜欢拿这张图去忽悠。好了，我想从这张图片出发，讲一讲YOLO算法的**画网格**思想。在讲这个之前，我们先来了解一下什么是 feature map 和 ROI， 以及它们之间的关系。
 
 ### 1.1.1 什么是 feature map 
 
-当我们谈及 CNN 网络，总能听到 feature map 这个词。它也叫特征映射，简单说来就是输入图像在与卷积核进行卷积操作后得到图像特征。
+当我们谈及 CNN 网络，总能听到 feature map 这个词。它也叫特征映射，简单说来就是输入图像在与卷积核进行卷积操作后得到图像特征。在输入层: 如果是灰度图片，那就只有一个feature map；如果是彩色图片（RGB），一般就是3个feature map（红绿蓝）。一般而言，图像在 CNN 网络自底向上提取特征时，feature map 的数量(其实也对应的就是卷积核的数目) 会越来越多，而空间信息会越来越少，其特征也会变得越来越抽象。比如著名的 VGG16 网络，它的 feature map 变化就是这个样子。
 
+<p align="center">
+    <img width="70%" src="https://raw.githubusercontent.com/YunYang1994/TensorFlow2.0-Examples/master/3-Neural_Network_Architecture/vgg16/docs/vgg16.png" style="max-width:70%;">
+    </a>
+</p>
 
+> feature map 在空间尺寸上越来越小，但在通道尺寸上变得越来越深，这就是 VGG16 的特点。 
 
+讲到 feature map 哦，就不得不提一下人脸识别领域里经常提到的 embedding. 它其实就是 feature map 被最后一层全连接层里提取到特征向量。深度学习鼻祖 hinton 于2006年发表于《SCIENCE 》上的一篇论文 ["Reducing the Dimensionality of Data with Neural Networks"](http://www.cs.toronto.edu/~hinton/science.pdf) 首次利用自编妈网络实现了对 mnist 数据集特征的提取，得到的 feature map 是一个2维或3维的向量。值得一提的是，也是这篇论文揭开了深度学习的序幕。
+
+<p align="center">
+    <img width="50%" src="https://user-images.githubusercontent.com/30433053/62225873-d395b100-b3eb-11e9-8a3b-ac3fe9d75518.png" style="max-width:50%;">
+    </a>
+</p>
+
+**多么神奇! 这就是这些数字在 CNN 空间里映射后得到的特征向量的样子。如果你对这个过程感兴趣，可以参考这份[代码](https://github.com/YunYang1994/SphereFace)。**
 
 | 它在2维空间是这个样子|它在3维空间是这个样子|
 |---|---|
