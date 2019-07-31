@@ -54,7 +54,7 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
 
 > feature map 在空间尺寸上越来越小，但在通道尺寸上变得越来越深，这就是 VGG16 的特点。 
 
-讲到 feature map 哦，就不得不提一下人脸识别领域里经常提到的 embedding. 它其实就是 feature map 被最后一层全连接层所提取到特征向量。深度学习鼻祖 hinton 于2006年发表于《SCIENCE 》上的一篇[论文](http://www.cs.toronto.edu/~hinton/science.pdf) 首次利用自编妈网络实现了对 mnist 数据集特征的提取，得到的特征是一个2维或3维的向量。值得一提的是，也是这篇论文揭开了深度学习的序幕。
+讲到 feature map 哦，就不得不提一下人脸识别领域里经常提到的 embedding. 它其实就是 feature map 被最后一层全连接层所提取到特征向量。深度学习鼻祖 hinton 于2006年发表于《SCIENCE 》上的一篇[论文](http://www.cs.toronto.edu/~hinton/science.pdf) 首次利用自编妈网络实现了对 mnist 数据集特征的提取，得到的特征是一个2维或3维的向量。值得一提的是，也是这篇论文揭开了深度学习兴起的序幕。
 
 <p align="center">
     <img width="50%" src="https://user-images.githubusercontent.com/30433053/62225873-d395b100-b3eb-11e9-8a3b-ac3fe9d75518.png" style="max-width:50%;">
