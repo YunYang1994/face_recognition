@@ -18,7 +18,7 @@
 
 
 ### 图像处理算法
-> 纯C语言底层实现, 不用安装任何第三方依赖库,对学习OpenCV有帮助.
+> 纯 C/C++ 语言底层实现, 不用安装任何第三方依赖库,对学习 OpenCV 有帮助.
 --------------------
 #### 2019-06-17. [如何利用两个简单的头文件就能实现读写图片？](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
 #### 2019-07-01. [彩色图像的二值化、灰度化和线性插值、最近邻插值算法实现](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics)
@@ -26,13 +26,13 @@
 ### 深度学习算法
 > 深度学习太难了，把我踩过的坑一点点记录下来.
 --------------------
-#### 2019-07-30 [如何实现pytorch与tf之间的相互转化？](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
+#### 2019-07-30 [如何实现 pytorch 与 tf 之间的相互转化？](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
 #### 2019-07-31 [我对 YOLOv3 算法的一点点理解](https://github.com/YunYang1994/CodeFun/blob/master/005-paper_reading/YOLOv3.md)
 
 ### 学习 CUDA 编程
 > 既然要搞深度学习和图像处理，那么CUDA 编程肯定是加分项了?
 --------------------
-#### 2018-10-01 [了解CUDA编程](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter01)
+#### 2018-10-01 [了解 CUDA 编程](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter01)
 #### 2018-10-04 [实现矩阵求和运算](https://github.com/YunYang1994/cuda-tutorial/blob/master/004-cuda_tutorial/chapter02)
 
 ### 我的个人杂谈
