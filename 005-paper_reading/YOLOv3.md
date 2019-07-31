@@ -67,6 +67,8 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
 |---|---|
 |![image](https://github.com/YunYang1994/SphereFace/blob/master/image/2D_Original_Softmax_Loss_embeddings.gif)|![weibo-logo](https://github.com/YunYang1994/SphereFace/blob/master/image/3D_Original_Softmax_Loss_embeddings.gif)|
 
+> 每一种颜色代表一种数字，原来这些数字的图片信息是[28, 28, 1]维度的，现在经 CNN 网络特征映射后，居然得到的是一个2维或3维的特征向量，真是降维打击👊！
+
 ### 1.1.2 ROI 映射到 feature map
 
 
@@ -76,9 +78,8 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
 </p>
 
 
+
 ### 1.1.3 YOLOv3 的画网格思想
-
-
 
 
 
