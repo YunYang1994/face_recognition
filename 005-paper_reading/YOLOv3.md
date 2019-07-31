@@ -12,6 +12,12 @@
 
 #### 1.1 不妨先给图片画网格
 
+<p align="center">
+    <img width="70%" src="https://user-images.githubusercontent.com/30433053/62187018-97863000-b39a-11e9-84ff-d7d3166f0407.png" style="max-width:90%;">
+    </a>
+</p>
+
+
 ![image](https://user-images.githubusercontent.com/30433053/62187018-97863000-b39a-11e9-84ff-d7d3166f0407.png)
 
 #### 1.2 Darknet53网络提取特征
