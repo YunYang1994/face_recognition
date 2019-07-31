@@ -61,9 +61,9 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
     </a>
 </p>
 
-**多么神奇! 这就是这些数字在 CNN 空间里映射后得到的特征向量的样子。如果你对这个过程感兴趣，可以参考这份[代码](https://github.com/YunYang1994/SphereFace)。**
+**下面就是上面这张图片里的数字在 CNN 空间里映射后得到的特征向量。如果你对这个过程感兴趣，可以参考这份[代码](https://github.com/YunYang1994/SphereFace)。**
 
-| 它在2维空间是这个样子|它在3维空间是这个样子|
+| 2维空间| 3维空间 |
 |---|---|
 |![image](https://github.com/YunYang1994/SphereFace/blob/master/image/2D_Original_Softmax_Loss_embeddings.gif)|![weibo-logo](https://github.com/YunYang1994/SphereFace/blob/master/image/3D_Original_Softmax_Loss_embeddings.gif)|
 
