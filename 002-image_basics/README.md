@@ -47,7 +47,7 @@ for(int i=0; i<im.w; i++){
 
 |原始图片|去掉红色通道|去掉绿色通道|去掉蓝色通道|
 |---|---|---|:---:|
-|![image](../data/dog.jpg)|![image](./docs/dog_no_red.jpg)|![image](./docs/dog_no_green.jpg)|![image](./docs/dog_no_blue.jpg)|
+|![image](../data/dog.jpg)|![image](https://user-images.githubusercontent.com/30433053/62187754-f77dd600-b39c-11e9-9fa7-3d51aedda505.jpg)|![image](https://user-images.githubusercontent.com/30433053/62187788-0ebcc380-b39d-11e9-9172-fa2e7cadb0da.jpg)|![image](https://user-images.githubusercontent.com/30433053/62187826-272cde00-b39d-11e9-937c-de77429296d1.jpg)|
  代码运行:
  
 ```bashrc
@@ -57,7 +57,7 @@ $ ./yyimg set_pixel ../data/dog.jpg
 
 ## rgb2gray
 文件`./src/image_basics.c`的`void rgb2gray`函数可以将彩色图像转化为灰度图像。灰度是描述灰度图像内容的最直接的视觉特征。它指黑白图像中点的颜色深度，范围一般从0到255，白色为255，黑色为0，故黑白图像也称灰度图像。
-![image](./docs/rgb2gray.png)
+![image](https://user-images.githubusercontent.com/30433053/62187717-e208ac00-b39c-11e9-832e-691950ae909a.png)
 
 当彩色图像转换为灰度图像时，需要计算图像中每个像素有效灰度值，其计算公式为：`Y = 0.299 R + 0.587 G + 0.114 B`
 
@@ -77,7 +77,7 @@ image rgb2gray(image im){
     return gray;
 }
 ```
-![image](./docs/rgb2gray1.png)
+![image](https://user-images.githubusercontent.com/30433053/62187692-ca312800-b39c-11e9-8f2a-354260f7e0ba.png)
  代码运行:
  
 ```bashrc
@@ -115,7 +115,7 @@ $ ./yyimg thresh_binary ../data/dog.jpg
 ## bilinear_resize
 
 `bilinear_resize`，又称为双线性内插。在数学上，双线性插值是有两个变量的插值函数的线性插值扩展，其核心思想是在两个方向分别进行一次线性插值。在介绍双向插值之前，先来了解单向插值：
-![image](./docs/interpolate.png)
+![image](https://user-images.githubusercontent.com/30433053/62187642-a1109780-b39c-11e9-899c-6c2ce0522b88.png)
 
 上面比较好理解吧，仔细看就是用x和x0，x1的距离作为一个权重，用于y0和y1的加权。双线性插值本质上就是在两个方向上做线性插值,基本思想和这个一样的。
 ![image](https://user-images.githubusercontent.com/30433053/62187513-2ba4c700-b39c-11e9-86f6-b0be3430da3d.png)
