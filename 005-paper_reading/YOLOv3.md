@@ -12,6 +12,8 @@
 
 #### 1.1 不妨先给图片画网格
 
+![image](https://user-images.githubusercontent.com/30433053/62187018-97863000-b39a-11e9-84ff-d7d3166f0407.png)
+
 #### 1.2 Darknet53网络提取特征
 
 #### 1.3 很奇怪的Anchor机制
