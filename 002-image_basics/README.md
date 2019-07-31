@@ -105,7 +105,7 @@ image thresh_binary(image im, float thresh){
     return binary;
 }
 ```
-![image](./docs/thresh_binary.png)
+![image](https://user-images.githubusercontent.com/30433053/62187526-3d866a00-b39c-11e9-9937-86e9b806106e.png)
  代码运行:
 
 ```bashrc
@@ -118,7 +118,7 @@ $ ./yyimg thresh_binary ../data/dog.jpg
 ![image](./docs/interpolate.png)
 
 上面比较好理解吧，仔细看就是用x和x0，x1的距离作为一个权重，用于y0和y1的加权。双线性插值本质上就是在两个方向上做线性插值,基本思想和这个一样的。
-![image](./docs/biinterpolate.png)
+![image](https://user-images.githubusercontent.com/30433053/62187513-2ba4c700-b39c-11e9-86f6-b0be3430da3d.png)
 
 ```c
 float bilinear_interpolate(image im, float x, float y, int c)
