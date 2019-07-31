@@ -44,14 +44,14 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
 
 初学者咋一看，这特么什么东西？只想说，看不懂！事实上，网上很多关于YOLO系列算法的教程也喜欢拿这张图去忽悠。好了，我想从这张图片出发，讲一讲YOLO算法的**画网格**思想。在讲这个之前，我们先来了解一下什么是 feature map 和 ROI， 以及它们之间的关系。不搞懂这些，怕是你很难听懂我在讲什么。
 
-### 1.1.1 feature map 长什么样子
+### 1.1.1 什么是 feature map 
 
 当我们谈及 CNN 网络，总能听到 feature map 这个词。它也叫特征映射，简单说来就是输入图像在与卷积核进行卷积操作后得到图像特征。
 
 
 
 
-| 2维空间|3维空间|
+| 它在2维空间是这个样子|它在3维空间是这个样子|
 |---|---|
 |![image](https://github.com/YunYang1994/SphereFace/blob/master/image/2D_Original_Softmax_Loss_embeddings.gif)|![weibo-logo](https://github.com/YunYang1994/SphereFace/blob/master/image/3D_Original_Softmax_Loss_embeddings.gif)|
 
