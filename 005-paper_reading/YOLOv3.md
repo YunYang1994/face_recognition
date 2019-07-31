@@ -1,5 +1,4 @@
 既然代码贴出来了，大家又这么喜欢问，那我就讲讲我对YOLOv3算法的一点点理解吧。万字长文，希望能帮助大家。
-
 翻了下大家开的几百条[issues](https://github.com/YunYang1994/tensorflow-yolov3/issues)，其中的吐槽可以总结成以下三点:
 
 - **YOLOv3算法的前向传播过程怎么进行的，如何理解画网格？** 
