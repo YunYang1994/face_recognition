@@ -80,7 +80,10 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
 
 其实，这就与 ROI 映射到 Feature map 有关。 在上面这幅图里：原图里的一块 ROI 在 CNN 网络空间里映射后，在 feature map 上空间尺寸会变得更小，甚至是一个点。
 
-![image](https://user-images.githubusercontent.com/30433053/62261301-5e57c980-b447-11e9-8b92-aa4f707570e5.png)
+![image](https://user-images.githubusercontent.com/30433053/62262236-84329d80-b44a-11e9-9c7f-cf225bed4754.png)
+
+>原图左上角红色 ROI 经 CNN 映射后在 feature map 空间上只得到了一个点，但是这个点有85个通道。那么，ROI的维度由原来的 [32, 32, 3] 变成了现在的 85 维，这难道又不是降维打击么？👊
+
 
 
 ### 1.1.3 YOLOv3 的网格思想
