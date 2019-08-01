@@ -71,6 +71,11 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
 
 ### 1.1.2 ROI 映射到 feature map
 
+好了，我们现在大概知道特征映射是怎么回事了。现在需要讲讲 ROI 的概念，ROI 的全称是 Region Of Interest, 中文翻译过来叫感兴趣区域。说白了就是从图像中选择一块区域，这个区域是图像分析所关注的重点， 像我们前面提到的候选框区域，也可以认为是 ROI。**前面我们提到：CNN 网络在对图像自底向上提取特征时，得到的 feature map 一般都是在空间尺寸上越来越小，而在通道尺寸上变得越来越深。** 那么，为什么要这么做？
+
+
+
+
 
 <p align="center">
     <img width="60%" src="https://user-images.githubusercontent.com/30433053/62198793-e4770000-b3b4-11e9-808f-d53703455def.png" style="max-width:60%;">
