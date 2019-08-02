@@ -233,6 +233,19 @@ def decode(conv_output, i=0):
 
     return tf.concat([pred_xywh, pred_conf, pred_prob], axis=-1)
 ```
+假设`output_size = 13`，`batch_size = 1`，那么得到的 `xy_grid`为:
+
+```python
+In [9]: xy_grid.shape                                                                               
+Out[9]: TensorShape([1, 13, 13, 3, 2])
+In [10]: xy_grid[0][1][1]                                                                          
+Out[10]: 
+<tf.Tensor: id=124, shape=(3, 2), dtype=float32, numpy=
+array([[1., 1.],
+       [1., 1.],
+       [1., 1.]], dtype=float32)> # 有 3 个网格左上角坐标是因为 num_anchors=3
+```
+
 
 ### 1.3.2 K-means 作用有多大?
 
