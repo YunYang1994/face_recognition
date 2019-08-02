@@ -188,9 +188,57 @@ def residual_block(input_layer, input_channel, filter_num1, filter_num2):
 ## 1.3 很奇怪的 anchor 机制
 讲到 `anchor` 机制，大家不会觉得有点奇怪吗？ 既然一个物体的特征很明显地摆在那里，神经网络居然还要通过一个先验候选框去学习如何找到它。这就好比当我们人第一眼看到物体的时候，居然还要拿着一把尺子去量，Is there anything more asshole than that in the world?
 
->所以，我更相信 `anchor free` 机制才是未来！
+>所以，我更愿意相信 `anchor free` 机制。
 
-### 1.3.1 K-means 作用有多大?
+### 1.3.1 边界框的预测
+前面讲到，如果物体的中心落在了这个网格里，那么这个网格就要负责去预测它。在下面这幅图里：蓝色的框代表真实框，色虚线的框表示的是预测框.
+<p align="center">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/62366897-b8957f00-b55a-11e9-93e0-89e796c36200.png" style="max-width:40%;">
+    </a>
+</p>
+
+- b_h 和 b_w 分别表示真实框的长宽，P_h 和 P_w 分别表示预测框的长和宽。
+- t_x 和 t_y 表示的是物体中心距离网格左上角位置的偏移量，C_x 和 C_y 则代表网格左上角的坐标。
+
+```
+def decode(conv_output, i=0):
+
+    conv_shape       = tf.shape(conv_output)
+    batch_size       = conv_shape[0]
+    output_size      = conv_shape[1]
+
+    conv_output = tf.reshape(conv_output, (batch_size, output_size, output_size, 3, 5 + NUM_CLASS))
+
+    conv_raw_dxdy = conv_output[:, :, :, :, 0:2] # 中心位置的偏移量
+    conv_raw_dwdh = conv_output[:, :, :, :, 2:4] # 边界框长宽的偏移量
+    conv_raw_conf = conv_output[:, :, :, :, 4:5] # 边界框里有无物体的置信度
+    conv_raw_prob = conv_output[:, :, :, :, 5: ] # 边界框里物体的类别概率
+
+
+    y = tf.tile(tf.range(output_size, dtype=tf.int32)[:, tf.newaxis], [1, output_size])
+    x = tf.tile(tf.range(output_size, dtype=tf.int32)[tf.newaxis, :], [output_size, 1])
+
+    xy_grid = tf.concat([x[:, :, tf.newaxis], y[:, :, tf.newaxis]], axis=-1)
+    xy_grid = tf.tile(xy_grid[tf.newaxis, :, :, tf.newaxis, :], [batch_size, 1, 1, 3, 1])
+    xy_grid = tf.cast(xy_grid, tf.float32) # 画好网格
+	# 计算真实边界框的中心位置
+    pred_xy = (tf.sigmoid(conv_raw_dxdy) + xy_grid) * STRIDES[i]
+    # 计算真实边界框的长和宽
+    pred_wh = (tf.exp(conv_raw_dwdh) * ANCHORS[i]) * STRIDES[i]
+    # 合并边界框的位置和长宽信息
+    pred_xywh = tf.concat([pred_xy, pred_wh], axis=-1) 
+
+    pred_conf = tf.sigmoid(conv_raw_conf) # 计算置信度
+    pred_prob = tf.sigmoid(conv_raw_prob) # 计算类别概率
+
+    return tf.concat([pred_xywh, pred_conf, pred_prob], axis=-1)
+```
+
+
+### 1.3.2 K-means 作用有多大?
+
+
+
 
 
 
