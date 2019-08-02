@@ -112,10 +112,10 @@ Darknet-53 有多牛逼？看看下面这张图，作者进行了比较，得出
 ### 1.2.1 backbone 结构
 
 
-<p align="center">
-    <img width="60%" src="https://raw.githubusercontent.com/YunYang1994/tensorflow-yolov3/master/docs/images/darknet53.png" style="max-width:60%;">
-    </a>
-</p>
+| 网络结构| 代码结构 |
+|---|---|
+|![image](https://raw.githubusercontent.com/YunYang1994/tensorflow-yolov3/master/docs/images/darknet53.png)|![image](https://user-images.githubusercontent.com/30433053/62342173-7ba89880-b518-11e9-8878-f1c38466eb39.png)|
+
 
 
 #### 1.3 很奇怪的 anchor 机制
