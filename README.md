@@ -27,7 +27,7 @@
 > 深度学习太难了，把我踩过的坑一点点记录下来.
 --------------------
 #### 2019-07-30 [如何实现 pytorch 与 tf 之间的相互转化？](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
-#### 2019-07-31 [我对 YOLOv3 算法的一点点理解](https://github.com/YunYang1994/CodeFun/blob/master/005-paper_reading/YOLOv3.md)
+#### 2019-08-03 [我对 YOLOv3 算法的一点点理解](https://github.com/YunYang1994/CodeFun/blob/master/005-paper_reading/YOLOv3.md)
 
 ### 学习 CUDA 编程
 > 既然要搞深度学习和图像处理，那么CUDA 编程肯定是加分项了?

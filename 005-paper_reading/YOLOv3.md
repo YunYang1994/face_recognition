@@ -234,7 +234,7 @@ def decode(conv_output, i=0):
     return tf.concat([pred_xywh, pred_conf, pred_prob], axis=-1)
 ```
 
-### 1.3.2 K-means 作用有多大?
+### 1.3.2 K-means 的作用有多大?
 
 
 
