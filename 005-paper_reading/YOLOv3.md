@@ -202,7 +202,7 @@ def residual_block(input_layer, input_channel, filter_num1, filter_num2):
 
 ```python
 def decode(conv_output, i=0):
-    # 这里的 i=0,1,2， 分别对应三种网格尺度
+    # 这里的 i=0、1 或者 2， 以分别对应三种网格尺度
     conv_shape       = tf.shape(conv_output)
     batch_size       = conv_shape[0]
     output_size      = conv_shape[1]
@@ -214,13 +214,13 @@ def decode(conv_output, i=0):
     conv_raw_conf = conv_output[:, :, :, :, 4:5] # 边界框里有无物体的置信度
     conv_raw_prob = conv_output[:, :, :, :, 5: ] # 边界框里物体的类别概率
 
-
+    # 好了，接下来需要画网格了。其中，output_size 等于 13、26 或者 32。
     y = tf.tile(tf.range(output_size, dtype=tf.int32)[:, tf.newaxis], [1, output_size])
     x = tf.tile(tf.range(output_size, dtype=tf.int32)[tf.newaxis, :], [output_size, 1])
 
     xy_grid = tf.concat([x[:, :, tf.newaxis], y[:, :, tf.newaxis]], axis=-1)
     xy_grid = tf.tile(xy_grid[tf.newaxis, :, :, tf.newaxis, :], [batch_size, 1, 1, 3, 1])
-    xy_grid = tf.cast(xy_grid, tf.float32) # 画好网格
+    xy_grid = tf.cast(xy_grid, tf.float32) # 计算网格左上角的位置
     # 根据上图公式计算真实边界框的中心位置
     pred_xy = (tf.sigmoid(conv_raw_dxdy) + xy_grid) * STRIDES[i] # 乘上缩放的倍数，如 8、16 和 32 倍。
     # 根据上图公式计算真实边界框的长和宽
