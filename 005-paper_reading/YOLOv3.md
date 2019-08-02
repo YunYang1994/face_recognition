@@ -166,14 +166,31 @@ Out[4]: <tf.Tensor 'zero_padding2d_1/Identity:0' shape=(None, 418, 418, 3) dtype
 
 ### 1.2.3 Residual 残差模块
 
+残差模块最显著的特点是使用了 `short cut` 机制（**有点类似于电路中的短路机制**）来缓解在深度神经网络中增加深度带来的梯度消失问题，使得神经网络变得更容易优化。它通过恒等映射(`identity mapping `)的方法使得输入和输出之间建立了一条直接的关联通道，从而使得网络集中学习输入和输出之间的残差。
+
+<p align="center">
+    <img width="50%" src="https://user-images.githubusercontent.com/30433053/62363930-de1e8a80-b552-11e9-98e9-914da36e5922.png" style="max-width:50%;">
+    </a>
+</p>
+
+```python
+def residual_block(input_layer, input_channel, filter_num1, filter_num2):
+    short_cut = input_layer
+    conv = convolutional(input_layer, filters_shape=(1, 1, input_channel, filter_num1))
+    conv = convolutional(conv       , filters_shape=(3, 3, filter_num1,   filter_num2))
+
+    residual_output = short_cut + conv
+    return residual_output
+```
+
+>不知道大家有没有注意，整个 `Darknet-53`  网络压根就没有使用 `Pooling` 层。
+
+## 1.3 很奇怪的 anchor 机制
 
 
 
 
 
-
-
-#### 1.3 很奇怪的 anchor 机制
 
 #### 1.4 原来是这样预测的
 
@@ -196,6 +213,3 @@ Out[4]: <tf.Tensor 'zero_padding2d_1/Identity:0' shape=(None, 418, 418, 3) dtype
 #### 3.3 加载预训练模型
 
 #### 3.4 其实好像也没那么难
-
-## 4 杂七杂八的bug
-
