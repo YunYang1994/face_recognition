@@ -200,7 +200,7 @@ def residual_block(input_layer, input_channel, filter_num1, filter_num2):
 - b_h 和 b_w 分别表示真实框的长宽，P_h 和 P_w 分别表示预测框的长和宽。
 - t_x 和 t_y 表示的是物体中心距离网格左上角位置的偏移量，C_x 和 C_y 则代表网格左上角的坐标。
 
-```
+```python
 def decode(conv_output, i=0):
 
     conv_shape       = tf.shape(conv_output)
