@@ -191,7 +191,7 @@ def residual_block(input_layer, input_channel, filter_num1, filter_num2):
 >所以，我更愿意相信 `anchor free` 机制。
 
 ### 1.3.1 边界框的预测
-前面讲到，如果物体的中心落在了这个网格里，那么这个网格就要负责去预测它。在下面这幅图里：蓝色的框代表真实框，色虚线的框表示的是预测框.
+前面讲到，如果物体的中心落在了这个网格里，那么这个网格就要负责去预测它。在下面这幅图里：蓝色的框代表真实框，黑色虚线的框表示的是预测框.
 <p align="center">
     <img width="40%" src="https://user-images.githubusercontent.com/30433053/62366897-b8957f00-b55a-11e9-93e0-89e796c36200.png" style="max-width:40%;">
     </a>
