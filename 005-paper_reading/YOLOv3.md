@@ -111,7 +111,7 @@ Darknet-53 有多牛逼？看看下面这张图，作者进行了比较，得出
 
 ### 1.2.1 backbone 结构
 
-Darknet-53 的主体框架如下图所示，主要由 `Convolutional` 和 `Residual` 结构所组成。需要注意的是，最后三层 `Avgpool`、`Connected` 和 `softmax` layer 是用于在 `Imagenet` 数据集上作分类训练用的。当我们用 Darknet-53 层对图片提取特征时，是不会用到这三层的。
+Darknet-53 的主体框架如下图所示，它主要由 `Convolutional` 和 `Residual` 结构所组成。需要特别注意的是，最后三层 `Avgpool`、`Connected` 和 `softmax` layer 是用于在 `Imagenet` 数据集上作分类训练用的。当我们用 Darknet-53 层对图片提取特征时，是不会用到这三层的。
 
 | 网络结构| [代码结构](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/YOLOV3/core/backbone.py) |
 |---|---|
