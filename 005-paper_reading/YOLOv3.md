@@ -166,7 +166,7 @@ Out[4]: <tf.Tensor 'zero_padding2d_1/Identity:0' shape=(None, 418, 418, 3) dtype
 
 ### 1.2.3 Residual 残差模块
 
-残差模块最显著的特点是使用了 `short cut` 机制（**有点类似于电路中的短路机制**）来缓解在深度神经网络中增加深度带来的梯度消失问题，使得神经网络变得更容易优化。它通过恒等映射(identity mapping)的方法使得输入和输出之间建立了一条直接的关联通道，从而使得网络集中学习输入和输出之间的残差。
+残差模块最显著的特点是使用了 `short cut` 机制（**有点类似于电路中的短路机制**）来缓解在深度神经网络中增加深度带来的梯度消失问题，从而使得神经网络变得更容易优化。它通过恒等映射(identity mapping)的方法使得输入和输出之间建立了一条直接的关联通道，从而使得网络集中学习输入和输出之间的残差。
 
 <p align="center">
     <img width="50%" src="https://user-images.githubusercontent.com/30433053/62363930-de1e8a80-b552-11e9-98e9-914da36e5922.png" style="max-width:50%;">
@@ -191,7 +191,7 @@ def residual_block(input_layer, input_channel, filter_num1, filter_num2):
 >所以，我更愿意相信 `anchor free` 机制。
 
 ### 1.3.1 边界框的预测
-前面讲到，如果物体的中心落在了这个网格里，那么这个网格就要负责去预测它。在下面这幅图里：蓝色的框代表先验框(anchor)，黑色虚线的框表示的是预测框.
+前面讲到，如果物体的中心落在了这个网格里，那么这个网格就要负责去预测它。在下面这幅图里：蓝色框代表先验框(anchor)，黑色虚线框表示的是预测框.
 <p align="center">
     <img width="40%" src="https://user-images.githubusercontent.com/30433053/62366897-b8957f00-b55a-11e9-93e0-89e796c36200.png" style="max-width:40%;">
     </a>
@@ -211,8 +211,8 @@ def decode(conv_output, i=0):
 
     conv_raw_dxdy = conv_output[:, :, :, :, 0:2] # 中心位置的偏移量
     conv_raw_dwdh = conv_output[:, :, :, :, 2:4] # 预测框长宽的偏移量
-    conv_raw_conf = conv_output[:, :, :, :, 4:5] # 预测框里有无物体的置信度
-    conv_raw_prob = conv_output[:, :, :, :, 5: ] # 预测框里物体的类别概率
+    conv_raw_conf = conv_output[:, :, :, :, 4:5]
+    conv_raw_prob = conv_output[:, :, :, :, 5: ]
 
     # 好了，接下来需要画网格了。其中，output_size 等于 13、26 或者 32
     y = tf.tile(tf.range(output_size, dtype=tf.int32)[:, tf.newaxis], [1, output_size])
@@ -221,19 +221,18 @@ def decode(conv_output, i=0):
     xy_grid = tf.concat([x[:, :, tf.newaxis], y[:, :, tf.newaxis]], axis=-1)
     xy_grid = tf.tile(xy_grid[tf.newaxis, :, :, tf.newaxis, :], [batch_size, 1, 1, 3, 1])
     xy_grid = tf.cast(xy_grid, tf.float32) # 计算网格左上角的位置
-    # 根据上图公式计算预测边界框的中心位置
+    # 根据上图公式计算预测框的中心位置
     pred_xy = (tf.sigmoid(conv_raw_dxdy) + xy_grid) * STRIDES[i] # 乘上缩放的倍数，如 8、16 和 32 倍。
-    # 根据上图公式计算预测边界框的长和宽
+    # 根据上图公式计算预测框的长和宽大小
     pred_wh = (tf.exp(conv_raw_dwdh) * ANCHORS[i]) * STRIDES[i]
     # 合并边界框的位置和长宽信息
     pred_xywh = tf.concat([pred_xy, pred_wh], axis=-1) 
 
-    pred_conf = tf.sigmoid(conv_raw_conf) # 计算置信度
-    pred_prob = tf.sigmoid(conv_raw_prob) # 计算类别概率
+    pred_conf = tf.sigmoid(conv_raw_conf) # 计算预测框里object的置信度
+    pred_prob = tf.sigmoid(conv_raw_prob) # 计算预测框里object的类别概率
 
     return tf.concat([pred_xywh, pred_conf, pred_prob], axis=-1)
 ```
-
 
 ### 1.3.2 K-means 作用有多大?
 
