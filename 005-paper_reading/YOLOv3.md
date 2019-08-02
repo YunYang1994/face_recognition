@@ -221,9 +221,9 @@ def decode(conv_output, i=0):
     xy_grid = tf.concat([x[:, :, tf.newaxis], y[:, :, tf.newaxis]], axis=-1)
     xy_grid = tf.tile(xy_grid[tf.newaxis, :, :, tf.newaxis, :], [batch_size, 1, 1, 3, 1])
     xy_grid = tf.cast(xy_grid, tf.float32) # 画好网格
-    # 计算真实边界框的中心位置
+    # 根据上图公式计算真实边界框的中心位置
     pred_xy = (tf.sigmoid(conv_raw_dxdy) + xy_grid) * STRIDES[i] # 乘上缩放的倍数，如 8、16 和 32 倍。
-    # 计算真实边界框的长和宽
+    # 根据上图公式计算真实边界框的长和宽
     pred_wh = (tf.exp(conv_raw_dwdh) * ANCHORS[i]) * STRIDES[i]
     # 合并边界框的位置和长宽信息
     pred_xywh = tf.concat([pred_xy, pred_wh], axis=-1) 
