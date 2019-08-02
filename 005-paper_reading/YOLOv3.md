@@ -197,3 +197,6 @@ Out[4]: <tf.Tensor 'zero_padding2d_1/Identity:0' shape=(None, 418, 418, 3) dtype
 #### 3.3 加载预训练模型
 
 #### 3.4 其实好像也没那么难
+
+## 4 杂七杂八的bug
+
