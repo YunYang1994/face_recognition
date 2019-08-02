@@ -111,12 +111,36 @@ Darknet-53 有多牛逼？看看下面这张图，作者进行了比较，得出
 
 ### 1.2.1 backbone 结构
 
+Darknet-53 的主体框架如下图所示，主要由 `Convolutional` 和 `Residual` 结构所组成。需要注意的是，最后三层 `Avgpool`、`Connected` 和 `softmax` layer 是用于在 `Imagenet` 数据集上作分类训练用的。当我们用 Darknet-53 层对图片提取特征时，是不会用到这三层的。
 
 | 网络结构| [代码结构](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/YOLOV3/core/backbone.py) |
 |---|---|
 |<img width="150%" src="https://raw.githubusercontent.com/YunYang1994/tensorflow-yolov3/master/docs/images/darknet53.png" style="max-width:150%;">|<img width="80%" src="https://user-images.githubusercontent.com/30433053/62342173-7ba89880-b518-11e9-8878-f1c38466eb39.png" style="max-width:70%;">|
 
+>代码结构里的`downsample`参数的意思是下采样，表示 feature map 输入该层 layer 后尺寸会变小。例如在第二层 layer 的输入尺寸是 `256X256`，输出尺寸则变成了 `128X128`。
 
+### 1.2.1 Convolutional 结构
+
+```python
+def convolutional(input_layer, filters_shape, downsample=False, activate=True, bn=True):
+    if downsample:
+        input_layer = tf.keras.layers.ZeroPadding2D(((1, 0), (1, 0)))(input_layer)
+        padding = 'valid'
+        strides = 2
+    else:
+        strides = 1
+        padding = 'same'
+
+    conv = tf.keras.layers.Conv2D(filters=filters_shape[-1], kernel_size = filters_shape[0], strides=strides, padding=padding,
+                                  use_bias=not bn, kernel_regularizer=tf.keras.regularizers.l2(0.0005),
+                                  kernel_initializer=tf.random_normal_initializer(stddev=0.01),
+                                  bias_initializer=tf.constant_initializer(0.))(input_layer)
+
+    if bn: conv = BatchNormalization()(conv)
+    if activate == True: conv = tf.nn.leaky_relu(conv, alpha=0.1)
+
+    return conv
+```
 
 
 #### 1.3 很奇怪的 anchor 机制
