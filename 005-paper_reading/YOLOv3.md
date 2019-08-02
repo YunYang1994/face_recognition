@@ -88,13 +88,19 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
 
 ### 1.1.3 YOLOv3 的网格思想
 
+YOLOv3 对输入图片进行了粗、中和细网格划分，以便分别实现对大、中和小物体的预测。其实在下面这幅图里面，每一个网格对应的就是一块 ROI 区域。如果某个物体的中心刚好落在这个网格中，那么这个网格就负责预测这个物体.
+
+>If the center of an object falls into a grid cell, that grid cell is responsible for detecting that object. 
+
+假如输入图片的尺寸为 `416X416`, 那么得到粗、中和细网格尺寸分别为 `13X13`、`26X26`和`52X52`。这样一算，那就是在长宽尺寸上分别缩放了`32`、`16`和`8`倍。
 
 | 粗网格| 中网格 | 细网格 |
 |---|---|---|
 |![image](https://user-images.githubusercontent.com/30433053/62338487-52cdd680-b50b-11e9-9ffe-86a42cfa9acb.png)|![image](https://user-images.githubusercontent.com/30433053/62338514-6bd68780-b50b-11e9-8085-be9fe9d84d77.png)|![image](https://user-images.githubusercontent.com/30433053/62338538-8446a200-b50b-11e9-8a73-0334271d73b7.png)|
 
 
-#### 1.2 Darknet53 的网络结构
+
+## 1.2 Darknet53 的网络结构
 
 #### 1.3 很奇怪的 anchor 机制
 
