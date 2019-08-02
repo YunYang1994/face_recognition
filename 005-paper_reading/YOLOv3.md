@@ -166,7 +166,7 @@ Out[4]: <tf.Tensor 'zero_padding2d_1/Identity:0' shape=(None, 418, 418, 3) dtype
 
 ### 1.2.3 Residual 残差模块
 
-残差模块最显著的特点是使用了 `short cut` 机制（**有点类似于电路中的短路机制**）来缓解在深度神经网络中增加深度带来的梯度消失问题，使得神经网络变得更容易优化。它通过恒等映射(`identity mapping `)的方法使得输入和输出之间建立了一条直接的关联通道，从而使得网络集中学习输入和输出之间的残差。
+残差模块最显著的特点是使用了 `short cut` 机制（**有点类似于电路中的短路机制**）来缓解在深度神经网络中增加深度带来的梯度消失问题，使得神经网络变得更容易优化。它通过恒等映射(identity mapping)的方法使得输入和输出之间建立了一条直接的关联通道，从而使得网络集中学习输入和输出之间的残差。
 
 <p align="center">
     <img width="50%" src="https://user-images.githubusercontent.com/30433053/62363930-de1e8a80-b552-11e9-98e9-914da36e5922.png" style="max-width:50%;">
@@ -186,6 +186,11 @@ def residual_block(input_layer, input_channel, filter_num1, filter_num2):
 >不知道大家有没有注意，整个 `Darknet-53`  网络压根就没有使用 `Pooling` 层。
 
 ## 1.3 很奇怪的 anchor 机制
+讲到 `anchor` 机制，大家不会觉得有点奇怪吗？ 既然一个物体的特征很明显地摆在那里，神经网络居然还要通过一个先验候选框去学习如何找到它。这就好比当我们人第一眼看到物体的时候，居然还要拿着一把尺子去量，Is there anything more asshole than that in the world?
+
+>所以，我更相信 `anchor free` 机制才是未来！
+
+### 1.3.1 K-means 作用有多大?
 
 
 
