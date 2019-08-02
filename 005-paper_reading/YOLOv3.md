@@ -119,7 +119,9 @@ Darknet-53 的主体框架如下图所示，它主要由 `Convolutional` 和 `Re
 
 >代码结构里的`downsample`参数的意思是下采样，表示 feature map 输入该层 layer 后尺寸会变小。例如在第二层 layer 的输入尺寸是 `256X256`，输出尺寸则变成了 `128X128`。
 
-### 1.2.1 Convolutional 结构
+### 1.2.2 Convolutional 结构
+
+Convolutional 结构其实很简单，就是普通的卷积层，其实没啥讲的。但是对于 `if downsample` 的情况，初学者可能觉得有点陌生， 为什么要对`input_layer`做 `ZeroPadding2D` ？
 
 ```python
 def convolutional(input_layer, filters_shape, downsample=False, activate=True, bn=True):
@@ -141,6 +143,16 @@ def convolutional(input_layer, filters_shape, downsample=False, activate=True, b
 
     return conv
 ```
+
+
+
+### 1.2.3 Residual 结构
+
+
+
+
+
+
 
 
 #### 1.3 很奇怪的 anchor 机制
