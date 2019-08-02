@@ -100,7 +100,7 @@ YOLOv3 对输入图片进行了粗、中和细网格划分，以便分别实现�
 
 ## 1.2 Darknet-53 的网络结构
 
-Darknet-53 有多牛逼？看看下面这张图，作者进行了比较，得出的结论是 Darknet-53 在精度上可以与最先进的分类器进行媲美，同时它的浮点运算更少，计算速度也最快。和 ReseNet-101 相比，Darknet-53 网络的速度是前者的1.5倍；而 ReseNet-152 和它性能相似，用时却是它的2倍以上。
+Darknet-53 有多牛逼？看看下面这张图，作者进行了比较，得出的结论是 Darknet-53 在精度上可以与最先进的分类器进行媲美，同时它的浮点运算更少，计算速度也最快。和 ReseNet-101 相比，Darknet-53 网络的速度是前者的1.5倍；虽然 ReseNet-152 和它性能相似，但是用时却是它的2倍以上。
 
 <p align="center">
     <img width="80%" src="https://user-images.githubusercontent.com/30433053/62341417-d7bded80-b515-11e9-8f98-cd3a75e5be63.png" style="max-width:80%;">
