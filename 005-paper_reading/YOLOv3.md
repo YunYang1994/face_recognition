@@ -147,7 +147,10 @@ def convolutional(input_layer, filters_shape, downsample=False, activate=True, b
 
 >`keras.layers.convolutional.ZeroPadding2D(padding=(1, 1), data_format=None)`<br>
 >说明: 对2D输入（如图片）的边界填充0，以控制卷积以后特征图的大小
-
+<p align="center">
+    <img width="50%" src="https://camo.githubusercontent.com/d8c0543ca968db698c9451b7c3cba9b7836e400e/68747470733a2f2f61736b2e71636c6f7564696d672e636f6d2f64726166742f313038323535352f3068753464326e6333352e676966" style="max-width:50%;">
+    </a>
+</p>
 
 
 
