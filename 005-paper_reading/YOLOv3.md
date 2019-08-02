@@ -214,7 +214,7 @@ def decode(conv_output, i=0):
     conv_raw_conf = conv_output[:, :, :, :, 4:5] # 边界框里有无物体的置信度
     conv_raw_prob = conv_output[:, :, :, :, 5: ] # 边界框里物体的类别概率
 
-    # 好了，接下来需要画网格了。其中，output_size 等于 13、26 或者 32。
+    # 好了，接下来需要画网格了。其中，output_size 等于 13、26 或者 32
     y = tf.tile(tf.range(output_size, dtype=tf.int32)[:, tf.newaxis], [1, output_size])
     x = tf.tile(tf.range(output_size, dtype=tf.int32)[tf.newaxis, :], [output_size, 1])
 
