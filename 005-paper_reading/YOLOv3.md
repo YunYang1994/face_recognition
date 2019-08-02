@@ -89,6 +89,10 @@ YOLO算法的最重要的思想就是**画网格**，由于本人做过一点点
 ### 1.1.3 YOLOv3 的网格思想
 
 
+| 粗网格| 中网格 | 细网格 |
+|---|---|---|
+|![image](https://user-images.githubusercontent.com/30433053/62338487-52cdd680-b50b-11e9-9ffe-86a42cfa9acb.png)|![image](https://user-images.githubusercontent.com/30433053/62338514-6bd68780-b50b-11e9-8085-be9fe9d84d77.png)|![image](https://user-images.githubusercontent.com/30433053/62338538-8446a200-b50b-11e9-8a73-0334271d73b7.png)|
+
 
 #### 1.2 Darknet53 的网络结构
 
