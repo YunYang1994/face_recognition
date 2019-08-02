@@ -121,7 +121,7 @@ Darknet-53 的主体框架如下图所示，它主要由 `Convolutional` 和 `Re
 
 ### 1.2.2 Convolutional 结构
 
-Convolutional 结构其实很简单，就是普通的卷积层，其实没啥讲的。但是对于 `if downsample` 的情况，初学者可能觉得有点陌生， 为什么要对`input_layer`做 `ZeroPadding2D` ？
+Convolutional 结构其实很简单，就是普通的卷积层，其实没啥讲的。但是对于 `if downsample` 的情况，初学者可能觉得有点陌生， `ZeroPadding2D` 是什么层？
 
 ```python
 def convolutional(input_layer, filters_shape, downsample=False, activate=True, bn=True):
