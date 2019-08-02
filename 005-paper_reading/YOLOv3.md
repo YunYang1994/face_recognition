@@ -202,7 +202,7 @@ def residual_block(input_layer, input_channel, filter_num1, filter_num2):
 
 ```python
 def decode(conv_output, i=0):
-
+    # 这里的 i=0,1,2， 分别对应三种网格尺度
     conv_shape       = tf.shape(conv_output)
     batch_size       = conv_shape[0]
     output_size      = conv_shape[1]
