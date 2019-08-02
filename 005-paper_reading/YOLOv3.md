@@ -191,13 +191,13 @@ def residual_block(input_layer, input_channel, filter_num1, filter_num2):
 >所以，我更愿意相信 `anchor free` 机制。
 
 ### 1.3.1 边界框的预测
-前面讲到，如果物体的中心落在了这个网格里，那么这个网格就要负责去预测它。在下面这幅图里：蓝色的框代表真实框，黑色虚线的框表示的是预测框.
+前面讲到，如果物体的中心落在了这个网格里，那么这个网格就要负责去预测它。在下面这幅图里：蓝色的框代表先验框(anchor)，黑色虚线的框表示的是预测框.
 <p align="center">
     <img width="40%" src="https://user-images.githubusercontent.com/30433053/62366897-b8957f00-b55a-11e9-93e0-89e796c36200.png" style="max-width:40%;">
     </a>
 </p>
 
-- b_h 和 b_w 分别表示真实框的长宽，P_h 和 P_w 分别表示预测框的长和宽。
+- b_h 和 b_w 分别表示预测框的长宽，P_h 和 P_w 分别表示先验框的长和宽。
 - t_x 和 t_y 表示的是物体中心距离网格左上角位置的偏移量，C_x 和 C_y 则代表网格左上角的坐标。
 
 ```python
@@ -210,9 +210,9 @@ def decode(conv_output, i=0):
     conv_output = tf.reshape(conv_output, (batch_size, output_size, output_size, 3, 5 + NUM_CLASS))
 
     conv_raw_dxdy = conv_output[:, :, :, :, 0:2] # 中心位置的偏移量
-    conv_raw_dwdh = conv_output[:, :, :, :, 2:4] # 边界框长宽的偏移量
-    conv_raw_conf = conv_output[:, :, :, :, 4:5] # 边界框里有无物体的置信度
-    conv_raw_prob = conv_output[:, :, :, :, 5: ] # 边界框里物体的类别概率
+    conv_raw_dwdh = conv_output[:, :, :, :, 2:4] # 预测框长宽的偏移量
+    conv_raw_conf = conv_output[:, :, :, :, 4:5] # 预测框里有无物体的置信度
+    conv_raw_prob = conv_output[:, :, :, :, 5: ] # 预测框里物体的类别概率
 
     # 好了，接下来需要画网格了。其中，output_size 等于 13、26 或者 32
     y = tf.tile(tf.range(output_size, dtype=tf.int32)[:, tf.newaxis], [1, output_size])
