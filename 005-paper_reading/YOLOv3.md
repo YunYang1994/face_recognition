@@ -152,7 +152,7 @@ def convolutional(input_layer, filters_shape, downsample=False, activate=True, b
     </a>
 </p>
 
-其实就是对图片上下左右四个边界填充0而已，`padding=((top_pad, bottom_pad), (left_pad, right_pad))`。 很简单吧，快打开你的`ipython`试试吧！
+其实就是对图片的上下左右四个边界填充0而已，`padding=((top_pad, bottom_pad), (left_pad, right_pad))`。 很简单吧，快打开你的`ipython`试试吧！
 
 ```ipython
 In [2]: x=tf.keras.layers.Input([416,416,3])                                                                                                                                                                
@@ -164,7 +164,7 @@ In [4]: tf.keras.layers.ZeroPadding2D(padding=((1,1),(1,1)))(x)
 Out[4]: <tf.Tensor 'zero_padding2d_1/Identity:0' shape=(None, 418, 418, 3) dtype=float32>
 ```
 
-### 1.2.3 Residual 结构
+### 1.2.3 Residual 残差模块
 
 
 
