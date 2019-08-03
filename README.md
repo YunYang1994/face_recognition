@@ -17,12 +17,12 @@
 #### 2017-11-27. [图的基本概念](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/6.1.图的基本概念.ipynb)
 
 
-### 图像处理算法
+### 从零实现一个神经网络算法库
 > 纯 C/C++ 语言底层实现, 不用安装任何第三方依赖库！！！
 --------------------
-#### 2019-06-17. [如何利用两个简单的头文件就能实现读写图片？](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
-#### 2019-07-01. [彩色图像的二值化、灰度化和线性插值、最近邻插值算法实现](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics)
-#### 2019-08-04. [动手从零开始实现神经网络系列之 fully connected layer](https://github.com/YunYang1994/CodeFun/tree/master/006-connected_layer)
+#### 2019-06-17. [图片处理系列之读写图片](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
+#### 2019-07-01. [图片处理系列之彩色图像的二值化、灰度化和线性插值、最近邻插值算法实现](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics)
+#### 2019-08-04. [神经网络基础层系列之 fully connected layer](https://github.com/YunYang1994/CodeFun/tree/master/006-connected_layer)
 
 ### 深度学习算法
 > 深度学习太难了，把我踩过的坑一点点记录下来.
