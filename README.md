@@ -17,7 +17,7 @@
 #### 2017-11-27. [图的基本概念](https://nbviewer.jupyter.org/github/YunYang1994/CodeFun/blob/master/000-data_structure/6.1.图的基本概念.ipynb)
 
 
-### 从零实现一个神经网络算法库
+### 从零实现一个卷积神经网络算法库
 > 纯 C/C++ 语言底层实现, 不用安装任何第三方依赖库！！！
 --------------------
 #### 2019-06-17. [图片处理系列之如何实现读写图片](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
