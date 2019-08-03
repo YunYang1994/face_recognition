@@ -355,6 +355,7 @@ def YOLOv3(input_layer):
     conv_lbbox = common.convolutional(conv_lobj_branch, (1, 1, 1024, 3*(NUM_CLASS + 5)), activate=False, bn=False)
 
     conv = common.convolutional(conv, (1, 1,  512,  256))
+    # 这里的 upsample 使用的是最近临插值方法，这样的好处在于上采样过程不需要学习，从而减少了网络参数
     conv = common.upsample(conv)
 
     conv = tf.concat([conv, route_2], axis=-1)
