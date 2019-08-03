@@ -252,7 +252,7 @@ def decode(conv_output, i=0):
 >We choose k = 5 as a good tradeoff between model complexity and high recall.
 >If we use 9 centroids we see a much higher average IOU. This indicates that using k-means to generate our bounding box starts the model off with a better representation and makes the task easier to learn.
 
-在上面这幅图里，作者发现 k = 5 时就能较好地实现高召回率与模型复杂度之间的平衡。由于在 `YOLOv3` 算法里一共有3种尺度预测，因此只能是3的倍数，所以最终选择了 9 个先验框。这里还有个问题需要解决，k-means 度量距离的选取很关键。距离度量如果使用标准的欧氏距离，大框框就会比小框产生更多的错误。在目标检测领域，我们度量两个边界框之间的相似度往往以 `IOU` 大小作为标准。因此，这里的度量距离也和 `IOU` 有关。**需要特别注意的是，这里的IOU计算只用到了 boudnding box 的长和宽**。在[我的代码](https://nbviewer.jupyter.org/github/YunYang1994/tensorflow-yolov3/blob/master/docs/Box-Clustering.ipynb)里，是认为两个先验框的左上角是相重合的。
+在上面这幅图里，作者发现 k = 5 时就能较好地实现高召回率与模型复杂度之间的平衡。由于在 `YOLOv3` 算法里一共有3种尺度预测，因此只能是3的倍数，所以最终选择了 9 个先验框。这里还有个问题需要解决，k-means 度量距离的选取很关键。距离度量如果使用标准的欧氏距离，大框框就会比小框产生更多的错误。在目标检测领域，我们度量两个边界框之间的相似度往往以 `IOU` 大小作为标准。因此，这里的度量距离也和 `IOU` 有关。**需要特别注意的是，这里的IOU计算只用到了 boudnding box 的长和宽**。在[我的代码](https://nbviewer.jupyter.org/github/YunYang1994/tensorflow-yolov3/blob/master/docs/Box-Clustering.ipynb)里，是认为两个先验框的左上角位置是相重合的。
 
 <p align="center">
     <img width="40%" src="https://user-images.githubusercontent.com/30433053/62405048-760c8a80-b5cc-11e9-9d2c-1ba88ab4ad65.png" style="max-width:40%;">
