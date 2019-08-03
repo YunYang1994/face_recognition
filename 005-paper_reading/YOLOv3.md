@@ -259,7 +259,7 @@ def decode(conv_output, i=0):
     </a>
 </p>
 
->如果两个边界框之间的`IOU`值更大，那么它们之间的距离就会更小。
+>如果两个边界框之间的`IOU`值越大，那么它们之间的距离就会越小。
 
 ```python
 def kmeans(boxes, k, dist=np.median,seed=1):
