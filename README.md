@@ -22,7 +22,7 @@
 --------------------
 #### 2019-06-17. [如何利用两个简单的头文件就能实现读写图片？](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
 #### 2019-07-01. [彩色图像的二值化、灰度化和线性插值、最近邻插值算法实现](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics)
-#### 2019-08-04. [动手从零开始实现神经网络系列之fully connected layer](https://github.com/YunYang1994/CodeFun/tree/master/006-connected_layer)
+#### 2019-08-04. [动手从零开始实现神经网络系列之 fully connected layer](https://github.com/YunYang1994/CodeFun/tree/master/006-connected_layer)
 
 ### 深度学习算法
 > 深度学习太难了，把我踩过的坑一点点记录下来.
