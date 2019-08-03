@@ -301,11 +301,35 @@ def kmeans(boxes, k, dist=np.median,seed=1):
 
 经常有人发邮件问我，到底要不要在自己的数据集上对先验框进行聚类，这个作用会有多大？我的答案是：不需要，直接默认使用 [COCO 数据集](https://github.com/YunYang1994/tensorflow-yolov3/issues/261)上得到的先验框即可。因为 YOLO 算法最本质地来说是去学习真实框与先验框之间的尺寸偏移量，即使你选的先验框再准确，也只能是网络更容易去学习而已。事实上，这对预测的精度没有什么影响，所以这个过程意义不大。我觉得作者在论文里这样写的原因在于**你总得告诉别人你的先验框是怎么来的**，并且让论文更具有学术性。
 
-### 1.3.3 原来是这样预测的
+## 1.4 原来是这样预测的
 
+### 1.4.1 letterbox_image
+在将图片输入模型之前，需要将图片尺寸 resize 成固定的大小，如 416X416 或 `608X608`。如果直接对图片进行 resize 处理，那么会使得图片扭曲变形从而降低模型的预测精度。
 
+```python
+def image_preporcess(image, target_size, gt_boxes=None):
 
+    ih, iw    = target_size # resize 尺寸
+    h,  w, _  = image.shape # 原始图片尺寸
 
+    scale = min(iw/w, ih/h)
+    nw, nh  = int(scale * w), int(scale * h) # 计算缩放后图片尺寸
+    image_resized = cv2.resize(image, (nw, nh))
+	# 制作一张画布，画布的尺寸就是我们想要的尺寸
+    image_paded = np.full(shape=[ih, iw, 3], fill_value=128.0)
+    dw, dh = (iw - nw) // 2, (ih-nh) // 2
+    # 将缩放后的图片放在画布中央
+    image_paded[dh:nh+dh, dw:nw+dw, :] = image_resized
+    image_paded = image_paded / 255.
+
+    if gt_boxes is None:
+        return image_paded
+
+    else:   # 训练网络时需要对 groudtruth box 进行矫正
+        gt_boxes[:, [0, 2]] = gt_boxes[:, [0, 2]] * scale + dw
+        gt_boxes[:, [1, 3]] = gt_boxes[:, [1, 3]] * scale + dh
+        return image_paded, gt_boxes
+```
 
 
 
