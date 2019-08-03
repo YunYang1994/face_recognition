@@ -340,8 +340,9 @@ def image_preporcess(image, target_size, gt_boxes=None):
 讲了这么多，还是不如看[代码](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/YOLOV3/core/yolov3.py)来得亲切。
 ```python
 def YOLOv3(input_layer):
+    # 输入层进入 Darknet-53 网络后，得到了三个分支
     route_1, route_2, conv = backbone.darknet53(input_layer)
-
+    # 见上图中的橘黄色模块(DBL)，一共需要进行5此卷积操作
     conv = common.convolutional(conv, (1, 1, 1024,  512))
     conv = common.convolutional(conv, (3, 3,  512, 1024))
     conv = common.convolutional(conv, (1, 1, 1024,  512))
