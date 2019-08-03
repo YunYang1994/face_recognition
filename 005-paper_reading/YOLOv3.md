@@ -338,6 +338,7 @@ def image_preporcess(image, target_size, gt_boxes=None):
 下面这幅图就是 YOLOv3 网络的整体结构，在图中我们可以看到：尺寸为 416X416 的输入图片进入 Darknet-53 网络后得到了 3 个分支，这些分支在经过一系列的卷积、上采样以及合并等操作后最终得到了三个尺寸不一的 feature map，分别为 [13, 13, 255]、[26, 26, 255] 和 [52, 52, 255]。
 ![image](https://raw.githubusercontent.com/YunYang1994/tensorflow-yolov3/master/docs/images/levio.jpeg)
 讲了这么多，还是不如看[代码](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/YOLOV3/core/yolov3.py)来得亲切。
+
 ```python
 def YOLOv3(input_layer):
     # 输入层进入 Darknet-53 网络后，得到了三个分支
@@ -350,6 +351,7 @@ def YOLOv3(input_layer):
     conv = common.convolutional(conv, (1, 1, 1024,  512))
 
     conv_lobj_branch = common.convolutional(conv, (3, 3, 512, 1024))
+    # conv_lbbox 用于预测大尺寸物体，shape = [None, 13, 13, 255]
     conv_lbbox = common.convolutional(conv_lobj_branch, (1, 1, 1024, 3*(NUM_CLASS + 5)), activate=False, bn=False)
 
     conv = common.convolutional(conv, (1, 1,  512,  256))
@@ -364,6 +366,7 @@ def YOLOv3(input_layer):
     conv = common.convolutional(conv, (1, 1, 512, 256))
 
     conv_mobj_branch = common.convolutional(conv, (3, 3, 256, 512))
+    # conv_mbbox 用于预测中等尺寸物体，shape = [None, 26, 26, 255]
     conv_mbbox = common.convolutional(conv_mobj_branch, (1, 1, 512, 3*(NUM_CLASS + 5)), activate=False, bn=False)
 
     conv = common.convolutional(conv, (1, 1, 256, 128))
@@ -378,6 +381,7 @@ def YOLOv3(input_layer):
     conv = common.convolutional(conv, (1, 1, 256, 128))
 
     conv_sobj_branch = common.convolutional(conv, (3, 3, 128, 256))
+    # conv_sbbox 用于预测小尺寸物体，shape = [None, 52, 52, 255]
     conv_sbbox = common.convolutional(conv_sobj_branch, (1, 1, 256, 3*(NUM_CLASS +5)), activate=False, bn=False)
 
     return [conv_sbbox, conv_mbbox, conv_lbbox]
