@@ -242,7 +242,7 @@ def decode(conv_output, i=0):
 
 其实就是使用 `k-means` 算法对训练集上的 boudnding box 尺度做聚类。此外，考虑到训练集上的图片尺寸不一，因此对此过程进行归一化处理。
 
-`k-means` 有个坑爹的地方在于，中心点个数需要人为指定。也就是说 `anchor` 的数目等于多少最合适？一般来说，`anchor` 的类别越多，那么 `YOLO` 算法就越能在不同尺度下与真实框进行回归，但是模型的复杂度就上来了。
+`k-means` 聚类算法有个坑爹的地方在于，类别的个数需要人为事先指定。这就带来一个问题，先验框 `anchor` 的数目等于多少最合适？一般来说，`anchor` 的类别越多，那么 `YOLO` 算法就越能在不同尺度下与真实框进行回归，但是这样就会导致模型的复杂度更高，网络的参数量更庞大。
 
 <p align="center">
     <img width="60%" src="https://user-images.githubusercontent.com/30433053/62404991-d222df00-b5cb-11e9-8347-f3808eb8f893.png" style="max-width:60%;">
