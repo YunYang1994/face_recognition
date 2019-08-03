@@ -236,15 +236,78 @@ def decode(conv_output, i=0):
 
 ### 1.3.2 K-means 的作用有多大?
 
+按照前文的思路，那么问题来了：先验框是怎么来的？对于这点，作者在 YOLOv2 论文里给出了很好的解释：
+
+>we run k-means clustering on the training set bounding boxes to automatically find good priors.
+
+其实就是使用 `k-means` 算法对训练集上的 boudnding box 尺度做聚类。此外，考虑到训练集上的图片尺寸不一，因此对此过程进行归一化处理。
+
+`k-means` 有个坑爹的地方在于，中心点个数需要人为指定。也就是说 `anchor` 的数目等于多少最合适？一般来说，`anchor` 的类别越多，那么 `YOLO` 算法就越能在不同尺度下与真实框进行回归，但是模型的复杂度就上来了。
+
+<p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/62404991-d222df00-b5cb-11e9-8347-f3808eb8f893.png" style="max-width:60%;">
+    </a>
+</p>
+
+>We choose k = 5 as a good tradeoff between model complexity and high recall.
+>If we use 9 centroids we see a much higher average IOU. This indicates that using k-means to generate our bounding box starts the model off with a better representation and makes the task easier to learn.
+
+在上面这幅图里，作者发现 k = 5 时就能较好地实现高召回率与模型复杂度之间的平衡。由于在 `YOLOv3` 算法里一共有3种尺度预测，因此只能是3的倍数，所以最终选择了 9 个先验框。这里还有个问题需要解决，k-means 度量距离的选取很关键。距离度量如果使用标准的欧氏距离，大框框就会比小框产生更多的错误。在目标检测领域，我们度量两个边界框之间的相似度往往以 `IOU` 大小作为标准。因此，这里的度量距离也和 `IOU` 有关。**需要特别注意的是，这里的IOU计算只用到了 boudnding box 的长和宽。**在[我的代码](https://nbviewer.jupyter.org/github/YunYang1994/tensorflow-yolov3/blob/master/docs/Box-Clustering.ipynb)里，是认为两个先验框的左上角是相重合的。
+
+<p align="center">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/62405048-760c8a80-b5cc-11e9-9d2c-1ba88ab4ad65.png" style="max-width:40%;">
+    </a>
+</p>
+
+>如果两个边界框之间的`IOU`值更大，那么它们之间的距离就会更小。
+
+```python
+def kmeans(boxes, k, dist=np.median,seed=1):
+    """
+    Calculates k-means clustering with the Intersection over Union (IoU) metric.
+    :param boxes: numpy array of shape (r, 2), where r is the number of rows
+    :param k: number of clusters
+    :param dist: distance function
+    :return: numpy array of shape (k, 2)
+    """
+    rows = boxes.shape[0]
+
+    distances     = np.empty((rows, k)) ## N row x N cluster
+    last_clusters = np.zeros((rows,))
+
+    np.random.seed(seed)
+
+    # initialize the cluster centers to be k items
+    clusters = boxes[np.random.choice(rows, k, replace=False)]
+
+    while True:
+        # 为每个点指定聚类的类别（如果这个点距离某类别最近，那么就指定它是这个类别)
+        for icluster in range(k): # I made change to lars76's code here to make the code faster
+            distances[:,icluster] = 1 - iou(clusters[icluster], boxes)
+
+        nearest_clusters = np.argmin(distances, axis=1)
+		# 如果距离中心位置基本不变了，那么迭代终止。
+        if (last_clusters == nearest_clusters).all():
+            break
+            
+        # 重新计算每个聚类簇的平均中心位置，并它作为聚类中心点
+        for cluster in range(k):
+            clusters[cluster] = dist(boxes[nearest_clusters == cluster], axis=0)
+
+        last_clusters = nearest_clusters
+
+    return clusters,nearest_clusters,distances
+```
+
+经常有人发邮件问我，到底要不要在自己的数据集上对先验框进行聚类，这个作用会有多大？我的答案是：不需要，直接使用 [COCO 数据集](https://github.com/YunYang1994/tensorflow-yolov3/issues/261)上得到的先验框即可。因为 YOLO 算法最本质地来说是去学习真实框尺寸与先验框尺寸之间的偏移量，即使你选的先验框再准确，也只能是网络更容易去学习而已。事实上，这对预测的精度没有什么影响，所以这个过程意义不大。我觉得作者在论文里这样写的原因在于**你总得告诉别人你的先验框是怎么来的**，并且让论文更具有学术性。
+
+### 1.3.3 原来是这样预测的
 
 
 
 
 
 
-
-
-#### 1.4 原来是这样预测的
 
 ### 2. YOLOv3 损失函数的理解
 
