@@ -303,8 +303,8 @@ def kmeans(boxes, k, dist=np.median,seed=1):
 
 ## 1.4 原来是这样预测的
 
-### 1.4.1 letterbox_image
-在将图片输入模型之前，需要将图片尺寸 resize 成固定的大小，如 416X416 或 `608X608`。如果直接对图片进行 resize 处理，那么会使得图片扭曲变形从而降低模型的预测精度。
+### 1.4.1 准备图片
+在将图片输入模型之前，需要将图片尺寸 resize 成固定的大小，如 416X416 或 608X608 。如果直接对图片进行 resize 处理，那么会使得图片扭曲变形从而降低模型的预测精度。
 
 ```python
 def image_preporcess(image, target_size, gt_boxes=None):
@@ -333,6 +333,61 @@ def image_preporcess(image, target_size, gt_boxes=None):
 | original_image (768X576)| letterbox_image (416X416)  |
 |---|---|
 |![image](../data/dog.jpg)|![image](https://user-images.githubusercontent.com/30433053/62408461-16c66e80-b5fc-11e9-8ae5-bb4d9963b43f.jpg)|
+
+### 1.4.2 网络输出
+
+![image](https://raw.githubusercontent.com/YunYang1994/tensorflow-yolov3/master/docs/images/levio.jpeg)
+
+```python
+def YOLOv3(input_layer):
+    route_1, route_2, conv = backbone.darknet53(input_layer)
+
+    conv = common.convolutional(conv, (1, 1, 1024,  512))
+    conv = common.convolutional(conv, (3, 3,  512, 1024))
+    conv = common.convolutional(conv, (1, 1, 1024,  512))
+    conv = common.convolutional(conv, (3, 3,  512, 1024))
+    conv = common.convolutional(conv, (1, 1, 1024,  512))
+
+    conv_lobj_branch = common.convolutional(conv, (3, 3, 512, 1024))
+    conv_lbbox = common.convolutional(conv_lobj_branch, (1, 1, 1024, 3*(NUM_CLASS + 5)), activate=False, bn=False)
+
+    conv = common.convolutional(conv, (1, 1,  512,  256))
+    conv = common.upsample(conv)
+
+    conv = tf.concat([conv, route_2], axis=-1)
+
+    conv = common.convolutional(conv, (1, 1, 768, 256))
+    conv = common.convolutional(conv, (3, 3, 256, 512))
+    conv = common.convolutional(conv, (1, 1, 512, 256))
+    conv = common.convolutional(conv, (3, 3, 256, 512))
+    conv = common.convolutional(conv, (1, 1, 512, 256))
+
+    conv_mobj_branch = common.convolutional(conv, (3, 3, 256, 512))
+    conv_mbbox = common.convolutional(conv_mobj_branch, (1, 1, 512, 3*(NUM_CLASS + 5)), activate=False, bn=False)
+
+    conv = common.convolutional(conv, (1, 1, 256, 128))
+    conv = common.upsample(conv)
+
+    conv = tf.concat([conv, route_1], axis=-1)
+
+    conv = common.convolutional(conv, (1, 1, 384, 128))
+    conv = common.convolutional(conv, (3, 3, 128, 256))
+    conv = common.convolutional(conv, (1, 1, 256, 128))
+    conv = common.convolutional(conv, (3, 3, 128, 256))
+    conv = common.convolutional(conv, (1, 1, 256, 128))
+
+    conv_sobj_branch = common.convolutional(conv, (3, 3, 128, 256))
+    conv_sbbox = common.convolutional(conv_sobj_branch, (1, 1, 256, 3*(NUM_CLASS +5)), activate=False, bn=False)
+
+    return [conv_sbbox, conv_mbbox, conv_lbbox]
+```
+
+
+### 1.4.3 NMS 处理
+
+
+
+
 
 
 ### 2. YOLOv3 损失函数的理解
