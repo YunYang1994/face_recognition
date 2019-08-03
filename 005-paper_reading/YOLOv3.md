@@ -286,7 +286,7 @@ def kmeans(boxes, k, dist=np.median,seed=1):
             distances[:,icluster] = 1 - iou(clusters[icluster], boxes)
 
         nearest_clusters = np.argmin(distances, axis=1)
-		# 如果距离中心位置基本不变了，那么迭代终止。
+	# 如果聚类簇的中心位置基本不变了，那么迭代终止。
         if (last_clusters == nearest_clusters).all():
             break
             
