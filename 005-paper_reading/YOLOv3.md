@@ -330,7 +330,9 @@ def image_preporcess(image, target_size, gt_boxes=None):
         gt_boxes[:, [1, 3]] = gt_boxes[:, [1, 3]] * scale + dh
         return image_paded, gt_boxes
 ```
-
+| original_image (768X576)| letterbox_image (416X416)  |
+|---|---|
+|![image](../data/dog.jpg)|![image](https://user-images.githubusercontent.com/30433053/62408461-16c66e80-b5fc-11e9-8ae5-bb4d9963b43f.jpg)|
 
 
 ### 2. YOLOv3 损失函数的理解
