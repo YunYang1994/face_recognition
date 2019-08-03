@@ -343,7 +343,7 @@ def image_preporcess(image, target_size, gt_boxes=None):
 def YOLOv3(input_layer):
     # 输入层进入 Darknet-53 网络后，得到了三个分支
     route_1, route_2, conv = backbone.darknet53(input_layer)
-    # 见上图中的橘黄色模块(DBL)，一共需要进行5此卷积操作
+    # 见上图中的橘黄色模块(DBL)，一共需要进行5次卷积操作
     conv = common.convolutional(conv, (1, 1, 1024,  512))
     conv = common.convolutional(conv, (3, 3,  512, 1024))
     conv = common.convolutional(conv, (1, 1, 1024,  512))
