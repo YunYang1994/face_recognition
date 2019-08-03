@@ -166,7 +166,7 @@ Out[4]: <tf.Tensor 'zero_padding2d_1/Identity:0' shape=(None, 418, 418, 3) dtype
 
 ### 1.2.3 Residual 残差模块
 
-残差模块最显著的特点是使用了 `short cut` 机制（**有点类似于电路中的短路机制**）来缓解在深度神经网络中增加深度带来的梯度消失问题，从而使得神经网络变得更容易优化。它通过恒等映射(identity mapping)的方法使得输入和输出之间建立了一条直接的关联通道，从而使得网络集中学习输入和输出之间的残差。
+残差模块最显著的特点是使用了 `short cut` 机制（**有点类似于电路中的短路机制**）来缓解在神经网络中增加深度带来的梯度消失问题，从而使得神经网络变得更容易优化。它通过恒等映射(identity mapping)的方法使得输入和输出之间建立了一条直接的关联通道，从而使得网络集中学习输入和输出之间的残差。
 
 <p align="center">
     <img width="50%" src="https://user-images.githubusercontent.com/30433053/62363930-de1e8a80-b552-11e9-98e9-914da36e5922.png" style="max-width:50%;">
