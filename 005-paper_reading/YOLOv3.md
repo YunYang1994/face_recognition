@@ -315,7 +315,7 @@ def image_preporcess(image, target_size, gt_boxes=None):
     scale = min(iw/w, ih/h)
     nw, nh  = int(scale * w), int(scale * h) # 计算缩放后图片尺寸
     image_resized = cv2.resize(image, (nw, nh))
-	# 制作一张画布，画布的尺寸就是我们想要的尺寸
+    # 制作一张画布，画布的尺寸就是我们想要的尺寸
     image_paded = np.full(shape=[ih, iw, 3], fill_value=128.0)
     dw, dh = (iw - nw) // 2, (ih-nh) // 2
     # 将缩放后的图片放在画布中央
