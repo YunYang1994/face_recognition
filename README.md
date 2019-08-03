@@ -18,7 +18,7 @@
 
 
 ### 从零实现一个卷积神经网络算法库
-> 纯 C/C++ 语言底层实现, 不用安装任何第三方依赖库！！！
+> 纯 C 语言底层实现, 不用安装任何第三方依赖库！！！
 --------------------
 #### 2019-06-17. [图片处理系列之如何实现读写图片](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
 #### 2019-07-01. [图片处理系列之彩色图像的二值化、灰度化、线性插值以及最近邻插值算法实现](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics)
