@@ -30,6 +30,5 @@ class ConvNet(nn.Module):
         return out
 
 torch_model = ConvNet()
-# torch.save(torch_model.state_dict(), 'model.pth')
 
 
