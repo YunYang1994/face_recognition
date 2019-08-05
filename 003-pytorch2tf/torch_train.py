@@ -19,7 +19,6 @@ from torch_model import torch_model
 
 # Device configuration
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-
 # Hyper parameters
 num_epochs = 5
 num_classes = 10
@@ -27,7 +26,7 @@ batch_size = 50
 learning_rate = 0.001
 
 # MNIST dataset
-train_dataset = torchvision.datasets.MNIST(root='../../data/',
+train_dataset = torchvision.datasets.MNIST(root='./',
                                            train=True,
                                            transform=transforms.ToTensor(),
                                            download=True)
@@ -62,9 +61,25 @@ for epoch in range(num_epochs):
             print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'
                    .format(epoch+1, num_epochs, i+1, total_step, loss.item()))
 
+test_dataset = torchvision.datasets.MNIST(root='./',
+                                          train=False,
+                                          transform=transforms.ToTensor())
+test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
+                                          batch_size=100,
+                                          shuffle=False)
+# Test the model
+torch_model.eval()  # eval mode (batchnorm uses moving mean/variance instead of mini-batch mean/variance)
+with torch.no_grad():
+    correct = 0
+    total = 0
+    for images, labels in test_loader:
+        images = images.to(device)
+        labels = labels.to(device)
+        outputs = torch_model(images)
+        _, predicted = torch.max(outputs.data, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+    print('=> Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total))
+
 torch.save(model.state_dict(), 'model.pth')
-
-
-
-
 
