@@ -25,8 +25,10 @@ class ConvNet(nn.Module):
 
     def forward(self, x):
         out = self.layer1(x)
+        print("torch 的卷积层输出", out[0])
         out = out.reshape(out.size(0), -1)
         out = self.fc(out)
+        print("torch 的全连接层输出", out[0])
         return out
 
 torch_model = ConvNet()

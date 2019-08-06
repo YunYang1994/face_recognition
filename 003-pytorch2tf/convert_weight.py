@@ -36,8 +36,10 @@ class model(tf.keras.Model):
     def call(self, x):
         out = self.layer1(x)
         out = tf.transpose(out, [0, 3, 1, 2]) # channel_first
+        print("tf 的卷积层输出", out[0])
         out = tf.reshape(out, (out.shape[0], -1))
         out = self.fc(out)
+        print("tf 的全连接层输出", out[0])
         return out
 
 # define torch model
@@ -94,8 +96,6 @@ tf_output = tf_model(tf_image).numpy()
 with torch.no_grad():
     torch_model.eval()
     torch_output = torch_model(torch_image).numpy()
-print(torch_output[0])
-print(tf_output[0])
 print("label : %d, torch : %d, tf : % d" %(tf_label, np.argmax(torch_output), np.argmax(tf_output)))
 
 
