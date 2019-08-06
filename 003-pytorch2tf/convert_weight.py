@@ -22,6 +22,7 @@ import tensorflow as tf
 from tensorflow.keras.layers import Conv2D, BatchNormalization, ReLU, Reshape, Dense, LeakyReLU
 from torch_model import ConvNet
 
+use_pretrained_model = False
 
 class model(tf.keras.Model):
     def __init__(self, num_class=10):
@@ -38,13 +39,13 @@ class model(tf.keras.Model):
         out = tf.transpose(out, [0, 3, 1, 2]) # channel_first
         out = tf.reshape(out, (out.shape[0], -1))
         out = self.fc(out)
-        print("tf 的全连接层输出", out[0])
         return out
 
 # define torch model
 torch_model = ConvNet()
-state_dict = torch.load("./model.pth")
-torch_model.load_state_dict(state_dict)
+if use_pretrained_model:
+    state_dict = torch.load("./model.pth")
+    torch_model.load_state_dict(state_dict)
 # define tf model
 tf_model = model()
 # Parsing layers
@@ -95,6 +96,10 @@ tf_output = tf_model(tf_image).numpy()
 with torch.no_grad():
     torch_model.eval()
     torch_output = torch_model(torch_image).numpy()
-print("label : %d, torch : %d, tf : % d" %(tf_label, np.argmax(torch_output), np.argmax(tf_output)))
+print("=> label : %d, torch : %d, tf : % d" %(tf_label, np.argmax(torch_output), np.argmax(tf_output)))
+print(tf_output)
+print(torch_output)
+print("=> errors: %f" %np.mean(np.abs((tf_output-torch_output) / torch_output)))
+
 
 

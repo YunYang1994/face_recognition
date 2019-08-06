@@ -27,7 +27,6 @@ class ConvNet(nn.Module):
         out = self.layer1(x)
         out = out.reshape(out.size(0), -1)
         out = self.fc(out)
-        print("torch 的全连接层输出", out[0])
         return out
 
 torch_model = ConvNet()
