@@ -30,5 +30,24 @@ torch_model = ConvNet()
 $ python torch_train.py
 ```
 
+# 权重转化
+先将 pytorch 模型的每一层权重按照顺序解析出来，这里需要特别注意的是 pytorch 模型的每一层输入和输出的形状都是 (batch_size, channels, height, width) , 而 tensorflow 的却是 (batch_size, height, width, channels)。因此，所有的卷积层权重都需要进行转置。
 
+```python
+conv_weight = torch_conv_layer.weight.detach().numpy()
+conv_weight = np.transpose(conv_weight, [2, 3, 1, 0]) # 转置卷积层权重
+bias_weight = torch_conv_layer.bias.detach().numpy()
+conv_layer_weights = [conv_weight, bias_weight]
+
+gama = torch_bn_layer.weight.detach().numpy()
+beta = torch_bn_layer.bias.detach().numpy()
+running_mean = torch_bn_layer.running_mean.detach().numpy()
+running_var = torch_bn_layer.running_var.detach().numpy()
+bn_layer_weights = [gama, beta, running_mean, running_var]
+
+linear_weight = torch_Linear_layer.weight.detach().numpy()
+linear_weight = np.transpose(linear_weight, [1, 0])
+linear_bias = torch_Linear_layer.bias.detach().numpy()
+linear_layer_weights = [linear_weight, linear_bias]
+```
 
