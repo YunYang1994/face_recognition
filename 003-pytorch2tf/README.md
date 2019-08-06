@@ -31,7 +31,7 @@ $ python torch_train.py
 ```
 
 # 权重转化
-先将 pytorch 模型的每一层权重按照顺序解析出来，这里需要特别注意的是 pytorch 模型的每一层输入和输出的形状都是 (batch_size, channels, height, width) , 而 tensorflow 的却是 (batch_size, height, width, channels)。因此，需要对**所有的卷积层和全连接层的权重都需要进行转置，使它们通道在后**。
+先将 pytorch 模型的每一层权重按照顺序解析出来，这里需要特别注意的是 pytorch 模型的每一层输入和输出的形状都是 (batch_size, channels, height, width) , 而 tensorflow 的却是 (batch_size, height, width, channels)。因此，需要对所有的卷积层和全连接层的权重都需要进行转置，使它们通道在后。
 
 ```python
 conv_weight = torch_conv_layer.weight.detach().numpy()
