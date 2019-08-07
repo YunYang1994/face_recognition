@@ -49,5 +49,47 @@ linear_weight = torch_Linear_layer.weight.detach().numpy()
 linear_weight = np.transpose(linear_weight, [1, 0]) # 转置全连接层权重
 linear_bias = torch_Linear_layer.bias.detach().numpy()
 linear_layer_weights = [linear_weight, linear_bias]
+
+# 最后把权重赋值给 tf 模型
+tf_model.layers[0].layers[0].set_weights(conv_layer_weights)
+tf_model.layers[0].layers[1].set_weights(bn_layer_weights)
+tf_model.layers[1].layers[0].set_weights(linear_layer_weights)
 ```
+
+# 验证模型
+ 当我们把 torch_model 训练好并把网络权重赋值给 tf_model 后，此时便需要对 tf_model 的准确性进行评估。评估的两个标准便是：<br>
+- 全连接层输出特征向量的平均误差 <br>
+- 两个模型最终预测 label 的结果是否一致？ <br>
+
+```python
+torch_image, torch_label = next(dataset) # 准备输入数据
+# tf_model 的输入图片的需要后置
+tf_image, tf_label = np.transpose(torch_image.numpy(), [0, 2, 3, 1]), torch_label.numpy()
+
+tf_output = tf_model(tf_image).numpy()
+with torch.no_grad():
+    torch_model.eval()
+    torch_output = torch_model(torch_image).numpy()
+# 打印预测结果
+print("=> label : %d, torch : %d, tf : % d" %(tf_label, np.argmax(torch_output), np.argmax(tf_output)))
+# 打印特征向量
+print(tf_output)
+print(torch_output)
+# 计算特征向量的平均误差
+print("=> errors: %f" %np.mean(np.abs((tf_output-torch_output) / torch_output)))
+```
+
+# One more thing
+尽管 tf_model 预测的 label 值与 torch_model 的一致，并且二者的特征向量也很接近。但是我发现了一个非常令人困惑的地方：**如果我们不对 torch_model 进行训练，而是直接将初始化的网络权重直接赋予 tf_model，那么得到的特征向量的平均误差将会更小。** <br>
+
+- 加载预训练网络: `use_pretrained_model = True`<br>
+
+- 直接初始化网络: `use_pretrained_model = False`<br>
+
+
+ 那么问题来了，为什么会有这种差异呢？
+
+
+
+
 
