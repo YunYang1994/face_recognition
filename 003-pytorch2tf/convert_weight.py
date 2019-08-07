@@ -19,7 +19,7 @@ import tensorflow as tf
 import torchvision.transforms as transforms
 from torch_model import ConvNet
 
-use_pretrained_model = True
+use_pretrained_model = False
 
 class model(tf.keras.Model):
     def __init__(self, num_class=10):
@@ -80,12 +80,12 @@ tf_model.layers[0].layers[0].set_weights(conv_layer_weights)
 tf_model.layers[0].layers[1].set_weights(bn_layer_weights)
 tf_model.layers[1].layers[0].set_weights(linear_layer_weights)
 
-test_dataset = torchvision.datasets.mnist(root='./',
-                                          train=false,
-                                          transform=transforms.totensor())
-test_loader = torch.utils.data.dataloader(dataset=test_dataset,
+test_dataset = torchvision.datasets.MNIST(root='./',
+                                          train=False,
+                                          transform=transforms.ToTensor())
+test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
                                           batch_size=1,
-                                          shuffle=true)
+                                          shuffle=False)
 dataset = iter(test_loader)
 torch_image, torch_label = next(dataset)
 # torch_image, torch_label = torch.Tensor(np.arange(28*28*1).reshape([1, 1, 28, 28])), torch.Tensor(1)

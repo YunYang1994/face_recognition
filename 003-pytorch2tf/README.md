@@ -83,9 +83,10 @@ print("=> errors: %f" %np.mean(np.abs((tf_output-torch_output) / torch_output)))
 尽管 tf_model 预测的 label 值与 torch_model 的一致，并且二者的特征向量也很接近。但是我发现了一个非常令人困惑的地方：**如果我们不对 torch_model 进行训练，而是直接将初始化的网络权重直接赋予 tf_model，那么得到的特征向量的平均误差将会更小。** <br>
 
 - 加载预训练网络: `use_pretrained_model = True`<br>
+![image](https://user-images.githubusercontent.com/30433053/62635415-980e6000-b972-11e9-9de0-36f6cbc4188b.png)
 
 - 直接初始化网络: `use_pretrained_model = False`<br>
-
+![image](https://user-images.githubusercontent.com/30433053/62635616-f9363380-b972-11e9-862a-920d5ecea186.png)
 
  那么问题来了，为什么会有这种差异呢？
 
