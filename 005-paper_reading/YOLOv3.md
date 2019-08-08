@@ -394,22 +394,10 @@ def YOLOv3(input_layer):
 
 - 流程1: 判断边界框的数目是否大于0，如果不是则结束迭代；
 - 流程2: 按照 socre 排序选出评分最大的边界框 A 并取出；
-- 流程3: 计算这个边界框 A 与剩下所有边界框的 iou 并剔除那些 iou 值高于阈值的边界框，重复上述步骤；
-
-最后所有取出来的边界框 A 就是我们想要的。不妨举个简单的例子：假如5个边界框及评分为: A: 0.9，B: 0.08，C: 0.8, D: 0.6，E: 0.5，设定评分阈值为 0.3，计算步骤如下。
-
-- 步骤1: 边界框的个数为5，满足迭代条件；
-- 步骤2: 按照 socre 排序选出评分最大的边界框 A 并取出；
-- 步骤3: 计算边界框 A 与其他 4 个边界框的 iou，假设分别得到的值为：B: 0.1，C:0.7, D:0.02, E:0.09, 因此剔除边界框 C；
-- 步骤4: 现在只剩下边界框 B、D、E，满足迭代条件；
-- 步骤5: 按照 socre 排序选出评分最大的边界框 D 并取出；
-- 步骤6: 计算边界框 D 与其他 2 个边界框的 iou，假设分别得到的值为：B:0.06，E:0.8，因此剔除边界框 E；
-- 步骤7: 现在只剩下边界框 B，满足迭代条件；
-- 步骤8: 按照 socre 排序选出评分最大的边界框 B 并取出；
-- 步骤9: 此时没有边界框，结束迭代。
+- 流程3: 计算这个边界框 A 与剩下所有边界框的 iou 并剔除那些 iou 值高于阈值的边界框，重复上述步骤；<br>
 
 ```python
-# 流程1: 判断边界框对数目是否大于0
+# 流程1: 判断边界框的数目是否大于0
 while len(cls_bboxes) > 0:
     # 流程2: 按照 socre 排序选出评分最大的边界框 A
     max_ind = np.argmax(cls_bboxes[:, 4])
@@ -417,19 +405,36 @@ while len(cls_bboxes) > 0:
     best_bbox = cls_bboxes[max_ind]
     best_bboxes.append(best_bbox)
     cls_bboxes = np.concatenate([cls_bboxes[: max_ind], cls_bboxes[max_ind + 1:]])
-
+	# 流程3: 计算这个边界框 A 与剩下所有边界框的 iou 并剔除那些 iou 值高于阈值的边界框
     iou = bboxes_iou(best_bbox[np.newaxis, :4], cls_bboxes[:, :4])
     weight = np.ones((len(iou),), dtype=np.float32)
-
     iou_mask = iou > iou_threshold
     weight[iou_mask] = 0.0
-
     cls_bboxes[:, 4] = cls_bboxes[:, 4] * weight
     score_mask = cls_bboxes[:, 4] > 0.
     cls_bboxes = cls_bboxes[score_mask]
 ```
 
+最后所有取出来的边界框 A 就是我们想要的。不妨举个简单的例子：假如5个边界框及评分为: A: 0.9，B: 0.08，C: 0.8, D: 0.6，E: 0.5，设定的评分阈值为 0.3，计算步骤如下。
 
+- 步骤1: 边界框的个数为5，满足迭代条件；
+- 步骤2: 按照 socre 排序选出评分最大的边界框 A 并取出；
+- 步骤3: 计算边界框 A 与其他 4 个边界框的 iou，假设分别得到的 iou 值为：B: 0.1，C:0.7, D:0.02, E:0.09, 因此剔除边界框 C；
+- 步骤4: 现在只剩下边界框 B、D、E，满足迭代条件；
+- 步骤5: 按照 socre 排序选出评分最大的边界框 D 并取出；
+- 步骤6: 计算边界框 D 与其他 2 个边界框的 iou，假设分别得到的 iou 值为：B:0.06，E:0.8，因此剔除边界框 E；
+- 步骤7: 现在只剩下边界框 B，满足迭代条件；
+- 步骤8: 按照 socre 排序选出评分最大的边界框 B 并取出；
+- 步骤9: 此时没有边界框，结束迭代。
+
+最后我们得到了边界框 A、B、D，但其中边界框 B 的评分非常低，这表明该边界框是没有物体的，因此应当抛弃掉。在 postprocess_boxes 代码中，
+
+```python
+# # (5) discard some boxes with low scores
+classes = np.argmax(pred_prob, axis=-1)
+scores = pred_conf * pred_prob[np.arange(len(pred_coor)), classes]
+score_mask = scores > score_threshold
+``
 
 ### 2. YOLOv3 损失函数的理解
 
