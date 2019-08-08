@@ -434,7 +434,7 @@ while len(cls_bboxes) > 0:
 classes = np.argmax(pred_prob, axis=-1)
 scores = pred_conf * pred_prob[np.arange(len(pred_coor)), classes]
 score_mask = scores > score_threshold
-``
+```
 
 ### 2. YOLOv3 损失函数的理解
 
