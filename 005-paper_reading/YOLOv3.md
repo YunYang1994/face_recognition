@@ -545,15 +545,11 @@ conf_loss = conf_focal * (
 prob_loss = respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob, logits=conv_raw_prob)
 ```
 
+# 3. YOLOv3 的训练技巧
 
-#### 2.4 原来是这样训练的
+## 3.1 权重初始化设置
 
-### 3. YOLOv3 的训练技巧
+## 3.2 学习率的设置
 
-#### 3.1 权重初始化设置
+## 3.3 加载预训练模型
 
-#### 3.2 学习率的设置
-
-#### 3.3 加载预训练模型
-
-#### 3.4 其实好像也没那么难
