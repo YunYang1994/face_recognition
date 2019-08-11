@@ -578,6 +578,12 @@ conf_loss = conf_focal * (
 ## 2.3 分类损失
 这里分类损失采用的是二分类的交叉熵，即把所有类别的分类问题归结为是否属于这个类别，这样就把多分类看做是二分类问题。
 
+<p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/62836847-8bf00e80-bca2-11e9-9af1-27c1f68580eb.png" style="max-width:60%;">
+    </a>
+</p>
+
+
 ```python
 prob_loss = respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob, logits=conv_raw_prob)
 ```
