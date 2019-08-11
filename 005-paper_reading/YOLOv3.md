@@ -442,7 +442,7 @@ scores = pred_conf * pred_prob[np.arange(len(pred_coor)), classes]
 score_mask = scores > score_threshold
 ```
 
->>在 YOLO 算法中，NMS 的处理有两种情况：一种所有预测框一起做 NMS 处理，另一种情况是分别对每个类别的预测框做 NMS 处理，后者会出现一个预测框既属于类别 A 又属于类别 B 的现象，这比较适合于一个小单元格中同时存在多个物体的情况。
+>>在 YOLO 算法中，NMS 的处理有两种情况：一种是所有的预测框一起做 NMS 处理，另一种情况是分别对每个类别的预测框做 NMS 处理。后者会出现一个预测框既属于类别 A 又属于类别 B 的现象，这比较适合于一个小单元格中同时存在多个物体的情况。
 
 # 2. YOLOv3 损失函数的理解
 
