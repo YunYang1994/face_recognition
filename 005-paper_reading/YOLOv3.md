@@ -528,35 +528,6 @@ giou_loss = respond_bbox * bbox_loss_scale * (1 - giou)
 - respond_bbox 的意思是如果网格单元中包含物体，那么就会计算边界框损失；
 - 两个边界框之间的 GIoU 值越大，giou 的损失值就会越小, 因此网络会朝着预测框与真实框重叠度较高的方向去优化。
 
-讲到这里，其实关于如何判断网格内有无物体还尚未展开。要想讲清楚 respond_bbox 就必须讲明 label 是怎么来的，这其实是在 [preprocess_true_boxes](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/YOLOV3/core/dataset.py#L197) 函数中:
-
-```python
-for i in range(3): # 针对 3 种网格尺寸
-    # 设定变量，用于存储每种网格尺寸下 3 个 anchor 框的中心位置和宽高
-    anchors_xywh = np.zeros((self.anchor_per_scale, 4))
-    # 将这 3 个 anchor 框都偏移至网格中心
-    anchors_xywh[:, 0:2] = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32) + 0.5
-    # 填充这 3 个 anchor 框的宽和高
-    anchors_xywh[:, 2:4] = self.anchors[i]
-    # 计算真实框与 3 个 anchor 框之间的 iou 值
-    iou_scale = self.bbox_iou(bbox_xywh_scaled[i][np.newaxis, :], anchors_xywh)
-    iou.append(iou_scale)
-    # 找出 iou 值大于 0.3 的 anchor 框
-    iou_mask = iou_scale > 0.3
-
-    if np.any(iou_mask): # 对于那些 iou > 0.3 的 anchor 框，做以下处理
-    	# 根据真实框的坐标信息来计算所属网格左上角的位置
-        xind, yind = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32)
-
-        label[i][yind, xind, iou_mask, :] = 0
-        # 填充真实框的中心位置和宽高
-        label[i][yind, xind, iou_mask, 0:4] = bbox_xywh
-        # 设定置信度为 1.0，表明该网格包含物体
-        label[i][yind, xind, iou_mask, 4:5] = 1.0
-        # 设置网格内 anchor 框的类别概率，做平滑处理
-        label[i][yind, xind, iou_mask, 5:] = smooth_onehot
-```
-
 ## 2.2 置信度损失
 
 ```python
@@ -585,6 +556,36 @@ conf_loss = conf_focal * (
 
 ```python
 prob_loss = respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob, logits=conv_raw_prob)
+```
+
+
+讲到这里，其实关于如何判断网格内有无物体还尚未展开。要想讲清楚 respond_bbox 就必须讲明 label 是怎么来的，这其实是在 [preprocess_true_boxes](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/YOLOV3/core/dataset.py#L197) 函数中:
+
+```python
+for i in range(3): # 针对 3 种网格尺寸
+    # 设定变量，用于存储每种网格尺寸下 3 个 anchor 框的中心位置和宽高
+    anchors_xywh = np.zeros((self.anchor_per_scale, 4))
+    # 将这 3 个 anchor 框都偏移至网格中心
+    anchors_xywh[:, 0:2] = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32) + 0.5
+    # 填充这 3 个 anchor 框的宽和高
+    anchors_xywh[:, 2:4] = self.anchors[i]
+    # 计算真实框与 3 个 anchor 框之间的 iou 值
+    iou_scale = self.bbox_iou(bbox_xywh_scaled[i][np.newaxis, :], anchors_xywh)
+    iou.append(iou_scale)
+    # 找出 iou 值大于 0.3 的 anchor 框
+    iou_mask = iou_scale > 0.3
+
+    if np.any(iou_mask): # 对于那些 iou > 0.3 的 anchor 框，做以下处理
+    	# 根据真实框的坐标信息来计算所属网格左上角的位置
+        xind, yind = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32)
+
+        label[i][yind, xind, iou_mask, :] = 0
+        # 填充真实框的中心位置和宽高
+        label[i][yind, xind, iou_mask, 0:4] = bbox_xywh
+        # 设定置信度为 1.0，表明该网格包含物体
+        label[i][yind, xind, iou_mask, 4:5] = 1.0
+        # 设置网格内 anchor 框的类别概率，做平滑处理
+        label[i][yind, xind, iou_mask, 5:] = smooth_onehot
 ```
 
 # 3. YOLOv3 的训练技巧
