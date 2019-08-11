@@ -455,7 +455,7 @@ score_mask = scores > score_threshold
 | L1 范数 | L2 范数 |
 |---|---|
 |![image](https://user-images.githubusercontent.com/30433053/62829145-18161d80-bc32-11e9-8ec0-a26536f3ffa6.png)|![image](https://user-images.githubusercontent.com/30433053/62829143-05034d80-bc32-11e9-9c8d-f0d8c3ee2d98.png)|
-> 当 L1 或 L2 范数都相同的时候，发现 IoU 和 GIoU 的值都差别很大，这表明使用 L 范数来度量边界框的距离是不合适的。
+> 当 L1 或 L2 范数都相同的时候，发现 IoU 和 GIoU 的值差别都很大，这表明使用 L 范数来度量边界框的距离是不合适的。
 
 在这种情况下，学术界普遍使用 IoU 来衡量两个边界框之间的相似性。作者发现使用 IoU 会有两个缺点，导致其不太适合做损失函数：
 
