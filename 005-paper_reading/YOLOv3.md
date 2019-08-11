@@ -515,7 +515,7 @@ giou_loss = respond_bbox * bbox_loss_scale * (1 - giou)
 ```
 
 - 边界框的尺寸越小，bbox_loss_scale 的值就越大。实际上，我们知道 YOLOv1 里作者在 loss 里对宽高都做了开根号处理，这是为了弱化边界框尺寸对损失值的影响；
-- respond_bbox 的意思是只计算包含物体的边界框损失；
+- respond_bbox 的意思是如果网格单元中包含物体，那么就会计算边界框损失；
 - 两个边界框之间的 GIoU 值越大，giou 的损失值就会越小。
 
 
