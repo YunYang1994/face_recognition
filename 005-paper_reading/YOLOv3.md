@@ -466,6 +466,15 @@ score_mask = scores > score_threshold
 |![image](https://user-images.githubusercontent.com/30433053/62829254-b6a37e00-bc34-11e9-9d3e-a8e0f3139b30.png)|![image](https://user-images.githubusercontent.com/30433053/62829264-d6d33d00-bc34-11e9-9438-96366c702b6c.png)|
 >蓝色的是真实框，场景 A 中的黄色框和场景 B 中的绿色框都为预测框。
 
+- 即使预测框和真实框之间相重合且具有相同的 IoU 值时，检测的效果也具有较大差异，如下图所示。
+
+<p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/62829348-56add700-bc36-11e9-9129-3586fe0979bf.png" style="max-width:60%;">
+    </a>
+</p>
+
+>Three different ways of overlap between two rectangles with the exactly same IoU values, i.e. IoU = 0.33, but different GIoU values, i.e. from the left to right GIoU = 0.33,0.24 and −0.1 respectively. GIoU value will be higher for the cases with better aligned orientation
+
 
 #### 2.2 置信度损失
 
