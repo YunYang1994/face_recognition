@@ -520,6 +520,26 @@ giou_loss = respond_bbox * bbox_loss_scale * (1 - giou)
 - respond_bbox 的意思是如果网格单元中包含物体，那么就会计算边界框损失；
 - 两个边界框之间的 GIoU 值越大，giou 的损失值就会越小, 因此网络会朝着预测框与真实框重叠度较高的方向去优化。
 
+讲到这里，其实关于如何判断网格内有无物体还尚未展开。要想讲清楚 respond_bbox 就必须讲明 label ，在 preprocess_true_boxes 函数中:
+
+```
+for i in range(3):
+	anchors_xywh = np.zeros((self.anchor_per_scale, 4))
+	anchors_xywh[:, 0:2] = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32) + 0.5
+	anchors_xywh[:, 2:4] = self.anchors[i]
+
+   iou_scale = self.bbox_iou(bbox_xywh_scaled[i][np.newaxis, :], anchors_xywh)
+   iou.append(iou_scale)
+   iou_mask = iou_scale > 0.3
+
+   if np.any(iou_mask):
+       xind, yind = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32)
+
+       label[i][yind, xind, iou_mask, :] = 0
+       label[i][yind, xind, iou_mask, 0:4] = bbox_xywh
+       label[i][yind, xind, iou_mask, 4:5] = 1.0
+```
+
 ## 2.2 置信度损失
 
 ```python
