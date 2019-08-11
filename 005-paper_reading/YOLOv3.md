@@ -536,7 +536,15 @@ conf_loss = conf_focal * (
     )
 ```
 
-#### 2.3 分类损失
+## 2.3 分类损失
+
+
+
+```python
+prob_loss = respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob, 
+												logits=conv_raw_prob)
+```
+
 
 #### 2.4 原来是这样训练的
 
