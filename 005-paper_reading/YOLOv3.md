@@ -448,15 +448,14 @@ score_mask = scores > score_threshold
 该代码的边界框损失受 [g-darknet](https://github.com/generalized-iou/g-darknet) 所启示，将原始 iou loss 替换成了 giou loss ，检测精度提高了大约 1 个百分点。
 
 ### 2.1.1 giou loss 的介绍
-[这篇论文](https://giou.stanford.edu/GIoU.pdf) 出自于 CVPR 2019，这篇论文提出了一种优化边界框的新方式 —— GIoU (generalized IoU，广义 IoU )。
+[这篇论文](https://giou.stanford.edu/GIoU.pdf) 出自于 CVPR 2019，这篇论文提出了一种优化边界框的新方式 —— GIoU (generalized IoU，广义 IoU )。边界框一般由左上角和右下角坐标所表示，即 (x1,y1,x2,y2)。那么，你发现这其实也是一个向量。向量的距离一般可以 L1 范数或者 L2 范数来度量。但是在L1及L2范数取到相同的值时，实际上检测效果却是差异巨大的，直接表现就是预测和真实检测框的IoU值变化较大，这说明L1和L2范数不能很好的反映检测效果。
 
-边界框一般由左上角和右下角坐标所表示，即 (x1,y1,x2,y2)。那么，你发现这其实也是一个向量。向量的距离一般可以 L1 范数或者 L2 范数来度量。
 ![image](https://user-images.githubusercontent.com/30433053/62829166-9b377380-bc32-11e9-8b9b-9e1601797d17.png)
 
 | L1 范数 | L2 范数 |
 |---|---|
 |![image](https://user-images.githubusercontent.com/30433053/62829145-18161d80-bc32-11e9-8ec0-a26536f3ffa6.png)|![image](https://user-images.githubusercontent.com/30433053/62829143-05034d80-bc32-11e9-9c8d-f0d8c3ee2d98.png)|
-> 
+> 当 L1 或 L2 范数都相同的时候，发现 IoU 和 GIoU 的值都差别很大，这表明使用 L 范数来度量边界框的距离是不合适的。
 
 
 
