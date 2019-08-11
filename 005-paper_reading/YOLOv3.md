@@ -541,7 +541,7 @@ conf_loss = conf_focal * (
 
 
 ```python
-prob_loss = respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob, 
+prob_loss = respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob,
 												logits=conv_raw_prob)
 ```
 
