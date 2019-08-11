@@ -487,7 +487,7 @@ score_mask = scores > score_threshold
 | 场景 A | 场景 B |
 |---|---|
 |![image](https://user-images.githubusercontent.com/30433053/62831088-b5824900-bc54-11e9-8a3c-2787199974a0.png)|![image](https://user-images.githubusercontent.com/30433053/62831105-dfd40680-bc54-11e9-9fd3-d3a5cbf4e57a.png)|
-
+>图中绿色包含的区域就是最小闭合凸面 C，the smallest enclosing convex object。
 ```python
 
 def bbox_giou(boxes1, boxes2):
