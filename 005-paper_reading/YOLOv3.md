@@ -507,11 +507,16 @@ def bbox_giou(boxes1, boxes2):
 
 ### 2.1.3 GIoU loss 的计算
 
-
 ```python
+respond_bbox  = label[:, :, :, :, 4:5]  # 置信度，判断是否有无物体
+...
 bbox_loss_scale = 2.0 - 1.0 * label_xywh[:, :, :, :, 2:3] * label_xywh[:, :, :, :, 3:4] / (input_size ** 2)
-giou_loss = respond_bbox * bbox_loss_scale * (1- giou)
+giou_loss = respond_bbox * bbox_loss_scale * (1 - giou)
 ```
+
+- 边界框的尺寸越小，bbox_loss_scale 的值就越大。实际上，我们知道 YOLOv1 里作者在 loss 里对宽高都做了开根号处理，这是为了弱化边界框尺寸对损失值的影响；
+- respond_bbox 的意思是只计算包含物体的边界框损失；
+- 两个边界框之间的 GIoU 值越大，giou 的损失值就会越小。
 
 
 
