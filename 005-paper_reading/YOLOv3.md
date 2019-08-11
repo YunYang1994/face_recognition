@@ -478,7 +478,7 @@ score_mask = scores > score_threshold
 ### 2.1.2 GIoU 的计算过程
 
 <p align="center">
-    <img width="80%" src="https://user-images.githubusercontent.com/30433053/62830993-380a0900-bc53-11e9-801b-4df7b8f25963.png" style="max-width:80%;">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/62830993-380a0900-bc53-11e9-801b-4df7b8f25963.png" style="max-width:60%;">
     </a>
 </p>
 
