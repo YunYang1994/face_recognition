@@ -447,7 +447,7 @@ score_mask = scores > score_threshold
 ## 2.1 边界框损失
 该代码的边界框损失受 [g-darknet](https://github.com/generalized-iou/g-darknet) 所启示，将原始 iou loss 替换成了 giou loss ，检测精度提高了大约 1 个百分点。
 
-### 2.1.1 GIoU loss 的介绍
+### 2.1.1 GIoU loss 的背景
 [这篇论文](https://giou.stanford.edu/GIoU.pdf) 出自于 CVPR 2019，这篇论文提出了一种优化边界框的新方式 —— GIoU (Generalized IoU，广义 IoU )。边界框一般由左上角和右下角坐标所表示，即 (x1,y1,x2,y2)。那么，你发现这其实也是一个向量。向量的距离一般可以 L1 范数或者 L2 范数来度量。但是在L1及L2范数取到相同的值时，实际上检测效果却是差异巨大的，直接表现就是预测和真实检测框的IoU值变化较大，这说明L1和L2范数不能很好的反映检测效果。
 
 ![image](https://user-images.githubusercontent.com/30433053/62829166-9b377380-bc32-11e9-8b9b-9e1601797d17.png)
@@ -474,6 +474,20 @@ score_mask = scores > score_threshold
 </p>
 
 >上面三幅图的 IoU = 0.33， 但是 GIoU 值分别是 0.33, 0.24 和 -0.1， 这表明如果两个边界框重叠和对齐得越好，那么得到的 GIoU 值就会越高。
+
+### 2.1.2 GIoU loss 的计算
+
+<p align="center">
+    <img width="80%" src="https://user-images.githubusercontent.com/30433053/62830993-380a0900-bc53-11e9-801b-4df7b8f25963.png" style="max-width:80%;">
+    </a>
+</p>
+
+the smallest enclosing convex object C 指的是最小的闭合凸面 C，例如在上述场景 A 和 B中，C 的形状分别为:
+
+| 场景 A | 场景 B |
+|---|---|
+|![image](https://user-images.githubusercontent.com/30433053/62831088-b5824900-bc54-11e9-8a3c-2787199974a0.png)|![image](https://user-images.githubusercontent.com/30433053/62831105-dfd40680-bc54-11e9-9fd3-d3a5cbf4e57a.png)|
+
 
 
 #### 2.2 置信度损失
