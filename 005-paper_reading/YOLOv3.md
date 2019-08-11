@@ -452,6 +452,8 @@ score_mask = scores > score_threshold
 
 ![image](https://user-images.githubusercontent.com/30433053/62836746-5bf43b80-bca1-11e9-85b7-7f7970cb6eb3.png)
 
+本文对原始的损失函数略有修改，请参考性使用。
+
 ## 2.1 边界框损失
 该代码的边界框损失受 [g-darknet](https://github.com/generalized-iou/g-darknet) 所启示，将原始 iou loss 替换成了 giou loss ，检测精度提高了大约 1 个百分点。
 
