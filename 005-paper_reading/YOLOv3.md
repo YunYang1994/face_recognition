@@ -522,22 +522,26 @@ giou_loss = respond_bbox * bbox_loss_scale * (1 - giou)
 
 讲到这里，其实关于如何判断网格内有无物体还尚未展开。要想讲清楚 respond_bbox 就必须讲明 label ，在 preprocess_true_boxes 函数中:
 
-```
+```python
 for i in range(3):
-	anchors_xywh = np.zeros((self.anchor_per_scale, 4))
-	anchors_xywh[:, 0:2] = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32) + 0.5
-	anchors_xywh[:, 2:4] = self.anchors[i]
+    anchors_xywh = np.zeros((self.anchor_per_scale, 4))
+    anchors_xywh[:, 0:2] = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32) + 0.5
+    anchors_xywh[:, 2:4] = self.anchors[i]
 
-   iou_scale = self.bbox_iou(bbox_xywh_scaled[i][np.newaxis, :], anchors_xywh)
-   iou.append(iou_scale)
-   iou_mask = iou_scale > 0.3
+    iou_scale = self.bbox_iou(bbox_xywh_scaled[i][np.newaxis, :], anchors_xywh)
+    iou.append(iou_scale)
+    iou_mask = iou_scale > 0.3
 
-   if np.any(iou_mask):
-       xind, yind = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32)
+    if np.any(iou_mask):
+        xind, yind = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32)
 
-       label[i][yind, xind, iou_mask, :] = 0
-       label[i][yind, xind, iou_mask, 0:4] = bbox_xywh
-       label[i][yind, xind, iou_mask, 4:5] = 1.0
+        label[i][yind, xind, iou_mask, :] = 0
+        label[i][yind, xind, iou_mask, 0:4] = bbox_xywh
+        label[i][yind, xind, iou_mask, 4:5] = 1.0
+        label[i][yind, xind, iou_mask, 5:] = smooth_onehot
+
+        bbox_ind = int(bbox_count[i] % self.max_bbox_per_scale)
+        bboxes_xywh[i][bbox_ind, :4] = bbox_xywh
 ```
 
 ## 2.2 置信度损失
