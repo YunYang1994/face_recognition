@@ -524,7 +524,7 @@ giou_loss = respond_bbox * bbox_loss_scale * (1 - giou)
 
 ```python
 for i in range(3): # 针对 3 种网格尺寸
-	# 设定变量，用于存储每种网格尺寸下 3 个 anchor 框的中心位置和宽高
+# 设定变量，用于存储每种网格尺寸下 3 个 anchor 框的中心位置和宽高
     anchors_xywh = np.zeros((self.anchor_per_scale, 4))
     # 将这 3 个 anchor 框都偏移至网格中心
     anchors_xywh[:, 0:2] = np.floor(bbox_xywh_scaled[i, 0:2]).astype(np.int32) + 0.5
