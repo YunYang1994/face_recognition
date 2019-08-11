@@ -482,7 +482,7 @@ score_mask = scores > score_threshold
     </a>
 </p>
 
-the smallest enclosing convex object C 指的是最小闭合凸面 C，例如在上述场景 A 和 B中，C 的形状分别为:
+`the smallest enclosing convex object C` 指的是最小闭合凸面 C，例如在上述场景 A 和 B 中，C 的形状分别为:
 
 | 场景 A | 场景 B |
 |---|---|
