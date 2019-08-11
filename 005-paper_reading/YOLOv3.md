@@ -442,9 +442,19 @@ scores = pred_conf * pred_prob[np.arange(len(pred_coor)), classes]
 score_mask = scores > score_threshold
 ```
 
-### 2. YOLOv3 损失函数的理解
+# 2. YOLOv3 损失函数的理解
 
-#### 2.1 边界框损失
+## 2.1 边界框损失
+该代码的边界框损失受 [g-darknet](https://github.com/generalized-iou/g-darknet) 所启示，将原始 iou loss 替换成了 giou loss ，检测精度提高了大约 1 个百分点。
+
+### 2.1.1 giou loss 的介绍
+[这篇论文](https://giou.stanford.edu/GIoU.pdf) 出自于 CVPR 2019，提出了一种新的目标检测评价指标
+
+
+
+
+
+
 
 #### 2.2 置信度损失
 
