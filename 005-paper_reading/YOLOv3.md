@@ -442,6 +442,8 @@ scores = pred_conf * pred_prob[np.arange(len(pred_coor)), classes]
 score_mask = scores > score_threshold
 ```
 
+>>在 YOLO 算法中，NMS 的处理有两种情况：一种所有预测框一起做 NMS 处理，另一种情况是分别对每个类别的预测框做 NMS 处理，后者会出现一个预测框既属于类别 A 又属于类别 B 的现象，这比较适合于一个小单元格中同时存在多个物体的情况。
+
 # 2. YOLOv3 损失函数的理解
 
 ## 2.1 边界框损失
@@ -537,7 +539,7 @@ conf_loss = conf_focal * (
 ```
 
 ## 2.3 分类损失
-这里分类损失采用的是二分类的交叉熵，即把所有类别的分类问题归结为是否属于这个类别，这样就把多分类看做是二分类问题。但这样会出现一个预测框既属于类别 A 又属于类别 B 的情况，比较适合于一个小单元格中同时存在多个物体的情况。
+这里分类损失采用的是二分类的交叉熵，即把所有类别的分类问题归结为是否属于这个类别，这样就把多分类看做是二分类问题。
 
 ```python
 prob_loss = respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_prob, logits=conv_raw_prob)
