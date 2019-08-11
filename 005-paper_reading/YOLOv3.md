@@ -464,7 +464,7 @@ score_mask = scores > score_threshold
 | 场景 A | 场景 B |
 |---|---|
 |![image](https://user-images.githubusercontent.com/30433053/62829254-b6a37e00-bc34-11e9-9d3e-a8e0f3139b30.png)|![image](https://user-images.githubusercontent.com/30433053/62829264-d6d33d00-bc34-11e9-9438-96366c702b6c.png)|
-
+>蓝色的是真实框，场景 A 中的黄色框和场景 B 中的绿色框都为预测框。
 
 
 #### 2.2 置信度损失
