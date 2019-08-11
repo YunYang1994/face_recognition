@@ -19,7 +19,7 @@
 - [x] 接着判断候选框里有没有物体？
 - [x] 如果有物体的话，那么它属于哪个类别？
 
-听起来就像把大象装进冰箱，分三步走。事实上，目前的 anchor 机制算法例如 RCNN、Faster rcnn 以及 YOLO 算法都是这个思想。最早的时候， [RCNN](https://arxiv.org/abs/1311.2524) 是这么干的，首先利用 Selective Search 的方法通过图片上像素之间的相似度和纹理特征进行区域合并，然后提出很多候选框并喂给 CNN 网络提取特征映射(feature map)，最后利用 feature map 训练SVM来对目标和背景进行分类.
+听起来就像把大象装进冰箱，分三步走。事实上，目前的 anchor-based 机制算法例如 RCNN、Faster rcnn 以及 YOLO 算法都是这个思想。最早的时候， [RCNN](https://arxiv.org/abs/1311.2524) 是这么干的，首先利用 Selective Search 的方法通过图片上像素之间的相似度和纹理特征进行区域合并，然后提出很多候选框并喂给 CNN 网络提取特征映射(feature map)，最后利用 feature map 训练SVM来对目标和背景进行分类.
 
 ![image](https://user-images.githubusercontent.com/30433053/62198083-944b6e00-b3b3-11e9-9cd5-a7230ced3762.png)
 
