@@ -524,7 +524,7 @@ giou_loss = respond_bbox * bbox_loss_scale * (1 - giou)
 iou = bbox_iou(pred_xywh[:, :, :, :, np.newaxis, :], bboxes[:, np.newaxis, np.newaxis, np.newaxis, :, :])
 # 找出与 gt 框 iou 值最大的预测框
 max_iou = tf.expand_dims(tf.reduce_max(iou, axis=-1), axis=-1)
-# 如果最大的 iou 小于阈值，那么认为该预测框不包含物体
+# 如果最大的 iou 小于阈值，那么认为该预测框不包含物体,则为背景框
 respond_bgd = (1.0 - respond_bbox) * tf.cast( max_iou < IOU_LOSS_THRESH, tf.float32 )
 
 conf_focal = tf.pow(respond_bbox - pred_conf, 2)
@@ -532,7 +532,7 @@ conf_focal = tf.pow(respond_bbox - pred_conf, 2)
 conf_loss = conf_focal * (
         respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=respond_bbox, logits=conv_raw_conf)
             +
-            respond_bgd * tf.nn.sigmoid_cross_entropy_with_logits(labels=respond_bbox, logits=conv_raw_conf)
+        respond_bgd * tf.nn.sigmoid_cross_entropy_with_logits(labels=respond_bbox, logits=conv_raw_conf)
     )
 ```
 
