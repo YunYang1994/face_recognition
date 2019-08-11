@@ -450,18 +450,13 @@ score_mask = scores > score_threshold
 ### 2.1.1 giou loss 的介绍
 [这篇论文](https://giou.stanford.edu/GIoU.pdf) 出自于 CVPR 2019，这篇论文提出了一种优化边界框的新方式 —— GIoU (generalized IoU，广义 IoU )。
 
-边界框一般由左上角和右下角坐标所表示，即 (x1,y1,x2,y2)。那么，你发现这其实也是一个向量。向量的距离一般可以 l1 范数或者 l2 范数来度量。
+边界框一般由左上角和右下角坐标所表示，即 (x1,y1,x2,y2)。那么，你发现这其实也是一个向量。向量的距离一般可以 L1 范数或者 L2 范数来度量。
+![image](https://user-images.githubusercontent.com/30433053/62829166-9b377380-bc32-11e9-8b9b-9e1601797d17.png)
 
-| l1 范数 | l2 范数 |
+| L1 范数 | L2 范数 |
 |---|---|
-|<p align="center">
-    <img width="50%" src="https://user-images.githubusercontent.com/30433053/62829041-bf458580-bc2f-11e9-8279-2200fd68532c.png" style="max-width:50%;">
-    </a>
-</p>|<p align="center">
-    <img width="50%" src="https://user-images.githubusercontent.com/30433053/62829041-bf458580-bc2f-11e9-8279-2200fd68532c.png" style="max-width:50%;">
-    </a>
-</p>|
-
+|![image](https://user-images.githubusercontent.com/30433053/62829145-18161d80-bc32-11e9-8ec0-a26536f3ffa6.png)|![image](https://user-images.githubusercontent.com/30433053/62829143-05034d80-bc32-11e9-9c8d-f0d8c3ee2d98.png)|
+> 
 
 
 
