@@ -508,7 +508,7 @@ def bbox_giou(boxes1, boxes2):
 ### 2.1.3 GIoU loss 的计算
 
 ```python
-respond_bbox  = label[:, :, :, :, 4:5]  # 置信度，判断是否有无物体
+respond_bbox  = label[:, :, :, :, 4:5]  # 置信度，判断网格内有无物体
 ...
 bbox_loss_scale = 2.0 - 1.0 * label_xywh[:, :, :, :, 2:3] * label_xywh[:, :, :, :, 3:4] / (input_size ** 2)
 giou_loss = respond_bbox * bbox_loss_scale * (1 - giou)
@@ -516,13 +516,13 @@ giou_loss = respond_bbox * bbox_loss_scale * (1 - giou)
 
 - 边界框的尺寸越小，bbox_loss_scale 的值就越大。实际上，我们知道 YOLOv1 里作者在 loss 里对宽高都做了开根号处理，这是为了弱化边界框尺寸对损失值的影响；
 - respond_bbox 的意思是如果网格单元中包含物体，那么就会计算边界框损失；
-- 两个边界框之间的 GIoU 值越大，giou 的损失值就会越小。
+- 两个边界框之间的 GIoU 值越大，giou 的损失值就会越小, 因此网络会朝着预测框与真实框重叠度较高的方向去优化。
 
 ## 2.2 置信度损失
 
 ```python
 iou = bbox_iou(pred_xywh[:, :, :, :, np.newaxis, :], bboxes[:, np.newaxis, np.newaxis, np.newaxis, :, :])
-# 找出与 gt 框 iou 值最大的预测框
+# 找出与真实框 iou 值最大的预测框
 max_iou = tf.expand_dims(tf.reduce_max(iou, axis=-1), axis=-1)
 # 如果最大的 iou 小于阈值，那么认为该预测框不包含物体,则为背景框
 respond_bgd = (1.0 - respond_bbox) * tf.cast( max_iou < IOU_LOSS_THRESH, tf.float32 )
@@ -535,11 +535,6 @@ conf_loss = conf_focal * (
         respond_bgd * tf.nn.sigmoid_cross_entropy_with_logits(labels=respond_bbox, logits=conv_raw_conf)
     )
 ```
-
-
-
-
-
 
 #### 2.3 分类损失
 
