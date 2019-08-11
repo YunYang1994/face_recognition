@@ -488,8 +488,8 @@ score_mask = scores > score_threshold
 |---|---|
 |![image](https://user-images.githubusercontent.com/30433053/62831088-b5824900-bc54-11e9-8a3c-2787199974a0.png)|![image](https://user-images.githubusercontent.com/30433053/62831105-dfd40680-bc54-11e9-9fd3-d3a5cbf4e57a.png)|
 >图中绿色包含的区域就是最小闭合凸面 C，the smallest enclosing convex object。
-```python
 
+```python
 def bbox_giou(boxes1, boxes2):
 	......
     # 计算两个边界框之间的 iou 值
@@ -506,6 +506,12 @@ def bbox_giou(boxes1, boxes2):
 ```
 
 ### 2.1.3 GIoU loss 的计算
+
+
+```python
+bbox_loss_scale = 2.0 - 1.0 * label_xywh[:, :, :, :, 2:3] * label_xywh[:, :, :, :, 3:4] / (input_size ** 2)
+giou_loss = respond_bbox * bbox_loss_scale * (1- giou)
+```
 
 
 
