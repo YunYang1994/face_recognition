@@ -629,6 +629,38 @@ plt.show()
 ![image](https://user-images.githubusercontent.com/30433053/63147337-5fd0e680-c030-11e9-989e-7e97127d105f.png)
 我们可以看到当标准差较大( std = 0.1 和 0.05 )时，几乎所有的输出值集中在 -1 或1 附近，这表明此时的神经网络发生了梯度爆炸；当标准差较小( std = 0.005 和 0.001）时，我们看到输出值迅速向 0 靠拢，这表明此时的神经网络发生了梯度消失。其实笔者也曾在 YOLOv3 网络里做过实验，初始化权重的标准差如果太大或太小，都容易出现 NaN 。不信，你可以试试看啰？
 
+Xavier initialization 可以解决上面的问题！其初始化方式也并不复杂。Xavier初始化的基本思想是保持输入和输出的方差一致，这样就避免了所有输出值都趋向于零。Xavier initialization 的实现很简单，初始化与输入和输出节点有关。
+
+其实在 [keras 实现](https://keras-cn.readthedocs.io/en/latest/other/initializations/)中很简单，Xavier 正态分布初始化，也称作 Glorot 正态分布初始化方法，参数由0均值，标准差为sqrt(2 / (fan_in + fan_out))的正态分布产生。
+
+```python
+import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+
+x = np.random.randn(2000, 800)
+
+for i in range(10):
+    dense = tf.keras.layers.Dense(750, kernel_initializer="glorot_normal", activation='tanh')
+    output = dense(x)
+    x = output
+
+    plt.subplot(1, 10, i+1)
+    plt.hist(output.numpy().flatten(), bins=60, range=[-1, 1])
+    plt.xlabel("layer %d" %(i+1))
+    plt.yticks([])
+plt.show()
+```
+
+![image](https://user-images.githubusercontent.com/30433053/63184703-8ae82400-c08a-11e9-9f94-7d0319422ce6.png)
+
+输出值在很多层之后依然保持着良好的分布，这很有利于我们优化神经网络。但是这个例子仅仅说明它对 tanh 很有效。那么，假如我们使用 relu 激活函数结果会如何呢？
+> 这里我就不贴代码了，你就在上面代码的基础上将 'tanh' 替换成 'relu' 就好了。
+
+![image](https://user-images.githubusercontent.com/30433053/63185267-2e860400-c08c-11e9-8f52-91e444a3e6ce.png)
+
+前面看起来还不错，后面的趋势却是越来越接近零。
+
 ## 3.2 学习率的设置
 
 ## 3.3 加载预训练模型
