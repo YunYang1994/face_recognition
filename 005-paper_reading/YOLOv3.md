@@ -592,6 +592,35 @@ for i in range(3): # 针对 3 种网格尺寸
 
 ## 3.1 权重初始化设置
 
+```python
+import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+
+x = np.random.randn(2000, 800) * 0.01
+stds = [0.1, 0.05, 0.01, 0.005, 0.001]
+
+for i, std in enumerate(stds):
+    # 第一层全连接层
+    dense_1 = tf.keras.layers.Dense(750, kernel_initializer=tf.random_normal_initializer(std), activation='tanh')
+    output_1 = dense_1(x)
+    # 第二层全连接层
+    dense_2 = tf.keras.layers.Dense(700, kernel_initializer=tf.random_normal_initializer(std), activation='tanh')
+    output_2 = dense_2(output_1)
+    # 第三层全连接层
+    dense_3 = tf.keras.layers.Dense(650, kernel_initializer=tf.random_normal_initializer(std), activation='tanh')
+    output_3 = dense_3(output_2).numpy().flatten()
+
+    plt.subplot(1, len(stds), i+1)
+    plt.hist(output_3, bins=60, range=[-1, 1])
+    plt.xlabel('std = %.3f' %std)
+    plt.yticks([])
+plt.show()
+```
+
+![image](https://user-images.githubusercontent.com/30433053/63147337-5fd0e680-c030-11e9-989e-7e97127d105f.png)
+
+
 ## 3.2 学习率的设置
 
 ## 3.3 加载预训练模型
