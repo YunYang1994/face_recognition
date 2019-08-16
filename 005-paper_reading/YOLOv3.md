@@ -631,7 +631,7 @@ plt.show()
 
 Xavier initialization 可以解决上面的问题！其初始化方式也并不复杂。Xavier初始化的基本思想是保持输入和输出的方差一致，这样就避免了所有输出值都趋向于零。Xavier initialization 的实现很简单，初始化与输入和输出节点有关。
 
-其实在 [keras 实现](https://keras-cn.readthedocs.io/en/latest/other/initializations/)中很简单，Xavier 正态分布初始化，也称作 Glorot 正态分布初始化方法，参数由0均值，标准差为sqrt(2 / (fan_in + fan_out))的正态分布产生。
+其实在 [keras 实现](https://keras-cn.readthedocs.io/en/latest/other/initializations/)中很简单，Xavier 正态分布初始化，也称作 Glorot 正态分布初始化方法，参数由0均值，标准差为sqrt(2 / (fan_in + fan_out))的正态分布产生，其中fan_in和fan_out是权重张量的扇入扇出（即输入和输出单元数目）。
 
 ```python
 import numpy as np
@@ -659,7 +659,12 @@ plt.show()
 
 ![image](https://user-images.githubusercontent.com/30433053/63185267-2e860400-c08c-11e9-8f52-91e444a3e6ce.png)
 
-前面看起来还不错，后面的趋势却是越来越接近零。
+前面看起来还不错，后面的趋势却是越来越接近零。幸运的是，He initialization 可以用来解决 relu 初始化的问题。He 正态分布初始化方法，参数由 0 均值，标准差为 sqrt(2 / fan_in) 的正态分布产生，其中fan_in权重张量的扇入。
+> 这里我就不贴代码了，你就在上面代码的基础上将 'glorot_normal' 替换成 'he_normal' 就好了。
+
+![image](https://user-images.githubusercontent.com/30433053/63185644-1d89c280-c08d-11e9-9cb3-b7134a98e016.png)
+
+看起来效果比之前好很多了，因此推荐在 relu 网络中使用！
 
 ## 3.2 学习率的设置
 
