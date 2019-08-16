@@ -607,7 +607,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 x = np.random.randn(2000, 800) * 0.01 # 制作输入数据
-stds = [0.1, 0.05, 0.01, 0.005, 0.001] # 尝试使用不同方差，这样初始权重大小也不一样
+stds = [0.1, 0.05, 0.01, 0.005, 0.001] # 尝试使用不同标准差，这样初始权重大小也不一样
 
 for i, std in enumerate(stds):
     # 第一层全连接层
@@ -627,7 +627,7 @@ for i, std in enumerate(stds):
 plt.show()
 ```
 ![image](https://user-images.githubusercontent.com/30433053/63147337-5fd0e680-c030-11e9-989e-7e97127d105f.png)
-
+我们可以看到当标准差较大( std = 0.1 和 0.05 )时，几乎所有的输出值集中在 -1 或1 附近，这表明此时神经网络发生了梯度爆炸；当标准差较小( std = 0.005 和 0.001）时，我们看到输出值迅速向 0 靠拢，这表明此时神经网络发生了梯度消失。其实笔者也曾在 YOLOv3 网络里做过实验，初始化权重的标准差如果太大或太小，都容易出现 NaN 。不信，你可以试试看啰？
 
 ## 3.2 学习率的设置
 
