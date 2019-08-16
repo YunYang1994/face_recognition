@@ -606,8 +606,8 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
-x = np.random.randn(2000, 800) * 0.01
-stds = [0.1, 0.05, 0.01, 0.005, 0.001]
+x = np.random.randn(2000, 800) * 0.01 # 制作输入数据
+stds = [0.1, 0.05, 0.01, 0.005, 0.001] # 尝试使用不同方差，这样初始权重大小也不一样
 
 for i, std in enumerate(stds):
     # 第一层全连接层
