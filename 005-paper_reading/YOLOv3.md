@@ -592,6 +592,15 @@ for i in range(3): # 针对 3 种网格尺寸
 
 ## 3.1 权重初始化设置
 
+<p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/63148053-94de3880-c032-11e9-873e-7fc8f033f3fc.png" style="max-width:80%;">
+    </a>
+</p>
+
+
+
+
+
 ```python
 import numpy as np
 import tensorflow as tf
