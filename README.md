@@ -22,7 +22,7 @@
 --------------------
 #### 2019-06-17. [图片像素在C语言中也是三维矩阵吗？](https://github.com/YunYang1994/CodeFun/tree/master/001-stb_image#stb_image)
 #### 2019-07-01. [彩色图像的二值化、灰度化、线性插值以及最近邻插值算法实现](https://github.com/YunYang1994/CodeFun/tree/master/002-image_basics)
-#### 2019-08-04. [神经网络基础层系列之 fully connected layer 的实现](https://github.com/YunYang1994/CodeFun/tree/master/006-connected_layer)
+#### 2019-08-04. [从零开始实现神经网络之全连接层](https://github.com/YunYang1994/CodeFun/tree/master/006-connected_layer)
 
 ### 深度学习的日常
 > 深度学习太难了，把我踩过的坑一点点记录下来.
