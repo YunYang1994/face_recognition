@@ -664,7 +664,7 @@ plt.show()
 
 ![image](https://user-images.githubusercontent.com/30433053/63185644-1d89c280-c08d-11e9-9cb3-b7134a98e016.png)
 
-看起来效果比之前好很多了，因此推荐在 relu 网络中使用！
+看起来效果比之前好很多了！
 
 ## 3.2 学习率的设置
 
@@ -692,4 +692,9 @@ plt.show()
 </p>
 
 ## 3.3 加载预训练模型
+
+目前针对目标检测到主流做法是基于 Imagenet 数据集预训练的模型来提取特征，然后在 COCO 数据集进行目标检测fine-tunning训练（比如 yolo 算法)，也就是大家常说的迁移学习。其实迁移学习是建立在数据集分布相似的基础上的，像 [yymnist](https://github.com/YunYang1994/yymnist) 这种与 COCO 数据集分布完全不同的情况，就没有必要加载 COCO 预训练模型的必要了吧。
+
+
+
 
