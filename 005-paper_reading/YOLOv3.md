@@ -723,4 +723,5 @@ plt.show()
                         self.train_op_with_all_variables = tf.no_op()
 ```
 
+看的人都这么累，何况写的人呢？喜欢就点个 star 吧！
 
