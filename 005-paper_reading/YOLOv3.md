@@ -695,6 +695,32 @@ plt.show()
 
 目前针对目标检测到主流做法是基于 Imagenet 数据集预训练的模型来提取特征，然后在 COCO 数据集进行目标检测fine-tunning训练（比如 yolo 算法)，也就是大家常说的迁移学习。其实迁移学习是建立在数据集分布相似的基础上的，像 [yymnist](https://github.com/YunYang1994/yymnist) 这种与 COCO 数据集分布完全不同的情况，就没有必要加载 COCO 预训练模型的必要了吧。
 
+```python
+	# 第一阶段训练：仅仅训练三个分支的最后卷积层
+        with tf.name_scope("define_first_stage_train"):
+            self.first_stage_trainable_var_list = []
+            for var in tf.trainable_variables():
+                var_name = var.op.name
+                var_name_mess = str(var_name).split('/')
+                if var_name_mess[0] in ['conv_sbbox', 'conv_mbbox', 'conv_lbbox']:
+                    self.first_stage_trainable_var_list.append(var)
 
+            first_stage_optimizer = tf.train.AdamOptimizer(self.learn_rate).minimize(self.loss,
+                                                      var_list=self.first_stage_trainable_var_list)
+            with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
+                with tf.control_dependencies([first_stage_optimizer, global_step_update]):
+                    with tf.control_dependencies([moving_ave]):
+                        self.train_op_with_frozen_variables = tf.no_op()
+	# 第二阶段训练：训练所有的层，其实也就是 fine-tunning 阶段
+        with tf.name_scope("define_second_stage_train"):
+            second_stage_trainable_var_list = tf.trainable_variables()
+            second_stage_optimizer = tf.train.AdamOptimizer(self.learn_rate).minimize(self.loss,
+                                                      var_list=second_stage_trainable_var_list)
+
+            with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
+                with tf.control_dependencies([second_stage_optimizer, global_step_update]):
+                    with tf.control_dependencies([moving_ave]):
+                        self.train_op_with_all_variables = tf.no_op()
+```
 
 
