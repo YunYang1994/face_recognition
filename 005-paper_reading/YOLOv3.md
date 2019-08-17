@@ -695,6 +695,10 @@ plt.show()
 
 目前针对目标检测到主流做法是基于 Imagenet 数据集预训练的模型来提取特征，然后在 COCO 数据集进行目标检测fine-tunning训练（比如 yolo 算法)，也就是大家常说的迁移学习。其实迁移学习是建立在数据集分布相似的基础上的，像 [yymnist](https://github.com/YunYang1994/yymnist) 这种与 COCO 数据集分布完全不同的情况，就没有必要加载 COCO 预训练模型的必要了吧。
 
+在 tensorflow-yolov3 版本里，由于 README 里训练的是 VOC 数据集，因此推荐加载预训练模型。由于在 YOLOv3 网络的三个分支里的最后卷积层与训练的类别数目有关，因此除掉这三层的网络权重以外，其余所有的网络权重都加载进来了。
+
+> 我加载的是作者
+
 ```python
 	# 第一阶段训练：仅仅训练三个分支的最后卷积层
         with tf.name_scope("define_first_stage_train"):
