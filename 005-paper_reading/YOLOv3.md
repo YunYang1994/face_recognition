@@ -669,7 +669,7 @@ plt.show()
 ## 3.2 学习率的设置
 
 <p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/30433053/63213775-f2fa4100-c142-11e9-9cf0-aeb1e5a9d70a.png" style="max-width:60%;">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/63213822-761b9700-c143-11e9-9c16-4473a579f931.png" style="max-width:60%;">
     </a>
 </p>
 
