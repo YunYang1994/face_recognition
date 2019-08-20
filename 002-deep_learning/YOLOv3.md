@@ -334,7 +334,7 @@ def image_preporcess(image, target_size, gt_boxes=None):
 ```
 | original_image (768X576)| letterbox_image (416X416)  |
 |---|---|
-|![image](../data/dog.jpg)|![image](https://user-images.githubusercontent.com/30433053/62408461-16c66e80-b5fc-11e9-8ae5-bb4d9963b43f.jpg)|
+|![image](.https://raw.githubusercontent.com/YunYang1994/CodeFun/master/001-do_something_from_scratch/data/dog.jpg)|![image](https://user-images.githubusercontent.com/30433053/62408461-16c66e80-b5fc-11e9-8ae5-bb4d9963b43f.jpg)|
 
 ### 1.4.2 网络输出
 下面这幅图就是 YOLOv3 网络的整体结构，在图中我们可以看到：尺寸为 416X416 的输入图片进入 Darknet-53 网络后得到了 3 个分支，这些分支在经过一系列的卷积、上采样以及合并等操作后最终得到了三个尺寸不一的 feature map，形状分别为 [13, 13, 255]、[26, 26, 255] 和 [52, 52, 255]。
