@@ -38,5 +38,5 @@
 
 ### 我的个人杂谈
 > 东写写，西写写，就当写日记了.
-#### 2019-07-30 [如何实现 pytorch 与 tf 之间的相互转化？](https://github.com/YunYang1994/CodeFun/tree/master/003-pytorch2tf)
+#### 2019-07-30 [如何实现 pytorch 与 tf 之间的相互转化？](https://github.com/YunYang1994/CodeFun/tree/master/004-my_topic/000-pytorch2tf)
 
