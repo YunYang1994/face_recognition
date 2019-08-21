@@ -72,4 +72,5 @@ print(x.shape) # [1, 4, 4, 1]
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63413031-7eb5eb00-c42b-11e9-9b37-4e28ec970365.gif"></td>
   </tr>
 
+
 >看完上述这些过程，就会觉得反卷积其实就是一种特殊的卷积操作而已。
