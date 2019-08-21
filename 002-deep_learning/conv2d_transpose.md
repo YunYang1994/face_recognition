@@ -56,10 +56,10 @@ print(x.shape) # [1, 4, 4, 1]
 <table style="width:100%; table-layout:fixed;">
   <tr>
     <td>op参数</td>
-    <td>No padding, no strides</td>
-    <td>Arbitrary padding, no strides</td>
-    <td>Half padding, no strides</td>
-    <td>Full padding, no strides</td>
+    <td>padding="VALID", strides=2</td>
+    <td>padding="VALID", strides=2</td>
+    <td>padding="VALID", strides=2</td>
+    <td>padding="VALID", strides=2</td>
   </tr>
   <tr>
     <td>卷积</td>
