@@ -12,7 +12,7 @@
 import tensorflow as tf
 
 x = tf.constant(1., shape=[1,4,4,1])
-w = tf.constant(1., shape=[3,3,1,1]) # [宽，高，输入通道数，输出通道数]
+w = tf.constant(1., shape=[3,3,1,1]) # [卷积核的高度，卷积核的宽度，输入通道数，输出通道数]
 y = tf.nn.conv2d(x, w, strides=[1,1,1,1,], padding='VALID')
 print(y.shape) # [1, 2, 2, 1]
 ```
