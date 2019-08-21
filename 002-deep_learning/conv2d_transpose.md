@@ -57,7 +57,7 @@ print(x.shape) # [1, 4, 4, 1]
   <tr>
     <td>op参数</td>
     <td>padding="VALID", strides=2</td>
-    <td>padding="VALID", strides=2</td>
+    <td>padding="SAME", strides=2</td>
     <td>padding="VALID", strides=2</td>
     <td>padding="VALID", strides=2</td>
   </tr>
