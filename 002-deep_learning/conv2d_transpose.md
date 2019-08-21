@@ -55,15 +55,15 @@ print(x.shape) # [1, 4, 4, 1]
 
 <table style="width:100%; table-layout:fixed;">
   <tr>
-    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
-    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
-    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
-    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
-  </tr>
-  <tr>
     <td>No padding, no strides</td>
     <td>Arbitrary padding, no strides</td>
     <td>Half padding, no strides</td>
     <td>Full padding, no strides</td>
+  </tr>
+  <tr>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
   </tr>
 
