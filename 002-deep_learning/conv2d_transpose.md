@@ -8,7 +8,7 @@
     </a>
 </p>
 
->在上图中，输入为 4x4, 经卷积操作后得到 2x2 的形状
+>在上图中，输入为 4x4, 经卷积操作后得到 2x2 的形状。
 
 ```python
 import tensorflow as tf
@@ -29,7 +29,14 @@ print(y.shape) # [1, 2, 2, 1]
 - strides： 一个整数列表,输入张量的每个维度的滑动窗口的步幅
 - padding：一个字符串,'VALID' 或者 'SAME'
 
-好了，我们现在要利用反卷积操作对上面的卷积过程进行逆转过来。
+好了，我们现在要利用反卷积操作对上面的卷积过程进行逆转过来。在这个反卷积操作过程中，卷积核的参数依然保持不变，并且 strides 和 padding 的操作依然不会发生变化，**唯一不同的是卷积过程里的输出在反卷积过程里变成了输入。**
+
+<p align="center">
+    <img width="25%" src="https://user-images.githubusercontent.com/30433053/63404874-68059900-c417-11e9-93a2-4b91e09b1ce4.gif" style="max-width:25%;">
+    </a>
+</p>
+
+>在上图中，输入为 2x2, 经反卷积操作后得到 4x4 的形状。
 
 ```python
 import tensorflow as tf
@@ -40,7 +47,4 @@ x = tf.nn.conv2d_transpose(y, w, output_shape=[1,4,4,1], strides=[1,1,1,1], padd
 print(y.shape) # [1, 4, 4, 1]
 ```
 
-<p align="center">
-    <img width="25%" src="https://user-images.githubusercontent.com/30433053/63404874-68059900-c417-11e9-93a2-4b91e09b1ce4.gif" style="max-width:25%;">
-    </a>
-</p>
+
