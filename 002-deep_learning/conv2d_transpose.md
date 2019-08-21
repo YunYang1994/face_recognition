@@ -8,7 +8,7 @@
     </a>
 </p>
 
->在上图中，输入为 4x4, 经卷积操作后得到 2x2
+>在上图中，输入为 4x4, 经卷积操作后得到 2x2 的形状
 
 ```python
 import tensorflow as tf
