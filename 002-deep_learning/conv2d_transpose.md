@@ -17,10 +17,7 @@ y = tf.nn.conv2d(x, w, strides=[1,1,1,1,], padding='VALID')
 print(y.shape) # [1, 2, 2, 1]
 ```
 
-
-
-
-★ 反卷积操作
+# 反卷积操作
 
 ```python
 import tensorflow as tf
