@@ -29,6 +29,8 @@ print(y.shape) # [1, 2, 2, 1]
 - strides： 一个整数列表,输入张量的每个维度的滑动窗口的步幅
 - padding：一个字符串,'VALID' 或者 'SAME'
 
+好了，我们现在要利用反卷积操作对上面的卷积过程进行逆转过来。
+
 ```python
 import tensorflow as tf
 
