@@ -55,7 +55,7 @@ print(x.shape) # [1, 4, 4, 1]
 
 <table style="width:100%; table-layout:fixed;">
   <tr>
-    <td>卷积op参数</td>
+    <td>op参数</td>
     <td>No padding, no strides</td>
     <td>Arbitrary padding, no strides</td>
     <td>Half padding, no strides</td>
