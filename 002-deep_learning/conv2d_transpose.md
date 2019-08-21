@@ -69,7 +69,7 @@ print(x.shape) # [1, 4, 4, 1]
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
   </tr>
     <td>反卷积</td>
-    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63412214-d5bac080-c429-11e9-8e0f-89180c14ab6e.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
