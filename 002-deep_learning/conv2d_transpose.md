@@ -34,9 +34,9 @@ print(y.shape) # [1, 2, 2, 1]
 ```python
 import tensorflow as tf
 
-x = tf.constant(1., shape=[1,2,2,1])
+y = tf.constant(1., shape=[1,2,2,1])
 w = tf.constant(1., shape=[3,3,1,1])
-y = tf.nn.conv2d_transpose(x, w, output_shape=[1,4,4,1], strides=[1,1,1,1], padding="VALID")
+x = tf.nn.conv2d_transpose(y, w, output_shape=[1,4,4,1], strides=[1,1,1,1], padding="VALID")
 print(y.shape) # [1, 4, 4, 1]
 ```
 
