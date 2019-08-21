@@ -1,4 +1,18 @@
 
-| 卷积 | 反卷积 |
-|---|---|
-|![image](https://user-images.githubusercontent.com/30433053/63404840-4dcbbb00-c417-11e9-8d35-0eea90c5a3c6.gif)|![image](https://user-images.githubusercontent.com/30433053/63404874-68059900-c417-11e9-93a2-4b91e09b1ce4.gif)|
+<p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/63404840-4dcbbb00-c417-11e9-8d35-0eea90c5a3c6.gif" style="max-width:80%;">
+    </a>
+</p>
+
+
+```python
+x = tf.constant(1., shape=[1,2,2,1])
+w = tf.constant(1., shape=[2,2,1,1])
+y = tf.nn.conv2d_transpose(x, w, output_shape=[1,4,4,1], strides=[1,2,2,1])
+print(y.shape) # [1, 4, 4, 1]
+```
+
+<p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/63404874-68059900-c417-11e9-93a2-4b91e09b1ce4.gif" style="max-width:80%;">
+    </a>
+</p>
