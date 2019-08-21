@@ -49,3 +49,23 @@ print(x.shape) # [1, 4, 4, 1]
 
 看完上面这个过程，你还会觉得反卷积操作难以理解吗？
 
+# One more thing
+
+现在好像对反卷积操作的理解比较清醒了点，说白了就是调用 tf.nn.conv2d_transpose 操作然后把 tf.nn.conv2d 过程里的输入和输出进行颠倒就是了呗。下面来看看一些常见的卷积和反卷积操作是怎样的。
+
+<table style="width:100%; table-layout:fixed;">
+  <tr>
+    <td>No padding, no strides</td>
+    <td>Arbitrary padding, no strides</td>
+    <td>Half padding, no strides</td>
+    <td>Full padding, no strides</td>
+  </tr>
+  <tr>
+    <td>No padding, no strides</td>
+    <td>Arbitrary padding, no strides</td>
+    <td>Half padding, no strides</td>
+    <td>Full padding, no strides</td>
+  </tr>
+
+
+
