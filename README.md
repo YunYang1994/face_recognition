@@ -28,6 +28,7 @@
 > 深度学习太难了，把我踩过的坑一点点记录下来.
 --------------------
 #### 2019-08-03 [我对 YOLOv3 算法的一点点理解](https://github.com/YunYang1994/CodeFun/blob/master/002-deep_learning/YOLOv3.md)
+#### 2019-08-21 [聊一聊反卷积操作的实现过程](https://github.com/YunYang1994/CodeFun/blob/master/002-deep_learning/conv2d_transpose.md)
 
 ### 学习 CUDA 编程
 > 既然要搞深度学习和图像处理，那么CUDA 编程肯定是加分项了?
