@@ -22,6 +22,12 @@ print(y.shape) # [1, 2, 2, 1]
 # 反卷积操作
 
 ![image](https://user-images.githubusercontent.com/30433053/63409704-45c64800-c424-11e9-9f61-c78b5f27c51c.png)
+参数解释：
+- value: 输入张量，shape = [batch, height, width, in_channels]
+- filter: 卷积核， shape = [height, width, output_channels, in_channels]
+- output_shape： 反卷积操作的输出形状
+- strides： 一个整数列表,输入张量的每个维度的滑动窗口的步幅
+- padding：一个字符串,'VALID' 或者 'SAME'
 
 ```python
 import tensorflow as tf
