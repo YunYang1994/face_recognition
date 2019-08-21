@@ -62,7 +62,13 @@ print(x.shape) # [1, 4, 4, 1]
     <td>Full padding, no strides</td>
   </tr>
   <tr>
-    <td>卷积操作</td>
+    <td>卷积</td>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
+  </tr>
+    <td>反卷积</td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
