@@ -21,6 +21,8 @@ print(y.shape) # [1, 2, 2, 1]
 
 # 反卷积操作
 
+![image](https://user-images.githubusercontent.com/30433053/63409704-45c64800-c424-11e9-9f61-c78b5f27c51c.png)
+
 ```python
 import tensorflow as tf
 
