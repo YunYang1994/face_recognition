@@ -22,7 +22,7 @@ print(y.shape) # [1, 2, 2, 1]
 # 反卷积操作
 
 ![image](https://user-images.githubusercontent.com/30433053/63409704-45c64800-c424-11e9-9f61-c78b5f27c51c.png)
-参数解释：
+这里只解释五个非常重要的参数，它们分别是：
 - value: 输入张量，shape = [batch, height, width, in_channels]
 - filter: 卷积核， shape = [height, width, output_channels, in_channels]
 - output_shape： 反卷积操作的输出形状
