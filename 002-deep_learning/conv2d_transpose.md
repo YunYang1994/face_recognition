@@ -61,12 +61,12 @@ print(x.shape) # [1, 4, 4, 1]
     <td>padding="SAME", strides=1</td>
   </tr>
   <tr>
-    <td>卷积</td>
+    <td>卷积过程</td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63412415-4d88eb00-c42a-11e9-8338-546efc29636d.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63412815-0a7b4780-c42b-11e9-99d2-a9e3d95fd907.gif"></td>
   </tr>
-    <td>反卷积</td>
+    <td>反卷积过程</td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63412214-d5bac080-c429-11e9-8e0f-89180c14ab6e.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63412567-90e35980-c42a-11e9-9f68-1d793536599a.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63413031-7eb5eb00-c42b-11e9-9b37-4e28ec970365.gif"></td>
