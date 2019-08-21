@@ -51,27 +51,24 @@ print(x.shape) # [1, 4, 4, 1]
 
 # One more thing
 
-现在好像对反卷积操作的理解比较清醒了点，说白了就是调用 tf.nn.conv2d_transpose 操作然后把 tf.nn.conv2d 过程里的输入和输出进行颠倒就是了呗。下面来看看一些常见的卷积和反卷积操作是怎样的。
+现在好像对反卷积操作的理解比较清醒了点，说白了就是调用 tf.nn.conv2d_transpose 操作然后把 tf.nn.conv2d 过程里的输入和输出进行颠倒就是了呗。下面来看看一些其他常见的卷积和反卷积操作是怎样的。
 
 <table style="width:100%; table-layout:fixed;">
   <tr>
     <td>op参数</td>
     <td>padding="VALID", strides=2</td>
     <td>padding="SAME", strides=2</td>
-    <td>padding="VALID", strides=2</td>
-    <td>padding="VALID", strides=2</td>
+    <td>padding="SAME", strides=1</td>
   </tr>
   <tr>
     <td>卷积</td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63412415-4d88eb00-c42a-11e9-8338-546efc29636d.gif"></td>
-    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
-    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
+    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63412815-0a7b4780-c42b-11e9-99d2-a9e3d95fd907.gif"></td>
   </tr>
     <td>反卷积</td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63412214-d5bac080-c429-11e9-8e0f-89180c14ab6e.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63412567-90e35980-c42a-11e9-9f68-1d793536599a.gif"></td>
-    <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
     <td><img width="150px" src="https://user-images.githubusercontent.com/30433053/63411725-bd967180-c428-11e9-8858-ef1058f9c490.gif"></td>
   </tr>
 
