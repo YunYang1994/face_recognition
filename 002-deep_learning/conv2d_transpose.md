@@ -17,6 +17,7 @@ print(y.shape) # [1, 2, 2, 1]
     </a>
 </p>
 
+★ 反卷积操作
 
 ```python
 import tensorflow as tf
