@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/30433053/63404840-4dcbbb00-c417-11e9-8d35-0eea90c5a3c6.gif" style="max-width:80%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/63404840-4dcbbb00-c417-11e9-8d35-0eea90c5a3c6.gif" style="max-width:40%;">
     </a>
 </p>
 
@@ -13,6 +13,6 @@ print(y.shape) # [1, 4, 4, 1]
 ```
 
 <p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/30433053/63404874-68059900-c417-11e9-93a2-4b91e09b1ce4.gif" style="max-width:80%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/63404874-68059900-c417-11e9-93a2-4b91e09b1ce4.gif" style="max-width:40%;">
     </a>
 </p>
