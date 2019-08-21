@@ -47,4 +47,5 @@ x = tf.nn.conv2d_transpose(y, w, output_shape=[1,4,4,1], strides=[1,1,1,1], padd
 print(y.shape) # [1, 4, 4, 1]
 ```
 
+看完上面这个过程，你还会觉得反卷积操作难以理解吗？
 
