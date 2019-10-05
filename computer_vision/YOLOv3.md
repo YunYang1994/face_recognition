@@ -732,6 +732,5 @@ plt.show()
                         self.train_op_with_all_variables = tf.no_op()
 ```
 
-**看的人都这么累，何况写的人呢？喜欢就点个 star 吧!**
+**喜欢就点个 star 吧!**
 
-[下一节：聊一聊卷积神经网络中的反卷积操作](https://github.com/YunYang1994/CodeFun/blob/master/002-deep_learning/conv2d_transpose.md)
