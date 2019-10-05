@@ -117,7 +117,7 @@ Darknet-53 的主体框架如下图所示，它主要由 `Convolutional` 和 `Re
 
 | 网络结构| [代码结构](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/YOLOV3/core/backbone.py) |
 |---|---|
-|<img width="150%" src="https://raw.githubusercontent.com/YunYang1994/tensorflow-yolov3/master/docs/images/darknet53.png" style="max-width:150%;">|<img width="80%" src="https://user-images.githubusercontent.com/30433053/62342173-7ba89880-b518-11e9-8878-f1c38466eb39.png" style="max-width:70%;">|
+|<img width="150%" src="https://raw.githubusercontent.com/YunYang1994/tensorflow-yolov3/1551aa4734added3ad0c6979ed2ed74894cdd504/docs/images/darknet53.png" style="max-width:150%;">|<img width="80%" src="https://user-images.githubusercontent.com/30433053/62342173-7ba89880-b518-11e9-8878-f1c38466eb39.png" style="max-width:70%;">|
 
 >代码结构里的`downsample`参数的意思是下采样，表示 feature map 输入该层 layer 后尺寸会变小。例如在第二层 layer 的输入尺寸是 `256X256`，输出尺寸则变成了 `128X128`。
 
