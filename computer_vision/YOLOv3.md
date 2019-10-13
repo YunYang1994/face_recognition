@@ -732,5 +732,5 @@ plt.show()
                         self.train_op_with_all_variables = tf.no_op()
 ```
 下面是在 PASCAL VOC 2012 上比赛刷的成绩，可是进了前十名哦！
-![image]https://user-images.githubusercontent.com/33013904/58227054-dd4fc800-7d5b-11e9-85aa-67854292fbe0.png
+![image](https://user-images.githubusercontent.com/33013904/58227054-dd4fc800-7d5b-11e9-85aa-67854292fbe0.png)
 **喜欢就点个 star 吧!**
