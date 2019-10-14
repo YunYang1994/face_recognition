@@ -50,7 +50,7 @@ YOLO算法最重要的思想就是**画网格**，由于本人做过一点点关
 当我们谈及 CNN 网络，总能听到 feature map 这个词。它也叫特征映射，简单说来就是输入图像在与卷积核进行卷积操作后得到图像特征。在输入层: 如果是灰度图片，那就只有一个feature map；如果是彩色图片（RGB），一般就是3个 feature map（红绿蓝）。一般而言，CNN 网络在对图像自底向上提取特征时，feature map 的数量(其实也对应的就是卷积核的数目) 会越来越多，而空间信息会越来越少，其特征也会变得越来越抽象。比如著名的 VGG16 网络，它的 feature map 变化就是这个样子。
 
 <p align="center">
-    <img width="70%" src="https://raw.githubusercontent.com/YunYang1994/TensorFlow2.0-Examples/master/3-Neural_Network_Architecture/vgg16/docs/vgg16.png" style="max-width:70%;">
+    <img width="70%" src="https://user-images.githubusercontent.com/30433053/66764054-a4b3b500-eedb-11e9-9329-eb9eff9950f7.png" style="max-width:70%;">
     </a>
 </p>
 
