@@ -556,7 +556,7 @@ prob_loss = respond_bbox * tf.nn.sigmoid_cross_entropy_with_logits(labels=label_
 ```
 
 
-讲到这里，其实关于如何判断网格内有无物体还尚未展开。要想讲清楚 respond_bbox 就必须讲明 label 是怎么来的，这其实是在 [preprocess_true_boxes](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/YOLOV3/core/dataset.py#L197) 函数中:
+讲到这里，其实关于如何判断网格内有无物体还尚未展开。要想讲清楚 respond_bbox 就必须讲明 label 是怎么来的，因为`respond_bbox  = label[:, :, :, :, 4:5]`。那么`label`是在 [preprocess_true_boxes](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/YOLOV3/core/dataset.py#L197) 函数中定义的:
 
 ```python
 for i in range(3): # 针对 3 种网格尺寸
