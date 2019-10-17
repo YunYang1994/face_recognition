@@ -590,7 +590,7 @@ for i in range(3): # 针对 3 种网格尺寸
 ```
 上面的过程，其实是一个生产出很多 Anchor 并将它们标定为正负样本的过程：
 
-1）如果 Anchor 与 Ground-truth Bounding Boxes 的 IoU > 0.3，标定为正样本;
+1）如果 Anchor 与 Ground-truth Bounding Boxes 的 IoU > 0.3，标定为正样本;<br>
 2) 在第一种情况下基本能够产生足够多的样本，但是如果它们的 iou 不大于 0.3，那么就把 iou 最大的那个标记为正样本。
 
 按照上面两种规则标记出正样本后，剩下的都是负样本了。这些负样本是不会参与到边界框损失和分类损失的计算中去，而只会参与到置信度损失的计算（因为你需要告诉神经网络什么是负样本）。在这里，你不必纠结 Anchor 是否能准确地框到物体。你只要关心 Anchor 能不能框到物体，如果框到很多了(比如iou>0.3)，那么它就是个正样本了，否则就不是了。 后面的损失函数会进一步告诉神经网络怎么去做精确的尺寸和位置回归，并给出一个评分。最后，那些评分比较低和重叠度较高的预测框就会被 NMS 算法给过滤掉。
@@ -742,4 +742,5 @@ plt.show()
 下面是在 PASCAL VOC 2012 上比赛刷的成绩，可是进了**前十名**哦！觉得讲得不错就点个 star 吧, 谢谢啦!
 ![image](https://user-images.githubusercontent.com/33013904/58227054-dd4fc800-7d5b-11e9-85aa-67854292fbe0.png)
 **我最近正在 TF2 复现一些经典的算法，并且也会写出类似这样的技术博客，请多多关注，大家一起进步！如果你对我这些工作感兴趣，欢迎加入！**
+[**https://github.com/YunYang1994/TensorFlow2.0-Examples**](https://github.com/YunYang1994/TensorFlow2.0-Examples)
 
