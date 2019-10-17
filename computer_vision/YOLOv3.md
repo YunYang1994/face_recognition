@@ -741,6 +741,7 @@ plt.show()
 ```
 下面是在 PASCAL VOC 2012 上比赛刷的成绩，可是进了**前十名**哦！觉得讲得不错就点个 star 吧, 谢谢啦!
 ![image](https://user-images.githubusercontent.com/33013904/58227054-dd4fc800-7d5b-11e9-85aa-67854292fbe0.png)
+
 **我最近正在 TF2 复现一些经典的算法，并且也会写出类似这样的技术博客，请多多关注，大家一起进步！如果你对我这些工作感兴趣，欢迎加入！**
 [**https://github.com/YunYang1994/TensorFlow2.0-Examples**](https://github.com/YunYang1994/TensorFlow2.0-Examples)
 
