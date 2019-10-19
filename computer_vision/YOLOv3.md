@@ -232,7 +232,7 @@ def decode(conv_output, i=0):
     return tf.concat([pred_xywh, pred_conf, pred_prob], axis=-1)
 ```
 
-### 1.3.2 K-means 的作用有多大?
+### 1.3.2 K-means 的作用
 
 按照前文的思路，那么问题来了：先验框是怎么来的？对于这点，作者在 YOLOv2 论文里给出了很好的解释：
 
@@ -297,7 +297,7 @@ def kmeans(boxes, k, dist=np.median,seed=1):
     return clusters,nearest_clusters,distances
 ```
 
-经常有人发邮件问我，到底要不要在自己的数据集上对先验框进行聚类，这个作用会有多大？我的答案是：不需要，直接默认使用 [COCO 数据集](https://github.com/YunYang1994/tensorflow-yolov3/issues/261)上得到的先验框即可。因为 YOLO 算法是去学习真实框与先验框之间的尺寸偏移量，即使你选的先验框再准确，也只能是网络更容易去学习而已。在大多数情况下，COCO 数据集上的先验框能够 cover 掉我们大多数的数据集场景。
+一般来说，直接默认使用 [COCO 数据集](https://github.com/YunYang1994/tensorflow-yolov3/issues/261)上得到的先验框即可。因为 YOLO 算法是去学习真实框与先验框之间的尺寸偏移量，即使你选的先验框再准确，也只能是网络更容易去学习而已。在大多数情况下，COCO 数据集上的先验框能够 cover 掉我们大多数的数据集场景。
 
 ## 1.4 原来是这样预测的
 
