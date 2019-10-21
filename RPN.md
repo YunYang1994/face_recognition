@@ -115,7 +115,7 @@ def compute_loss(target_scores, target_bboxes, target_masks, pred_scores, pred_b
 
 ## k-means 造框
 
-如果 Anchor boxes 的尺寸选得好，那么就使得网络更容易去学习。刚开始我以为反正网络预测的都是 Bounding Boxes 的偏移量，那么 Anchor boxes 尺寸就没那么重要了。但我在复现算法和写代码的过程中发现，看来我还是太年轻了。我使用的是 [synthetic_dataset 数据集](https://pan.baidu.com/s/1QZAIakMVS0sJV0sjgv7v2w&shfl=sharepset)进行训练，该数据集里所有检测的目标都为 "person"，假如我直接用作者[论文](https://arxiv.org/pdf/1703.06283)里的原始 anchor，那么得到的正样本为如下左图；而如果我使用 [k-means](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/RPN/kmeans.py)算法对该数据集所有的 ground-truth boxes 进行聚类得到的 anchor，那么效果就如下右图所示，显然后者多效果比前者好得多。
+如果 Anchor boxes 的尺寸选得好，那么就使得网络更容易去学习。刚开始我以为反正网络预测的都是 Bounding Boxes 的偏移量，那么 Anchor boxes 尺寸就没那么重要了。但我在复现算法和写代码的过程中发现，看来我还是太年轻了。我使用的是 [synthetic_dataset 数据集](https://pan.baidu.com/s/1QZAIakMVS0sJV0sjgv7v2w&shfl=sharepset)进行训练，该数据集里所有检测的目标都为 "person"，假如我直接用作者[论文](https://arxiv.org/pdf/1703.06283)里的原始 anchor，那么得到的正样本为如下左图；而如果我使用 [k-means](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/RPN/kmeans.py)算法对该数据集所有的 ground-truth boxes 进行聚类得到的 anchor，那么效果就如下右图所示，显然后者的效果比前者好得多。
 
 | 论文原始 anchor | k-means 的 anchor|
 |---|---
