@@ -61,9 +61,9 @@ RPN 的损失函数和 YOLO 非常像，不过从发表论文时间顺序来看�
     </a>
 </p>
 
-在上图中，蓝色框为 anchor boxes，它们就是正样本，红点为这些正样本 anchor boxes 的中心位置，黑点表示的负样本 anchor boxes 的中心位置。从图中可以看出：在有人的区域，正样本框的分布比较密集，并且红点都在人体中心区域，而在没有人的区域（属于背景）则布满了黑点。
+在上图中，蓝色框为 anchor boxes，它们就是正样本，红点为这些正样本 anchor boxes 的中心位置，黑点表示的是负样本 anchor boxes 的中心位置。从图中可以看出：在有人的区域，正样本框的分布比较密集，并且红点都在人体中心区域，而在没有人的区域则布满了黑点（属于背景）。
 
-在前面讲到，RPN 预测的是 anchor boxes 与 ground-truth boxes 的偏移量，如果我们将这些正样本 anchor boxes 的偏移量映射回去的话：
+在前面讲到，RPN 网络预测的是 anchor boxes 与 ground-truth boxes 的偏移量，如果我们将这些正样本 anchor boxes 的偏移量映射回去的话：
 
 ```
 => Decoding positive sample: 20, 20, 0
@@ -77,7 +77,7 @@ RPN 的损失函数和 YOLO 非常像，不过从发表论文时间顺序来看�
     </a>
 </p>
 
-你会发现，这就是 ground-truth boxes 框（绿色框）和物体中心点（红色点）的位置。RPN 的损失是一个多任务的 loss function，集合了分类损失与回归框损失，它们两者之间的优化可以通过 λ 系数去实现平衡。
+你会发现，这就是 ground-truth boxes 框（绿色框）和物体中心点（红色点）的位置。事实上，RPN 的损失是一个多任务的 loss function，集合了分类损失与回归框损失，它们两者之间的优化可以通过 λ 系数去实现平衡。
 
 <p align="center">
     <img width="40%" src="https://user-images.githubusercontent.com/30433053/67206340-07f59800-f444-11e9-9126-5484ea68cdd3.png" style="max-width:40%;">
