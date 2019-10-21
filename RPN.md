@@ -79,8 +79,7 @@ RPN 的损失函数和 YOLO 非常像，不过从发表论文时间顺序来看�
 你会发现，这就是 ground-truth boxes 框（绿色框）和物体中心点（红色点）的位置。RPN 的损失是一个多任务的 loss function，集合了分类损失与回归框损失，它们两者之间的优化可以通过 λ 系数去实现平衡。
 
 <p align="center">
-    <img width="40%" src="https://user-images.githubusercontent.com/30433053/67206340-07f59800-f444-11e9-9126-5484ea68cdd3.png
-" style="max-width:40%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/67206340-07f59800-f444-11e9-9126-5484ea68cdd3.png" style="max-width:40%;">
     </a>
 </p>
 
