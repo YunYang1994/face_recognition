@@ -121,7 +121,7 @@ def compute_loss(target_scores, target_bboxes, target_masks, pred_scores, pred_b
 |---|---
 |![image](https://user-images.githubusercontent.com/30433053/67209048-3a55c400-f449-11e9-944f-1efd2029d408.png)|![image](https://user-images.githubusercontent.com/30433053/67209522-1ba3fd00-f44a-11e9-9c9b-d2c14f0d6014.png)
 
-不仅如此，事实上一些其他超参数也会影响正负样本的数量，从而影响网络的学习过程。所有这些事实告诉我们，学习神经网络不能靠从网上看一些浅显的教程就够了的，关键还得自己去多多看源码并实践，才能成为一名合格的深度学习炼丹师。
+不仅如此，事实上一些其他超参数也会影响正负样本的分布情况，从而直接影响到网络的学习过程。所有这些事实告诉我们，学习神经网络不能靠从网上看一些浅显的教程就够了的，关键还得自己去多多看源码并实践，才能成为一名合格的深度学习炼丹师。
 
 | pos_thresh=0.2, neg_thresh=0.1 | pos_thresh=0.7, neg_thresh=0.2|
 |---|---
