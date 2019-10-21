@@ -1,3 +1,4 @@
+# [TensorFlow2.0-Examples/4-Object_Detection/RPN](https://github.com/YunYang1994/TensorFlow2.0-Examples/tree/master/4-Object_Detection/RPN)
 ## RPN 网络
 我觉得 RPN 是目标检测领域里最经典也是最容易入门的网络了。如果你想学好目标检测，那一定不能不知道它！今天讲的 RPN 是来一篇来自 CVPR2017 的论文 [Expecting the Unexpected: Training Detectors for Unusual Pedestrians with Adversarial Imposters](https://arxiv.org/pdf/1703.06283)， 作者在 Faster-RCNN 的 RPN 基础上进行了改进，称它为 RPNplus， 用于行人检测。
 
@@ -122,7 +123,7 @@ def compute_loss(target_scores, target_bboxes, target_masks, pred_scores, pred_b
 
 不仅如此，事实上一些其他超参数也会影响正负样本的数量，从而影响网络的学习过程。所有这些事实告诉我们，学习神经网络不能靠从网上看一些浅显的教程就够了的，关键还得自己去多多看源码并实践，才能成为一名合格的深度学习炼丹师。
 
-| pos_thresh=0.2, neg_thres=0.1 | pos_thresh=0.7, neg_thres=0.2|
+| pos_thresh=0.2, neg_thresh=0.1 | pos_thresh=0.7, neg_thresh=0.2|
 |---|---
 |![image](https://user-images.githubusercontent.com/30433053/67210062-08456180-f44b-11e9-9719-2bf8cb10ac74.png)|![image](https://user-images.githubusercontent.com/30433053/67210282-66724480-f44b-11e9-8cf5-fa9372131555.png)
 
