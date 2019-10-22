@@ -45,6 +45,20 @@ def compute_regression(box1, box2):
     return target_reg
 ```
 
+## k-means 造框
+
+如果 Anchor boxes 的尺寸选得好，那么就使得网络更容易去学习。刚开始我以为反正网络预测的都是 Bounding Boxes 的偏移量，那么 Anchor boxes 尺寸就没那么重要了。但我在复现算法和写代码的过程中发现，看来我还是太年轻了。我使用的是 [synthetic_dataset 数据集](https://pan.baidu.com/s/1QZAIakMVS0sJV0sjgv7v2w&shfl=sharepset)进行训练，该数据集里所有检测的目标都为 "person"，假如我直接用作者[论文](https://arxiv.org/pdf/1703.06283)里的原始 anchor，那么得到的正样本为如下左图；而如果我使用 [k-means](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/RPN/kmeans.py)算法对该数据集所有的 ground-truth boxes 进行聚类得到的 anchor，那么效果就如下右图所示，显然后者的效果比前者好得多。
+
+| 论文原始 anchor | k-means 的 anchor|
+|---|---
+|![image](https://user-images.githubusercontent.com/30433053/67209048-3a55c400-f449-11e9-944f-1efd2029d408.png)|![image](https://user-images.githubusercontent.com/30433053/67209522-1ba3fd00-f44a-11e9-9c9b-d2c14f0d6014.png)
+
+不仅如此，事实上一些其他超参数也会影响正负样本的分布情况，从而直接影响到网络的学习过程。所有这些事实都告诉我们，学习神经网络不能靠从网上看一些浅显的教程就够了的，关键还得自己去多多看源码并实践，才能成为一名合格的深度学习炼丹师。
+
+| pos_thresh=0.2, neg_thresh=0.1 | pos_thresh=0.7, neg_thresh=0.2|
+|---|---
+|![image](https://user-images.githubusercontent.com/30433053/67210062-08456180-f44b-11e9-9719-2bf8cb10ac74.png)|![image](https://user-images.githubusercontent.com/30433053/67210282-66724480-f44b-11e9-8cf5-fa9372131555.png)
+
 ## 损失函数
 RPN 的损失函数和 YOLO 非常像，不过从发表论文时间顺序来看，应该是 YOLO 借鉴了 RPN 。在 Faster-rcnn 论文里，RPN 的损失函数是这样的:
 
@@ -113,19 +127,6 @@ def compute_loss(target_scores, target_bboxes, target_masks, pred_scores, pred_b
     return score_loss, boxes_loss
 ```
 
-## k-means 造框
-
-如果 Anchor boxes 的尺寸选得好，那么就使得网络更容易去学习。刚开始我以为反正网络预测的都是 Bounding Boxes 的偏移量，那么 Anchor boxes 尺寸就没那么重要了。但我在复现算法和写代码的过程中发现，看来我还是太年轻了。我使用的是 [synthetic_dataset 数据集](https://pan.baidu.com/s/1QZAIakMVS0sJV0sjgv7v2w&shfl=sharepset)进行训练，该数据集里所有检测的目标都为 "person"，假如我直接用作者[论文](https://arxiv.org/pdf/1703.06283)里的原始 anchor，那么得到的正样本为如下左图；而如果我使用 [k-means](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/RPN/kmeans.py)算法对该数据集所有的 ground-truth boxes 进行聚类得到的 anchor，那么效果就如下右图所示，显然后者的效果比前者好得多。
-
-| 论文原始 anchor | k-means 的 anchor|
-|---|---
-|![image](https://user-images.githubusercontent.com/30433053/67209048-3a55c400-f449-11e9-944f-1efd2029d408.png)|![image](https://user-images.githubusercontent.com/30433053/67209522-1ba3fd00-f44a-11e9-9c9b-d2c14f0d6014.png)
-
-不仅如此，事实上一些其他超参数也会影响正负样本的分布情况，从而直接影响到网络的学习过程。所有这些事实都告诉我们，学习神经网络不能靠从网上看一些浅显的教程就够了的，关键还得自己去多多看源码并实践，才能成为一名合格的深度学习炼丹师。
-
-| pos_thresh=0.2, neg_thresh=0.1 | pos_thresh=0.7, neg_thresh=0.2|
-|---|---
-|![image](https://user-images.githubusercontent.com/30433053/67210062-08456180-f44b-11e9-9719-2bf8cb10ac74.png)|![image](https://user-images.githubusercontent.com/30433053/67210282-66724480-f44b-11e9-8cf5-fa9372131555.png)
 
 
 
