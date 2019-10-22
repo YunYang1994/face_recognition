@@ -21,7 +21,7 @@
 直接利用这些 anchor boxes 对真实框进行预测会有些困难，因此作者采用了 anchor boxes 与 gt-boxes 的偏移量机制进行回归预测。
 
 <p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/30433053/67203842-b4348000-f43e-11e9-812a-8a1f56f5e125.png" style="max-width:80%;">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/67203842-b4348000-f43e-11e9-812a-8a1f56f5e125.png" style="max-width:60%;">
     </a>
 </p>
 
