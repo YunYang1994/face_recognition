@@ -119,7 +119,7 @@ for i in range(H):
 
 >We explore training with sampling in Section 4.3, and do not find that it yields faster or better convergence for dense prediction. Whole image training is effective and efficient.
 
-补丁式训练完全没有必要，训练 FCN 还是输入整张图片比较好。并且解决这种类别不均衡的问题，只需要给损失函数按比例加权重就行。最后作者还此进行了学术上的解释，我这里就不讲了，话讲多了你们会觉得我在胡言乱语...
+补丁式训练完全没有必要，训练 FCN 还是输入整张图片比较好。并且解决这种类别不均衡的问题，只需要给损失函数按比例加权重就行。最后作者还对此进行了学术上的解释，我这里就不讲了，话讲多了你们会觉得我在胡言乱语...
 
 
 
