@@ -2,12 +2,17 @@
 
 在我还是实习生的时候，我们组的 leader 讲了 FCN 网络。由于当时对图像分割还不是很了解，所以也没太听懂，只记得他当时讲这篇文章拿了 CVPR-2015 的最佳论文奖。现在学习 FCN 就觉得，这应该是图像分割领域里最经典也最适合入门的网络了吧。
 
+<p align="center">
+    <img width="50%" src="https://user-images.githubusercontent.com/30433053/67369222-33df5d80-f5ab-11e9-95d4-3d7813cfa0a8.png" style="max-width:50%;">
+    </a>
+</p>
+
 ## 网络结构
 
-在我的代码里，使用了 VGG16 作为 backbone 来提取图片特征。如果把 FCN 看成是一个黑箱子，那么我们只要关心网络的输入和输出就行了。如果我们使用 VOC 数据集进行训练，输入图片的维度为 [H,W,C]，那么 FCN 输出的 feature map 形状则为 [H, W, 21]。其中，数字 21 代表的 VOC 的 20 个类别还有 1 个背景。
+在我的代码里，使用了 VGG16 作为 backbone 来提取图片特征【其实作者也使用了 VGG19 作为backbone，但是发现效果和 VGG16 差不多。】。如果把 FCN 看成是一个黑箱子，那么我们只要关心网络的输入和输出就行了。如果我们使用 VOC 数据集进行训练，输入图片的维度为 [H,W,C]，那么 FCN 输出的 feature map 形状则为 [H, W, 21]。其中，数字 21 代表的 VOC 的 20 个类别还有 1 个背景。
 
 <p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/30433053/67369222-33df5d80-f5ab-11e9-95d4-3d7813cfa0a8.png" style="max-width:60%;">
+    <img width="80%" src="https://user-images.githubusercontent.com/30433053/67388473-4cf80680-f5cb-11e9-9c36-36480d84b48d.png" style="max-width:80%;">
     </a>
 </p>
 
@@ -42,19 +47,30 @@ FCN的上采样层使用的是反卷积层，反卷积也称为转置卷积操�
     <img width="80%" src="https://user-images.githubusercontent.com/30433053/67378378-bbcc6400-f5b9-11e9-8d80-672010380f1c.png" style="max-width:80%;">
     </a>
 </p>
-稀疏矩阵 **C** 的形状为 **4x16**, **X** 形状为 **16x1**，**Y** 的形状为 **4x1**，将 **Y** 进行 reshape 后便是我们的期望输出形状 **2x2**。那么，反卷积的操作就是要对这个矩阵运算过程进行转置，通过输出 Y 得到输入 X：
+稀疏矩阵 C 的形状为 4x16, X 形状为 16x1，Y 的形状为 4x1，将 Y 进行 reshape 后便是我们的期望输出形状 2x2。那么，反卷积的操作就是要对这个矩阵运算过程进行转置，通过输出 Y 得到输入 X：
+
 <p align="center">
     <img width="15%" src="https://user-images.githubusercontent.com/30433053/67379139-eff45480-f5ba-11e9-99bc-9fcbdc731290.png" style="max-width:15%;">
     </a>
 </p>
 
 从矩阵元素形状的角度出发，可以理解为：**16x1=16x4x4x1**，下面这个动画比较生动地描述了反卷积过程:
+
 <p align="center">
     <img width="25%" src="https://raw.githubusercontent.com/hhaAndroid/conv_arithmetic/master/gif/no_padding_no_strides_transposed.gif" style="max-width:30%;">
     </a>
 </p>
 
+## 跳跃结构
+在刚开始的时候，作者将输入图片经过卷积和下采样操作一头走到尾，最后宽和高都被缩放了 32 倍。为了将 feature map 上采样到原来的尺寸，因此作者将 vgg16 的输出扩大了 32 倍，并将该模型称为 FCN-32s。
 
+![image](https://user-images.githubusercontent.com/30433053/67386859-53d14a00-f5c8-11e9-9d62-ccb1c2e61a80.jpg)
+但是发现FCN-32s的分割效果并不够好，如下图所示。尽管最后的 feature map 输出经过了 32 倍的上采样操作，但是图片的边缘细节信息还是被 VGG16 网络里的卷积和下采样操作所模糊掉了。
+
+<p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/67385904-9003ab00-f5c6-11e9-87da-3dbf0dcb079a.png" style="max-width:60%;">
+    </a>
+</p>
 
 
 
