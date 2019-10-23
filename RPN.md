@@ -131,4 +131,4 @@ def compute_loss(target_scores, target_bboxes, target_masks, pred_scores, pred_b
 |---|---
 |![image](https://user-images.githubusercontent.com/30433053/67265487-6c663500-f4e0-11e9-8bf9-f9d59d22b0a8.png)|![image](https://user-images.githubusercontent.com/30433053/67265620-c36c0a00-f4e0-11e9-8689-9d3b6efaff47.png)
 
-[【推荐: YOLOv3 的算法复现笔记, TensorFlow2.0-Examples/4-Object_Detection/YOLOv3】](https://github.com/YunYang1994/Easy-Deep-Learning/blob/master/YOLOv3.md)
+[【推荐: YOLOv3 的算法复现笔记, TensorFlow2.0-Examples/4-Object_Detection/YOLOv3】](https://github.com/YunYang1994/ai-notebooks/blob/master/YOLOv3.md)
