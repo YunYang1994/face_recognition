@@ -25,9 +25,9 @@ FCN 网络很好地解决了这两个问题，它可以接受任意尺寸的输�
 for i in range(H):
    write_line = []
    for j in range(W):
-   	pixel_color = label_image[i, j].tolist()
+   	pixel_color = label_image[i, j].tolist() # 得到该像素点的 RGB值
         if pixel_color in colormap:
-       	    cls_idx = colormap.index(pixel_color)
+       	    cls_idx = colormap.index(pixel_color) # 索引该 RGB 值的类别
         else:
             cls_idx = 0
 ```
