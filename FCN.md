@@ -123,6 +123,8 @@ for i in range(H):
 
 补丁式训练完全没有必要，训练 FCN 还是输入整张图片比较好。并且解决这种类别不均衡的问题，只需要给损失函数按比例加权重就行。最后作者还对此进行了学术上的解释，我这里就不讲了，话讲多了你们会觉得我在胡言乱语...
 
+[【推荐: 医学影像分割大赛的冠军网络，Unet, TensorFlow2.0-Examples/5-Image_Segmentation/Unet/】](https://github.com/YunYang1994/ai-notebooks/blob/master/Unet.md)
+
 
 
 

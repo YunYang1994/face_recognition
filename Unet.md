@@ -10,7 +10,7 @@ controls="controls"></video>
 
 ## 网络结构
 
-U-Net 与前面讲到的 [FCN](https://github.com/YunYang1994/ai-notebooks/blob/master/FCN.md)非常的相似，U-Net 比 FCN 稍晚提出来，但都发表在 2015 年，和 FCN 相比，U-Net 的第一个特点是完全对称，也就是左边和右边是很类似的。当我第一次看到该网络的拓扑结构时，顿时惊为天人，卧槽，简直是一个大写的 **U**。
+U-Net 与前面讲到的 [FCN](https://github.com/YunYang1994/ai-notebooks/blob/master/FCN.md) 非常的相似，U-Net 比 FCN 稍晚提出来，但都发表在 2015 年，和 FCN 相比，U-Net 的第一个特点是完全对称，也就是左边和右边是很类似的。当我第一次看到该网络的拓扑结构时，顿时惊为天人，卧槽，简直是一个大写的 **U**。
 
 <p align="center">
     <img width="70%" src="https://user-images.githubusercontent.com/30433053/67412409-cdc9f900-f5f1-11e9-918a-d92355e35395.png" style="max-width:70%;">
