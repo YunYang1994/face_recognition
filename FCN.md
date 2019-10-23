@@ -27,6 +27,7 @@ FCN 网络很好地解决了这两个问题，它可以接受任意尺寸的输�
 在刚开始的时候，作者将输入图片经过卷积和下采样操作一头走到尾，最后宽和高都被缩放了 32 倍。为了将 feature map 上采样到原来的尺寸，因此作者将 vgg16 的输出扩大了 32 倍，并将该模型称为 FCN-32s。
 
 ![image](https://user-images.githubusercontent.com/30433053/67386859-53d14a00-f5c8-11e9-9d62-ccb1c2e61a80.jpg)
+
 但是发现FCN-32s的分割效果并不够好，如下图所示。尽管最后的 feature map 输出经过了 32 倍的上采样操作，但是图片里的边缘细节信息还是被 VGG16 网络里的卷积和下采样操作所模糊掉了。
 
 <p align="center">
@@ -70,7 +71,8 @@ FCN的上采样层使用的是反卷积层，反卷积也称为转置卷积操�
     <img width="80%" src="https://user-images.githubusercontent.com/30433053/67378378-bbcc6400-f5b9-11e9-8d80-672010380f1c.png" style="max-width:80%;">
     </a>
 </p>
-稀疏矩阵 C 的形状为 4x16, X 形状为 16x1，Y 的形状为 4x1，将 Y 进行 reshape 后便是我们的期望输出形状 2x2。那么，反卷积的操作就是要对这个矩阵运算过程进行转置，通过输出 Y 得到输入 X：
+                                                                                                                                                      
+稀疏矩阵 **C** 的形状为 **4x16**, **X** 形状为 **16x1**，**Y** 的形状为 **4x1**，将 **Y** 进行 reshape 后便是我们的期望输出形状 **2x2**。那么，反卷积的操作就是要对这个矩阵运算过程进行转置，通过输出 **Y** 得到输入 **X**：
 
 <p align="center">
     <img width="15%" src="https://user-images.githubusercontent.com/30433053/67379139-eff45480-f5ba-11e9-99bc-9fcbdc731290.png" style="max-width:15%;">
