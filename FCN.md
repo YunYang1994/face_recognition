@@ -1,6 +1,6 @@
 ## 代码:[TensorFlow2.0-Examples/5-Image_Segmentation/FCN](https://github.com/YunYang1994/TensorFlow2.0-Examples/tree/master/5-Image_Segmentation/FCN)
 
-在我还是实习生的时候，我们组的 leader 讲了 FCN 网络。由于当时对图像分割还不是很了解，所以也没太听懂，只记得他当时讲这篇文章拿了 CVPR-2015 的最佳论文奖。现在学习 FCN 就觉得，这应该是图像分割领域里最经典也最适合入门的网络了吧。
+在我还是实习生的时候，我们组的 leader 讲了 FCN 网络。由于当时对图像分割还不是很了解，所以也没太听懂，只记得他当时讲这篇文章拿了 CVPR-2015 的最佳论文奖。现在学习 FCN 就觉得，这应该是图像分割领域里最经典也是最适合入门的网络了吧。
 
 <p align="center">
     <img width="50%" src="https://user-images.githubusercontent.com/30433053/67369222-33df5d80-f5ab-11e9-95d4-3d7813cfa0a8.png" style="max-width:50%;">
@@ -22,6 +22,29 @@ FCN 解决的实际问题就是针对图片里的每个像素进行分类，从�
 - 一旦网络训练好，图片的输入尺寸将无法改变。
 
 FCN 网络很好地解决了这两个问题，它可以接受任意尺寸的输入图像，并保留了原始输入图像中的空间信息，最后直接在 feature map 上对像素进行分类。
+
+## 跳跃拼接
+在刚开始的时候，作者将输入图片经过卷积和下采样操作一头走到尾，最后宽和高都被缩放了 32 倍。为了将 feature map 上采样到原来的尺寸，因此作者将 vgg16 的输出扩大了 32 倍，并将该模型称为 FCN-32s。
+
+![image](https://user-images.githubusercontent.com/30433053/67386859-53d14a00-f5c8-11e9-9d62-ccb1c2e61a80.jpg)
+但是发现FCN-32s的分割效果并不够好，如下图所示。尽管最后的 feature map 输出经过了 32 倍的上采样操作，但是图片里的边缘细节信息还是被 VGG16 网络里的卷积和下采样操作所模糊掉了。
+
+<p align="center">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/67385904-9003ab00-f5c6-11e9-87da-3dbf0dcb079a.png" style="max-width:60%;">
+    </a>
+</p>
+
+作者把它称作是一个**what**和**where**的问题，请看下面作者的原话：
+
+>Semantic segmentation faces an inherent tension between semantics and location: global information resolves what while local information resolves where.
+
+说白了就是**全局信息能够预测这个物体是哪个类别，而局部的细粒度信息能够实现对物体的定位与检测**。为了解决这个问题，作者通过缓慢地（分阶段地）对编码特征进行上采样，从浅层添加了“skip connections(跳跃连接)”，并将这两个特征映射相加，并最终将它上采样 8 或者 16 倍进行输出，分别称为 FCN-8s 和 FCN-16s 模型。
+
+![image](https://user-images.githubusercontent.com/30433053/67389318-f4c20400-f5cc-11e9-9769-acb912aa8292.png)
+
+添加 skip connections 结构后，就能将深层的，粗糙的语义信息与浅层的，精细的表面信息融合起来，从而在一定程度上解决图像边缘分割效果较差的问题。
+
+>We define a skip architecture to take advantage of this feature spectrum that combines deep, coarse, semantic information and shallow, fine, appearance information
 
 ## 反卷积层
 FCN的上采样层使用的是反卷积层，反卷积也称为转置卷积操作(Transposed convolution)。要了解反卷积是怎么回事，得先回顾一下正向卷积的实现过程。假设输入的图片 input 尺寸为 4x4，元素矩阵为:
@@ -61,18 +84,7 @@ FCN的上采样层使用的是反卷积层，反卷积也称为转置卷积操�
     </a>
 </p>
 
-## 跳跃结构
-在刚开始的时候，作者将输入图片经过卷积和下采样操作一头走到尾，最后宽和高都被缩放了 32 倍。为了将 feature map 上采样到原来的尺寸，因此作者将 vgg16 的输出扩大了 32 倍，并将该模型称为 FCN-32s。
-
-![image](https://user-images.githubusercontent.com/30433053/67386859-53d14a00-f5c8-11e9-9d62-ccb1c2e61a80.jpg)
-但是发现FCN-32s的分割效果并不够好，如下图所示。尽管最后的 feature map 输出经过了 32 倍的上采样操作，但是图片的边缘细节信息还是被 VGG16 网络里的卷积和下采样操作所模糊掉了。
-
-<p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/30433053/67385904-9003ab00-f5c6-11e9-87da-3dbf0dcb079a.png" style="max-width:60%;">
-    </a>
-</p>
-
-
+值得注意的是，反卷积操作并不是卷积操作的可逆过程，也就是说图像经过卷积操作后是不能通过反卷积操作恢复原来的样子。这是因为反卷积只是转置运算，并非可逆运算。
 
 ## 数据处理
 在 PASCAL VOC 数据集中，每个类别对应一个色彩【RGB】, 因此我们需要对`SegmentationClass`文件夹里的每张 mask 图片根据像素的色彩来标定其类别，在代码 [parser_voc.py](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/5-Image_Segmentation/FCN/parser_voc.py#L48)是这样进行处理的。
@@ -92,6 +104,11 @@ for i in range(H):
 |![image](https://user-images.githubusercontent.com/30433053/66732799-dd2da180-ee8f-11e9-9025-3a3e0e94a20b.jpg)|![image](https://user-images.githubusercontent.com/30433053/66733895-aa85a800-ee93-11e9-8eae-405235aa8564.jpg)|![image](https://user-images.githubusercontent.com/30433053/66733897-ace80200-ee93-11e9-84e4-21f7d94d06eb.jpg)|
 
 考虑到在批量训练图片时的 batch_size >= 1，因此必须将图片 resize 成相同的尺寸，这里采用的是最近邻插值法，从而保证新插值的像素分类问题。
+
+## 模型训练
+
+
+
 
 
 
