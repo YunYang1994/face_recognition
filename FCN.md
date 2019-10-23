@@ -21,15 +21,15 @@ FCN 网络很好地解决了这两个问题，它可以接受任意尺寸的输�
 ## 数据处理
 在 PASCAL VOC 数据集中，每个类别对应一个色彩【RGB】, 因此我们需要对`SegmentationClass`文件夹里的每张 mask 图片根据像素的色彩来标定其类别，在代码 [parser_voc.py](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/5-Image_Segmentation/FCN/parser_voc.py#L48)是这样进行处理的。
 
-```bashrc
+```python
 for i in range(H):
-                write_line = []
-                for j in range(W):
-                    pixel_color = label_image[i, j].tolist()
-                    if pixel_color in colormap:
-                        cls_idx = colormap.index(pixel_color)
-                    else:
-                        cls_idx = 0
+	write_line = []
+   for j in range(W):
+   		pixel_color = label_image[i, j].tolist()
+       if pixel_color in colormap:
+       	cls_idx = colormap.index(pixel_color)
+       else:
+          cls_idx = 0
 ```
 |![image](https://user-images.githubusercontent.com/30433053/66732790-d4d56680-ee8f-11e9-9120-07b0e8aa53d4.jpg)|![image](https://user-images.githubusercontent.com/30433053/66732791-d69f2a00-ee8f-11e9-9c5d-16cc84bc7e9e.jpg)|![image](https://user-images.githubusercontent.com/30433053/66732795-da32b100-ee8f-11e9-9d85-f0ddba7a3ab1.jpg)|
 |---|---|:---:|
