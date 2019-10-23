@@ -748,4 +748,4 @@ plt.show()
 **题外话：我正在利用业余时间复现一些经典的算法，并且也会抽空写出类似这样的技术博客，请多多关注，大家一起进步！如果你对我这些工作很感兴趣，欢迎加入！**
 [**https://github.com/YunYang1994/TensorFlow2.0-Examples**](https://github.com/YunYang1994/TensorFlow2.0-Examples)
 
-[【推荐: Faster-RCNN 里的 RPN 网络解读, TensorFlow2.0-Examples/4-Object_Detection/RPN】](https://github.com/YunYang1994/Easy-Deep-Learning/blob/master/RPN.md)
+[【推荐: Faster-RCNN 里的 RPN 网络解读, TensorFlow2.0-Examples/4-Object_Detection/RPN】](https://github.com/YunYang1994/ai-notebooks/blob/master/RPN.md)
