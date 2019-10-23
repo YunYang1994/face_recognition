@@ -19,7 +19,7 @@ FCN 解决的实际问题就是针对图片里的每个像素进行分类，从�
 FCN 网络很好地解决了这两个问题，它可以接受任意尺寸的输入图像，并保留了原始输入图像中的空间信息，最后直接在 feature map 上对像素进行分类。
 
 ## 反卷积层
-反卷积操作也称为转置卷积操作(Transposed convolution)。要了解反卷积是怎么回事，得先回顾一下正向卷积的实现过程。假设输入的图片 input 尺寸为 4x4，元素矩阵为:
+FCN的上采样层使用的是反卷积层，反卷积也称为转置卷积操作(Transposed convolution)。要了解反卷积是怎么回事，得先回顾一下正向卷积的实现过程。假设输入的图片 input 尺寸为 4x4，元素矩阵为:
 <p align="center">
     <img width="40%" src="https://user-images.githubusercontent.com/30433053/67377252-f6350180-f5b7-11e9-8e27-50f2db5d5bae.png" style="max-width:40%;">
     </a>
@@ -33,12 +33,28 @@ FCN 网络很好地解决了这两个问题，它可以接受任意尺寸的输�
 
 正向卷积操作：步长 strides = 1, 填充 padding = 0,输出形状为 2x2，该过程如下图所示：
 <p align="center">
-    <img width="30%" src="https://raw.githubusercontent.com/hhaAndroid/conv_arithmetic/master/gif/no_padding_no_strides.gif" style="max-width:30%;">
+    <img width="25%" src="https://raw.githubusercontent.com/hhaAndroid/conv_arithmetic/master/gif/no_padding_no_strides.gif" style="max-width:30%;">
     </a>
 </p>
 
-如果我们用矩阵乘法描述这个过程，那么就是这样子：
-![image](https://user-images.githubusercontent.com/30433053/67378150-63956200-f5b9-11e9-8fc7-ef4d1f2ff014.png)
+在上面这幅图中，底端为输入，上端为输出，卷积核为 3x3。如果我们用矩阵乘法去描述这个过程：
+<p align=left">
+    <img width="80%" src="https://user-images.githubusercontent.com/30433053/67378378-bbcc6400-f5b9-11e9-8d80-672010380f1c.png" style="max-width:80%;">
+    </a>
+</p>
+稀疏矩阵 **C** 的形状为 **4x16**, **X** 形状为 **16x1**，**Y** 的形状为 **4x1**，将 **Y** 进行 reshape 后便是我们的期望输出形状 **2x2**。那么，反卷积的操作就是要对这个矩阵运算过程进行转置，通过输出 Y 得到输入 X：
+<p align="center">
+    <img width="15%" src="https://user-images.githubusercontent.com/30433053/67379139-eff45480-f5ba-11e9-99bc-9fcbdc731290.png" style="max-width:15%;">
+    </a>
+</p>
+
+从矩阵元素形状的角度出发，可以理解为：**16x1=16x4x4x1**，下面这个动画比较生动地描述了反卷积过程:
+<p align="center">
+    <img width="25%" src="https://raw.githubusercontent.com/hhaAndroid/conv_arithmetic/master/gif/no_padding_no_strides_transposed.gif" style="max-width:30%;">
+    </a>
+</p>
+
+
 
 
 
