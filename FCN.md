@@ -23,7 +23,7 @@ FCN 解决的实际问题就是针对图片里的每个像素进行分类，从�
 
 FCN 网络很好地解决了这两个问题，它可以接受任意尺寸的输入图像，并保留了原始输入图像中的空间信息，最后直接在 feature map 上对像素进行分类。
 
-## 跳跃拼接
+## 跳跃连接
 在刚开始的时候，作者将输入图片经过卷积和下采样操作一头走到尾，最后宽和高都被缩放了 32 倍。为了将 feature map 上采样到原来的尺寸，因此作者将 vgg16 的输出扩大了 32 倍，并将该模型称为 FCN-32s。
 
 ![image](https://user-images.githubusercontent.com/30433053/67386859-53d14a00-f5c8-11e9-9d62-ccb1c2e61a80.jpg)
@@ -46,6 +46,21 @@ FCN 网络很好地解决了这两个问题，它可以接受任意尺寸的输�
 添加 skip connections 结构后，就能将深层的，粗糙的语义信息与浅层的，精细的表面信息融合起来，从而在一定程度上解决图像边缘分割效果较差的问题。
 
 >We define a skip architecture to take advantage of this feature spectrum that combines deep, coarse, semantic information and shallow, fine, appearance information
+
+**这里需要抛出一个问题，为什么这个 “跳跃连接” 这么牛逼有效?**
+
+这还得从**感受野(Receptive Field)**说起，卷积神经网络中的感受野的定义是卷积神经网络每一层输出的特征图（feature map）上的像素点在输入图片上映射的区域大小。再通俗点的解释是，特征图上的一个点对应输入图上的区域。
+
+<p align="center">
+    <img width="50%" src="https://user-images.githubusercontent.com/30433053/67464190-82592e80-f675-11e9-9ad0-2b4ac870eb52.png" style="max-width:50%;">
+    </a>
+</p>
+
+前面讲到深层的特征图在空间尺寸上往往会越来越小，这就意味着它的感受野区域会越来越大，从而更富含图片的全局信息，能较好地解决 **what** 问题；浅层特征图的空间尺寸较大，这就意味着它的感受野会更小，因而容易捕捉到物体的边缘信息和丰富的细粒特征。感受野大的特征，可以很容易的识别出大物体的，但是在实际分割中，大物体边缘信息和小物体本身是很容易被深层网络一次次的降采样和一次次升采样给弄丢的，这个时候就可能需要感受野小的特征来帮助。
+
+>在上图中，如果把 conv1 和 conv2 分别比作浅层特征和深层特征的话。那么深层特征里一个数字 "5" 的感受野尺寸就是 3x3，而浅层特征里 4 个 数字 "3" 的感受野也是这个区域，但是平均下来 1 个数字 "3" 的感受野尺寸则 1x1 都不到。
+
+**深层特征的感受野较大，浅层特征的感受野较小，它们分别解决 what 和 where 问题。**
 
 ## 反卷积层
 FCN的上采样层使用的是反卷积层，反卷积也称为转置卷积操作(Transposed convolution)。要了解反卷积是怎么回事，得先回顾一下正向卷积的实现过程。假设输入的图片 input 尺寸为 4x4，元素矩阵为:
@@ -124,8 +139,3 @@ for i in range(H):
 补丁式训练完全没有必要，训练 FCN 还是输入整张图片比较好。并且解决这种类别不均衡的问题，只需要给损失函数按比例加权重就行。最后作者还对此进行了学术上的解释，我这里就不讲了，话讲多了你们会觉得我在胡言乱语...
 
 [【推荐: 医学影像分割大赛的冠军网络，Unet, TensorFlow2.0-Examples/5-Image_Segmentation/Unet/】](https://github.com/YunYang1994/ai-notebooks/blob/master/Unet.md)
-
-
-
-
-
