@@ -25,10 +25,13 @@
     </a>
 </p>
 
+x, y, w, h 分别表示 boxes 的中心坐标和宽高；变量 x, x_a, x_∗ 则分别代表预测框，anchor 框和 ground-truth 框的中心坐标 `x`
+
+
 ```python
 def compute_regression(box1, box2):
     """
-    box1: ground-truth boxes
+    box1: predicted boxes
     box2: anchor boxes
     """
     target_reg = np.zeros(shape=[4,])
