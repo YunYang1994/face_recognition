@@ -56,12 +56,7 @@ U-Net 与前面讲到的 [FCN](https://github.com/YunYang1994/ai-notebooks/blob/
 ## 个人思考
 从 Unet 的主体结构设计来看，其实是借鉴了 Hinton 祖师爷的自编码网络。仔细看 Unet 会发现：它的下采样结构其实是一个编码过程，所谓的编码就是尽可能地压缩图像的空间信息，而保留最本质的特征；上采样结构则是一个解码过程，尽可能地还原到原来的图像。在 FCN 的 skip-connection 提出后，这几乎成了语义分割和目标检测领域的标配，因此 Unet 网络避免不了得用它。所以 Unet 更像是 AutoEncoder 与 FCN 的结合版。
 
-
-
-
-
-
-
+[【推荐: FPN, 特征金字塔网络. TensorFlow2.0-Examples/3-Neural_Network_Architecture/FPN】](https://github.com/YunYang1994/ai-notebooks/blob/master/FPN.md)
 
 
 
