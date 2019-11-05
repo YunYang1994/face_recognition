@@ -59,7 +59,7 @@ RPN 的损失函数和 YOLO 非常像，不过从发表论文时间顺序来看�
 在我的代码 [demo.py](https://github.com/YunYang1994/TensorFlow2.0-Examples/blob/master/4-Object_Detection/RPN/demo.py) 里将正负样本都可视化出来了，大家只要配置好 image 和 label 的路径然后直接执行 `python demo.py` 就可以看到以下图片。
 
 <p align="center">
-    <img width="80%" src="https://user-images.githubusercontent.com/30433053/67204319-db3f8180-f43f-11e9-99fe-bb73b0123fc6.png" style="max-width:80%;">
+    <img width="50%" src="https://user-images.githubusercontent.com/30433053/67204319-db3f8180-f43f-11e9-99fe-bb73b0123fc6.png" style="max-width:50%;">
     </a>
 </p>
 
@@ -75,7 +75,7 @@ RPN 的损失函数和 YOLO 非常像，不过从发表论文时间顺序来看�
 ```
 
 <p align="center">
-    <img width="80%" src="https://user-images.githubusercontent.com/30433053/67206752-e052ff80-f444-11e9-94eb-f3ce7caacfd3.png" style="max-width:80%;">
+    <img width="50%" src="https://user-images.githubusercontent.com/30433053/67206752-e052ff80-f444-11e9-94eb-f3ce7caacfd3.png" style="max-width:50%;">
     </a>
 </p>
 
