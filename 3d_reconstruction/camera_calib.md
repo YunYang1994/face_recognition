@@ -1,4 +1,4 @@
-#### 代码：[https://github.com/YunYang1994/stereo_calib/blob/master/camera_calibraion.py](https://github.com/YunYang1994/stereo_calib/blob/master/camera_calibraion.py)
+### 代码：[https://github.com/YunYang1994/stereo_calib/blob/master/camera_calibraion.py](https://github.com/YunYang1994/stereo_calib/blob/master/camera_calibraion.py)
 
 今天我们将会通过这个博客来了解相机的内参、外参 (intrinsic、extrinsic parameters) 以及去畸变过程。
 
@@ -16,21 +16,21 @@
 可以通过以下方程进行修正：
 
 <p align="center">
-    <img width="45%" src="https://user-images.githubusercontent.com/30433053/69607990-658f8c80-1061-11ea-806a-dc72cdae88fb.png" style="max-width:50%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69607990-658f8c80-1061-11ea-806a-dc72cdae88fb.png" style="max-width:50%;">
     </a>
 </p>
 
 类似地，另一个畸变是**切向畸变**，这是由于摄像透镜未完全平行于成像平面对齐而发生的。因此，图像中的某些区域可能看起来比预期的要近。解决方法如下:
 
 <p align="center">
-    <img width="50%" src="https://user-images.githubusercontent.com/30433053/69607990-658f8c80-1061-11ea-806a-dc72cdae88fb.png" style="max-width:50%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69607990-658f8c80-1061-11ea-806a-dc72cdae88fb.png" style="max-width:50%;">
     </a>
 </p>
 
 综上，我们需要求解出5个参数，他它们称为**畸变参数**：
 
 <p align="center">
-    <img width="50%" src="https://user-images.githubusercontent.com/30433053/69608726-003c9b00-1063-11ea-8b6f-b58d75aea450.png" style="max-width:50%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69608726-003c9b00-1063-11ea-8b6f-b58d75aea450.png" style="max-width:50%;">
     </a>
 </p>
 
