@@ -14,7 +14,7 @@
 --------------------
 对物体拍几张图片后，就能重构出它的 3D 形状。
 
-|算法简称|算法领域|论文地址|论文源码|源码框架|我的代码|复现笔记|
+|算法简称|算法领域|论文地址|论文源码|源码框架|我的代码|学习笔记|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|stereo_calib|相机标定|无|[github](https://github.com/abidrahmank/OpenCV2-Python-Tutorials/blob/master/source/py_tutorials/py_calib3d/py_calibration/py_calibration.rst)|OpenCV|[link](https://github.com/YunYang1994/stereo_calib)|[stere_calib.md](https://github.com/YunYang1994/ai-notebooks/blob/master/3d_reconstruction/stereo_calib.md)
+|camera_calib|相机标定|[link](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr98-71.pdf)|[github](https://github.com/abidrahmank/OpenCV2-Python-Tutorials/blob/master/source/py_tutorials/py_calib3d/py_calibration/py_calibration.rst)|OpenCV|[link](https://github.com/YunYang1994/stereo_calib)|[camera_calib.md](https://github.com/YunYang1994/ai-notebooks/blob/master/3d_reconstruction/camera_calib.md)
 
