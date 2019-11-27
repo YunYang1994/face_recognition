@@ -16,21 +16,21 @@
 可以通过以下方程进行修正：
 
 <p align="center">
-    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69607990-658f8c80-1061-11ea-806a-dc72cdae88fb.png" style="max-width:50%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69699797-c8e1f300-1123-11ea-9071-7c03b2b4de37.png" style="max-width:50%;">
     </a>
 </p>
 
 类似地，另一个畸变是**切向畸变**，这是由于摄像透镜未完全平行于成像平面对齐而发生的。因此，图像中的某些区域可能看起来比预期的要近。解决方法如下:
 
 <p align="center">
-    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69607990-658f8c80-1061-11ea-806a-dc72cdae88fb.png" style="max-width:50%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69699861-f29b1a00-1123-11ea-8fc8-2774e5bb016f.png" style="max-width:50%;">
     </a>
 </p>
 
 综上，我们需要求解出5个参数，把它们统称为**畸变参数**：
 
 <p align="center">
-    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69608726-003c9b00-1063-11ea-8b6f-b58d75aea450.png" style="max-width:50%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69699917-20805e80-1124-11ea-8822-0185a75b0661.png" style="max-width:50%;">
     </a>
 </p>
 
