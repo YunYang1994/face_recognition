@@ -30,7 +30,7 @@
 综上，我们需要求解出5个参数，把它们统称为**畸变参数**：
 
 <p align="center">
-    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69699917-20805e80-1124-11ea-8822-0185a75b0661.png" style="max-width:50%;">
+    <img width="50%" src="https://user-images.githubusercontent.com/30433053/69699917-20805e80-1124-11ea-8822-0185a75b0661.png" style="max-width:50%;">
     </a>
 </p>
 
