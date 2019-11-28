@@ -31,7 +31,7 @@ rms, M1, D1, M2, D2, R, T, E, F = cv2.stereoCalibrate(objpoints, imgpoints_l, im
 ```
 
 <p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/30433053/69800389-1b004280-1210-11ea-8ffd-b8e4c46ba9cf.png" style="max-width:60%;">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/69800454-42570f80-1210-11ea-8360-defb223036ad.png" style="max-width:60%;">
     </a>
 </p>
 
@@ -55,6 +55,5 @@ mapx2, mapy2 = cv2.initUndistortRectifyMap(M2, D2, R2, P2, imageSize, cv2.CV_16S
 ```
 
 首先利用畸变系数对图像对做矫正，然后双目标定的参数作为输入，调用 OpenCV 中 stereoRectify 与 initUndistortRectifyMap 函数得到 Bouguet 算法中所需的旋转参数与投影参数，最 后利用 remap 函数获取双目校正、裁剪后的图像对。
-
 
 
