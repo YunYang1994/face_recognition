@@ -16,11 +16,11 @@ ret, M2, D2, R2, T2 = cv2.calibrateCamera(objpoints, imgpoints_r, imageSize, Non
 其中 **M** 代表的是相机的内部参数（焦距和光心距离），**D** 表示的是相机的畸变参数， **R** 和 **T** 分别表示的是相机的旋转矢量和平移矢量。
 
 <p align="center">
-    <img width="80%" src="https://user-images.githubusercontent.com/30433053/69800389-1b004280-1210-11ea-8ffd-b8e4c46ba9cf.png" style="max-width:80%;">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/69800389-1b004280-1210-11ea-8ffd-b8e4c46ba9cf.png" style="max-width:60%;">
     </a>
 </p>
 
-本文标定图像的大小是 640*480，理想主点坐标为图像的中心位置，即(320,240)，标定所得结果为(319, 219) ，近似于理想值。
+本文标定图像的大小是 640*480，理想主点坐标为图像的中心位置，即(320,240)，标定所得结果为(319, 239) ，近似于理想值。
 
 ### step2:
 然后在单目标定的基础上，获取左右摄像机之间的旋转矩阵和平移向量，从而完成立体标定。
@@ -31,7 +31,7 @@ rms, M1, D1, M2, D2, R, T, E, F = cv2.stereoCalibrate(objpoints, imgpoints_l, im
 ```
 
 <p align="center">
-    <img width="80%" src="https://user-images.githubusercontent.com/30433053/69800389-1b004280-1210-11ea-8ffd-b8e4c46ba9cf.png" style="max-width:80%;">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/69800389-1b004280-1210-11ea-8ffd-b8e4c46ba9cf.png" style="max-width:60%;">
     </a>
 </p>
 
@@ -42,7 +42,7 @@ rms, M1, D1, M2, D2, R, T, E, F = cv2.stereoCalibrate(objpoints, imgpoints_l, im
 校正对齐采用的是Bouguet 算法, 这里不做赘述。校正对齐的大致流程如下：
 
 <p align="center">
-    <img width="80%" src="https://user-images.githubusercontent.com/30433053/69801124-8991d000-1211-11ea-93c6-5d8afd2465db.png" style="max-width:80%;">
+    <img width="60%" src="https://user-images.githubusercontent.com/30433053/69801124-8991d000-1211-11ea-93c6-5d8afd2465db.png" style="max-width:60%;">
     </a>
 </p>
 
