@@ -9,7 +9,7 @@
 
 
 <p align="center">
-    <img width="30%" src="https://user-images.githubusercontent.com/30433053/69615340-a7273400-106f-11ea-86ca-a1b742add8b2.png" style="max-width:30%;">
+    <img width="30%" src="https://user-images.githubusercontent.com/30433053/69615340-a7273400-106f-11ea-86ca-a1b742add8b2.png" style="max-width:40%;">
     </a>
 </p>
 
@@ -45,7 +45,7 @@
 焦距参数 ( **fx**、**fy** ) 和光心坐标 (**uo**、**vo** ) 等参数为内部参数，它反映的是相机机坐标系到图像坐标系之间的投影关系；**R** 和 **T** 组成了相机的外部参数，它描述了相机坐标系和世界坐标系之间的旋转和平移关系。这里补充一下：
 
 <p align="center">
-    <img width="30%" src="https://user-images.githubusercontent.com/30433053/69794182-c60aff00-1204-11ea-88df-dea4a06e170f.png" style="max-width:30%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69794182-c60aff00-1204-11ea-88df-dea4a06e170f.png" style="max-width:40%;">
     </a>
 </p>
 
