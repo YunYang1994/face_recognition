@@ -163,7 +163,7 @@ cv2.imwrite('calibresult.png',dst)
     <img width="40%" src="https://user-images.githubusercontent.com/30433053/69792707-103eb100-1202-11ea-96da-57f80509c635.png" style="max-width:40%;">
     </a>
 </p>
-由于边缘的径向畸变比中心的径向畸变严重
+
 上图是去畸变之后的图像，径向畸变已经移除，但是我们会发现原图的边缘区域要比中心弯的更厉害。为什么会出现这个情况，这是因为边缘的径向畸变比中心的径向畸变严重。
 
 <p align="center">
