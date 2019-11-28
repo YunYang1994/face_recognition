@@ -47,7 +47,7 @@
 通过这层关系我们可以发现，假如一些图片的像素坐标已知，世界坐标系也已知，那么不就可以求解出相机的内参和外参了嘛。
 
 ## 相机的标定
-这里使用的是一个 7X6 的棋盘方格，然后利用 **cv2.findChessboardCorners** 这个函数，它能帮助我们找到一些角点位置。一旦我们找到它们了，就可以利用 **cv2.cornerSubPix** 更精确地定位它们的位置，然后再利用  **cv2.drawChessboardCorners** 将它们画出来。
+这里使用的是一个 7X6 的棋盘方格，然后利用 **cv2.findChessboardCorners** 这个函数，它能帮助我们找到一些角点位置。一旦我们找到它们了，就可以利用 **cv2.cornerSubPix** 更精确地定位它们的位置，然后再将它们画出来。
 
 ```python
 import numpy as np
