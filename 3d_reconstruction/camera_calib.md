@@ -112,7 +112,7 @@ img = cv2.imread('left12.jpg')
 h,  w = img.shape[:2]
 newcameramtx, roi=cv2.getOptimalNewCameraMatrix(mtx,dist,(w,h),1,(w,h))
 ```
-这样做的目的是在图片边缘加一些 padding 区域，以便后续裁剪。下面，OpenCV 有两种方法可以进行操作。
+函数 **cv2.getOptimalNewCameraMatrix** 是调节视场大小，为1时视场大小不变，小于1时缩放视场.
 
 ### 1. Using cv2.undistort()
 方法很直接，直接调用该函数就可以得到去畸变区域
@@ -128,6 +128,7 @@ cv2.imwrite('calibresult.png',dst)
 ```
 
 ### 2. Using remapping
+
 方法有点绕: 它是首先通过找到从扭曲图像到未扭曲图像的映射函数,然后使用重新映射得到去畸变区域
 
 ```python
