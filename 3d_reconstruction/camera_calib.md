@@ -92,16 +92,17 @@ cv2.destroyAllWindows()
 ## 相机的校准
 现在我们已经通过相机的标定过程找到棋盘上的角点了，并且知道每个方格的尺寸 (square size)，因此可以知道每个角点在真实世界和图像像素上的坐标。最后就可以通过校准求解出相机的内参和外参矩阵。<br>
 
-我们可以通过 **cv2.calibrateCamera** 函数求出以下关键信息：
-
-- 相机矩阵(camera matrix)
-- 畸变系数(distortion coefficients)
-- 旋转矢量(rotation vector)
-- 平移矢量(translation vectors)
-
 ```python
 ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1],None,None)
 ```
+
+我们可以通过 **cv2.calibrateCamera** 函数求出以下关键信息：
+
+- 相机矩阵(camera matrix) ![image](https://docs.opencv.org/2.4/_images/math/5017fc06df8951eb2ca115915d52e6fe6d8034de.png)
+- 畸变系数(distortion coefficients) ![image](https://docs.opencv.org/2.4/_images/math/94288b7709d10a7ddf286e33db0074512bda0411.png)
+- 旋转矢量(rotation vector)
+- 平移矢量(translation vectors)
+
 
 ## 图像去畸变
 现在我们已经获得了相机的内外参数信息了，我们就可以对其中一张图片进行去畸变。在进行去畸变之前，我们需要对输入图片进行一些预处理操作。
