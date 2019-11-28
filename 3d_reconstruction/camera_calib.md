@@ -37,14 +37,14 @@
 ## 坐标系变换
 
 <p align="center">
-    <img width="50%" src="https://user-images.githubusercontent.com/30433053/69615650-37657900-1070-11ea-9840-f61d0d326862.png" style="max-width:50%;">
+    <img width="50%" src="https://user-images.githubusercontent.com/30433053/69796577-3a47a180-1209-11ea-9bc0-cd4121fe10c9.png" style="max-width:50%;">
     </a>
 </p>
 
 根据立体视觉的知识，很容易得到图像像素坐标系与世界坐标系之间的转换关系：
 
 <p align="center">
-    <img width="50%" src="https://user-images.githubusercontent.com/30433053/69796577-3a47a180-1209-11ea-9bc0-cd4121fe10c9.png" style="max-width:50%;">
+    <img width="50%" src="https://user-images.githubusercontent.com/30433053/69615650-37657900-1070-11ea-9840-f61d0d326862.png" style="max-width:50%;">
     </a>
 </p>
 
