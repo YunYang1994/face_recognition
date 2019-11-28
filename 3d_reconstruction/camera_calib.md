@@ -98,8 +98,8 @@ ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.sh
 
 我们可以通过 **cv2.calibrateCamera** 函数求出以下关键信息：
 
-- 相机矩阵(camera matrix) ![image](https://docs.opencv.org/2.4/_images/math/5017fc06df8951eb2ca115915d52e6fe6d8034de.png)
-- 畸变系数(distortion coefficients) ![image](https://docs.opencv.org/2.4/_images/math/94288b7709d10a7ddf286e33db0074512bda0411.png)
+- 相机矩阵(camera matrix)， 它包含了相机的焦距和光心坐标的信息
+- 畸变系数(distortion coefficients)，它包含了相机的畸变参数
 - 旋转矢量(rotation vector)
 - 平移矢量(translation vectors)
 
