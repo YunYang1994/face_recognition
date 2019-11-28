@@ -39,10 +39,10 @@ rms, M1, D1, M2, D2, R, T, E, F = cv2.stereoCalibrate(objpoints, imgpoints_l, im
 
 ## 校正对齐
 
-校正对齐采用的是Bouguet 算法, 这里不做赘述。校正对齐的大致流程如下：
+校正对齐采用的是[Bouguet](http://hvrl.ics.keio.ac.jp/charmie/doc/CameraCalibration/BouguetCameraCalibrationToolbox.pdf) 算法, 这里不做赘述。校正对齐的大致流程如下：
 
 <p align="center">
-    <img width="60%" src="https://user-images.githubusercontent.com/30433053/69801124-8991d000-1211-11ea-93c6-5d8afd2465db.png" style="max-width:60%;">
+    <img width="40%" src="https://user-images.githubusercontent.com/30433053/69801124-8991d000-1211-11ea-93c6-5d8afd2465db.png" style="max-width:40%;">
     </a>
 </p>
 
