@@ -1,4 +1,4 @@
-### 代码：[https://github.com/YunYang1994/stereo_calib/blob/master/camera_calibraion.py](https://github.com/YunYang1994/stereo_calib/blob/master/camera_calibraion.py)
+### 代码：[https://github.com/YunYang1994/stereo_calib/blob/master/camera_calib.py](https://github.com/YunYang1994/stereo_calib/blob/master/camera_calib.py)
 
 今天我们将会通过这个博客来了解相机的内参、外参 (intrinsic、extrinsic parameters) 以及去畸变过程。
 
