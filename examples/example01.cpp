@@ -9,7 +9,7 @@
 *
 *===============================================================*/
 
-#include "image.h"
+#include "yynet.hpp"
 
 void print_image(Image im)
 {
