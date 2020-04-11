@@ -1,7 +1,7 @@
 ⏳ 更新笔记
 --------------------
 
-- [x] 2020-04-11 支持读写图片，构建基础图像容器 Image，详见 [example01.cpp](https://github.com/YunYang1994/yynet/blob/master/examples/example01.cpp)
+- [x] 2020-04-11 支持读写图片，构建基础图像类 Image，详见 [example01.cpp](https://github.com/YunYang1994/yynet/blob/master/examples/example01.cpp)
 
 ⚙️ 使用方法
 --------------------
