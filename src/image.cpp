@@ -10,7 +10,7 @@
 *===============================================================*/
 
 #include <stdio.h>
-#include <string.h>
+#include <string>
 
 #include "image.hpp"
 #include "stb_image.h"
@@ -78,7 +78,7 @@ Image imread(std::string filename, int channels){
     return im;
 }
 
-void imwrite(char *filename, Image im){
+void imwrite(std::string filename, Image im){
 
 
 }

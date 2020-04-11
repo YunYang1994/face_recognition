@@ -12,8 +12,8 @@
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
+#include <string>
 #include <iostream>
-#include <string.h>
 
 class Image{
     public:
@@ -29,6 +29,6 @@ class Image{
 };
 
 Image imread(std::string filename, int channels); // Load an image using stb
-// void imwrite(char *filename, Image im);     // Write an image using stb_write
+void imwrite(std::string filename, Image im);     // Write an image using stb_write
 
 #endif
