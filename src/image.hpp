@@ -13,6 +13,7 @@
 #define IMAGE_HPP
 
 #include <iostream>
+#include <string.h>
 
 class Image{
     public:
@@ -27,6 +28,7 @@ class Image{
         Image(const Image &im);   // copy constructor
 };
 
-Image imread(char *filename, int channels);
+Image imread(std::string filename, int channels); // Load an image using stb
+// void imwrite(char *filename, Image im);     // Write an image using stb_write
 
 #endif

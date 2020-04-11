@@ -49,12 +49,13 @@ Image::Image(const Image &im){
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
-Image imread(char *filename, int channels){
+Image imread(std::string filename, int channels){
     int w, h, c;
-    unsigned char *data = stbi_load(filename, &w, &h, &c, channels);
+    char *p = (char *)filename.c_str();
 
+    unsigned char *data = stbi_load(p, &w, &h, &c, channels);
     if(!data){
-        fprintf(stderr, "Cannot load image \"%s\"\nSTB Reason: %s\n", filename, stbi_failure_reason());
+        fprintf(stderr, "Cannot load image \"%s\"\nSTB Reason: %s\n", p, stbi_failure_reason());
         exit(0);
     }
 
@@ -70,9 +71,15 @@ Image imread(char *filename, int channels){
             }
         }
     }
+
     free(data);
     data = NULL;
+
     return im;
 }
 
+void imwrite(char *filename, Image im){
+
+
+}
 
