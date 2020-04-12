@@ -30,8 +30,13 @@ void print_image(Image im)
 
 int main(){
     Image im = imread("/Users/yangyun/mnist/test/000000-num7.png", 1);
+
+    Image km = im.copy();
+
+    im.at(0,1,0) = 255;
     Image jm(im);
 
-    print_image(im);
+    print_image(jm);
+    print_image(km);
     return 0;
 }

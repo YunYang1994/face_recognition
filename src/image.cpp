@@ -16,7 +16,7 @@
 #include "stb_image.h"
 
 
-Image::Image(int h, int w, int c){
+Image::Image(int h, int w, int c){                          // 构造函数
     rows = h;
     cols = w;
     channels = c;
@@ -26,13 +26,13 @@ Image::Image(int h, int w, int c){
     std::cout << "调用构造函数 " << data << std::endl;
 }
 
-Image::~Image(){
+Image::~Image(){                                           // 析构函数
     std::cout << "调用析构函数 " << data << std::endl;
-    free(data);
+    free(data);                                            // 释放空间
     data = NULL;
 }
 
-Image::Image(const Image &im){
+Image::Image(const Image &im){                             // 拷贝构造函数
     this->rows = im.rows;
     this->cols = im.cols;
     this->size = im.size;
@@ -42,6 +42,19 @@ Image::Image(const Image &im){
     memcpy(this->data, im.data, im.size * sizeof(float));
     std::cout << "调用拷贝构造函数 " << im.data << " -> " << data << std::endl;
 }
+
+float &Image::at(int y, int x, int z) const{              // 加 const 是为了不改变成员, & 则是引用，可以改变像素值
+    assert(x < cols && y < rows && z < channels);
+    return data[x + y*cols + z*rows*cols];
+}
+
+
+Image Image::copy(){
+    Image im(rows, cols, channels);
+    memcpy(im.data, data, im.size * sizeof(float));
+    return im;
+}
+
 
 
 #define STB_IMAGE_IMPLEMENTATION

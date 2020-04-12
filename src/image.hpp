@@ -25,10 +25,12 @@ class Image{
 
         Image(int h, int w, int c);
         ~Image();
-        Image(const Image &im);   // copy constructor
+        Image(const Image &im);                 // 拷贝构造函数
+        float &at(int y, int x, int z) const;   // 按照 [H, W, C] 顺序索引像素值
+        Image copy();
 };
 
-Image imread(std::string filename, int channels); // Load an image using stb
-void imwrite(std::string filename, Image im);     // Write an image using stb_write
+Image imread(std::string filename, int channels);
+void imwrite(std::string filename, Image im);
 
 #endif
