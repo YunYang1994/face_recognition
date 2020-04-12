@@ -91,7 +91,25 @@ Image imread(std::string filename, int channels){
 }
 
 void imwrite(std::string filename, Image im){
+    std::string f = filename.substr(filename.length() - 3, filename.length());
 
+    unsigned char *data = (unsigned char *)calloc(im.size, sizeof(char));
+
+    int i,k;
+    for(k = 0; k < im.channels; ++k){
+        for(i = 0; i < im.cols*im.rows; ++i){
+            data[i*im.channels+k] = (unsigned char) im.data[i + k*im.cols*im.rows];
+        }
+    }
+
+    int success = 0;
+    if(f == "png")       success = stbi_write_png(filename.c_str(), im.cols, im.rows, im.channels, data, im.cols*im.channels);
+    else if (f == "bmp") success = stbi_write_bmp(filename.c_str(), im.cols, im.rows, im.channels, data);
+    else if (f == "tga") success = stbi_write_tga(filename.c_str(), im.cols, im.rows, im.channels, data);
+    else if (f == "jpg") success = stbi_write_jpg(filename.c_str(), im.cols, im.rows, im.channels, data, 80);
+
+    free(data);
+    if(!success) std::cerr << "Failed to write image " << filename.c_str() << std::endl;
 
 }
 
