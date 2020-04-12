@@ -14,5 +14,5 @@ $ tar xvzf mnist.tar.gz
 - 编译 example 程序
 ```bashrc
 $ make example01
-$ ./example01
+$ ./example01 images/sample.png 3
 ```
