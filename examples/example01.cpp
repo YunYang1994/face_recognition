@@ -38,7 +38,7 @@ int main(int argc, char **argv){
 
     std::string image_path = argv[1];
     Image im = imread(argv[1], 1);
-    imwrite("test.png", im);
+    imwrite("test.bmp", im);
 
     Image km = im.copy();
 
