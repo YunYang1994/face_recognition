@@ -24,6 +24,6 @@ int main(int argc, char **argv){
     std::string image_path = argv[1];
     Image im = imread(argv[1], atoi(argv[2]));
 
-    imwrite("sample.png", im);
+    imwrite("result.png", im);
     return 0;
 }

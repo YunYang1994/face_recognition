@@ -23,11 +23,9 @@ Image::Image(int h, int w, int c){                          // 构造函数
     size = h * w * c;
 
     data = (float *)calloc(size, sizeof(float));
-    std::cout << "调用构造函数 " << data << std::endl;
 }
 
 Image::~Image(){                                           // 析构函数
-    std::cout << "调用析构函数 " << data << std::endl;
     free(data);                                            // 释放空间
     data = NULL;
 }
@@ -40,7 +38,6 @@ Image::Image(const Image &im){                             // 拷贝构造函数
 
     this->data = (float *)calloc(im.size, sizeof(float));
     memcpy(this->data, im.data, im.size * sizeof(float));
-    std::cout << "调用拷贝构造函数 " << im.data << " -> " << data << std::endl;
 }
 
 float &Image::at(int y, int x, int z) const{              // 加 const 是为了不改变成员, & 则是引用，可以改变像素值
