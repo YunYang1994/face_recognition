@@ -64,11 +64,10 @@ Image Image::copy(){
 
 Image imread(std::string filename, int channels){
     int w, h, c;
-    char *p = (char *)filename.c_str();
 
-    unsigned char *data = stbi_load(p, &w, &h, &c, channels);
+    unsigned char *data = stbi_load(filename.c_str(), &w, &h, &c, channels);
     if(!data){
-        fprintf(stderr, "Cannot load image \"%s\"\nSTB Reason: %s\n", p, stbi_failure_reason());
+        fprintf(stderr, "Cannot load image \"%s\"\nSTB Reason: %s\n", filename.c_str(), stbi_failure_reason());
         exit(0);
     }
 

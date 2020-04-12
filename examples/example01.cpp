@@ -9,6 +9,8 @@
 *
 *===============================================================*/
 
+#include <string>
+#include <iostream>
 #include "yynet.hpp"
 
 void print_image(Image im)
@@ -28,8 +30,14 @@ void print_image(Image im)
     printf("\n");
 }
 
-int main(){
-    Image im = imread("/Users/yangyun/mnist/test/000000-num7.png", 1);
+int main(int argc, char **argv){
+    if(argc != 2){
+        std::cerr << "useage: " << argv[0] << " <image_path>" << std::endl;
+        exit(0);
+    }
+
+    std::string image_path = argv[1];
+    Image im = imread(argv[1], 1);
 
     Image km = im.copy();
 
