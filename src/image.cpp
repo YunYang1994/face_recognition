@@ -15,7 +15,7 @@
 #include "image.hpp"
 #include "stb_image.h"
 
-Image::Image(){                                                     // 默认构造函数
+Image::Image(){                                                     // 默认构造函数的初始化
     rows = 1;
     cols = 1;
     channels = 3;
