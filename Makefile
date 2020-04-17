@@ -3,7 +3,9 @@ FLAGS= -Iinclude -Isrc/ `pkg-config --libs opencv` -Wall -Wno-unknown-pragmas -W
 
 example01:
 	g++ examples/example01.cpp src/image.cpp -o example01 ${FLAGS}
+example02:
+	g++ examples/example02.cpp src/image.cpp -o example02 ${FLAGS}
 
 .PHONY: clean
 clean:
-	rm -rf example01
+	rm -rf example01 example02

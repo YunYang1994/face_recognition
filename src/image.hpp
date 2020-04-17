@@ -31,6 +31,9 @@ class Image{
 
         float &at(int y, int x, int z) const;      // 按照 [H, W, C] 顺序索引像素值
         Image copy();
+
+        Image gray();                              // 转灰度图函数
+        Image resize(int w, int h);                // 图像的 resize 操作，双线性插值
 };
 
 Image imread(std::string filename, int channels);  // 读取图片

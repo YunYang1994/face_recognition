@@ -62,10 +62,22 @@ Image& Image::operator=(const Image &other){
     return *this;
 }
 
+Image Image::gray(){                                  // 彩色图转灰度图，三个颜色通道求平均即可
+    if(channels == 1) return *this;
+    Image im(rows, cols, 1);
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<cols; j++)
+            im.at(i,j,0) = (*this).at(i, j, 0) / 3.f + (*this).at(i, j, 1) / 3.f + (*this).at(i, j, 2) / 3.f;
+    return im;
+}
+
+Image Image::resize(int w, int h){
+    Image im(w, h, channels);
+    return im;
+}
 
 
-
-float &Image::at(int y, int x, int z) const{                        // 加 const 是为了不改变成员, & 则是引用，可以改变像素值
+float &Image::at(int y, int x, int z) const{              // 加 const 是为了不改变成员, 但可以改变像素值, & 则是引用
     assert(x < cols && y < rows && z < channels);
     return data[x + y*cols + z*rows*cols];
 }
