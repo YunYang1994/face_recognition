@@ -33,9 +33,7 @@ class Image{
         Image copy();
 };
 
-// 读取图片
-Image imread(std::string filename, int channels);
-// 写出图片
-void imwrite(std::string filename, Image im);
+Image imread(std::string filename, int channels);  // 读取图片
+void imwrite(std::string filename, Image im);      // 写出图片
 
 #endif
