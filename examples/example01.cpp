@@ -21,12 +21,8 @@ int main(int argc, char **argv){
         exit(0);
     }
 
-    std::string image_path = argv[1];
     Image im = imread(argv[1], atoi(argv[2]));
-    Image jm;
+    imwrite("result.png", im);
 
-    jm = im.copy();
-
-    imwrite("result.png", jm);
     return 0;
 }
