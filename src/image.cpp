@@ -29,8 +29,8 @@ Image::Image(int h, int w, int c){                                  // 构造函
     cols = w;
     channels = c;
     size = h * w * c;
-
-    data = (float *)calloc(size, sizeof(float));
+                                                                    // 跟 mallo c的区别：calloc 在动态分配完内存后，自动初始化该内存空间为零
+    data = (float *)calloc(size, sizeof(float));                    // 而 malloc 不初始化，里边数据是随机的垃圾数据
 }
 
 Image::~Image(){                                                    // 析构函数
@@ -77,7 +77,7 @@ Image Image::copy(){
     return im;
 }
 
-
+                                                                   // 利用 stb_image.h 和 stb_image_write.h 来读写图片
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
