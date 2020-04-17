@@ -29,8 +29,8 @@ Image::Image(int h, int w, int c){                                  // 构造函
     cols = w;
     channels = c;
     size = h * w * c;
-                                                                    // 跟 mallo c的区别：calloc 在动态分配完内存后，自动初始化该内存空间为零
-    data = (float *)calloc(size, sizeof(float));                    // 而 malloc 不初始化，里边数据是随机的垃圾数据
+                                                        // 跟 mallo c的区别：calloc 在动态分配完内存后，自动初始化该内存空间为零
+    data = (float *)calloc(size, sizeof(float));        // 而 malloc 不初始化，里边数据是随机的垃圾数据
 }
 
 Image::~Image(){                                                    // 析构函数
