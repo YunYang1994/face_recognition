@@ -15,8 +15,16 @@
 #include "image.hpp"
 #include "stb_image.h"
 
+Image::Image(){                                                     // 默认构造函数
+    rows = 1;
+    cols = 1;
+    channels = 3;
+    size = 3;
 
-Image::Image(int h, int w, int c){                          // 构造函数
+    data = (float *)calloc(size, sizeof(float));
+}
+
+Image::Image(int h, int w, int c){                                  // 构造函数
     rows = h;
     cols = w;
     channels = c;
@@ -25,22 +33,39 @@ Image::Image(int h, int w, int c){                          // 构造函数
     data = (float *)calloc(size, sizeof(float));
 }
 
-Image::~Image(){                                           // 析构函数
-    free(data);                                            // 释放空间
+Image::~Image(){                                                    // 析构函数
+    free(data);                                                     // 释放空间
     data = NULL;
 }
 
-Image::Image(const Image &im){                             // 拷贝构造函数
-    this->rows = im.rows;
-    this->cols = im.cols;
-    this->size = im.size;
-    this->channels = im.channels;
+Image::Image(const Image &other){                                   // 拷贝构造函数
+    this->rows = other.rows;
+    this->cols = other.cols;
+    this->size = other.size;
+    this->channels = other.channels;
 
-    this->data = (float *)calloc(im.size, sizeof(float));
-    memcpy(this->data, im.data, im.size * sizeof(float));
+    this->data = (float *)calloc(other.size, sizeof(float));        // 重新申请一块内存
+    memcpy(this->data, other.data, other.size * sizeof(float));     // 将数据拷贝过来
 }
 
-float &Image::at(int y, int x, int z) const{              // 加 const 是为了不改变成员, & 则是引用，可以改变像素值
+Image& Image::operator=(const Image &other){
+    if(&other != this){
+        this->rows = other.rows;
+        this->cols = other.cols;
+        this->size = other.size;
+        this->channels = other.channels;
+
+        free(this->data);                                           // 必须释放原有的内存，然后再重新申请一块内存
+        this->data = (float *)calloc(other.size, sizeof(float));
+        memcpy(this->data, other.data, other.size * sizeof(float));
+    }
+    return *this;
+}
+
+
+
+
+float &Image::at(int y, int x, int z) const{                        // 加 const 是为了不改变成员, & 则是引用，可以改变像素值
     assert(x < cols && y < rows && z < channels);
     return data[x + y*cols + z*rows*cols];
 }

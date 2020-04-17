@@ -23,11 +23,13 @@ class Image{
         int channels;
         int size;
 
-        Image(int h, int w, int c);             // 构造函数
-        ~Image();                               // 析构函数
-        Image(const Image &im);                 // 拷贝构造函数
+        Image();
+        Image(int h, int w, int c);                // 构造函数
+        ~Image();                                  // 析构函数
+        Image(const Image &other);                 // 拷贝构造函数
+        Image& operator=(const Image &other);      // 赋值函数
 
-        float &at(int y, int x, int z) const;   // 按照 [H, W, C] 顺序索引像素值
+        float &at(int y, int x, int z) const;      // 按照 [H, W, C] 顺序索引像素值
         Image copy();
 };
 
