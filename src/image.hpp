@@ -80,7 +80,7 @@ class Image{
 
         Image gray();                              // 转灰度图函数
         Image resize(int w, int h);                // 图像的 resize 操作，最近邻插值
-        Image resize(float factor);
+        Image resize(float scale);
 };
 
 Image imread(std::string filename, int channels);  // 读取图片

@@ -47,9 +47,9 @@ Image Image::resize(int w, int h){                    // 最近邻插值函数
 }
 
 
-Image Image::resize(float factor){
-    int w = cols * factor;
-    int h = rows * factor;
+Image Image::resize(float scale){
+    int w = cols * scale;
+    int h = rows * scale;
     Image im = this->resize(w, h);
     return im;
 }
