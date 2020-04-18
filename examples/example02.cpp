@@ -21,9 +21,9 @@ int main(int argc, char **argv){
         exit(0);
     }
 
-    Image im = imread(argv[1], atoi(argv[2]));
+    Image im = imread(argv[1], atoi(argv[2])); // 读取图片
 
-    Image gm = im.gray();
+    Image gm = im.gray();                      // 灰度转化
     Image rm = im.resize(2);    // 放大两倍
 
     imwrite("color.png", im);
