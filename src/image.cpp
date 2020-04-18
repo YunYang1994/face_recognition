@@ -15,57 +15,6 @@
 #include "image.hpp"
 #include "stb_image.h"
 
-Image::Image(){                                                     // 默认构造函数的初始化
-    rows = 1;
-    cols = 1;
-    channels = 3;
-    size = 3;
-
-    data = (float *)calloc(size, sizeof(float));
-}
-
-Image::Image(int h, int w, int c){                                  // 构造函数
-    rows = h;
-    cols = w;
-    channels = c;
-    size = h * w * c;
-
-    data = (float *)calloc(size, sizeof(float));        // calloc 在动态分配完内存后，自动初始化该内存空间为零
-}
-
-Image::~Image(){                                                    // 析构函数
-    free(data);                                                     // 释放空间
-    data = NULL;
-}
-
-Image::Image(const Image &other){                                   // 拷贝构造函数
-    this->rows = other.rows;
-    this->cols = other.cols;
-    this->size = other.size;
-    this->channels = other.channels;
-
-    this->data = (float *)calloc(other.size, sizeof(float));        // 重新申请一块内存
-    memcpy(this->data, other.data, other.size * sizeof(float));     // 将数据拷贝过来
-}
-
-Image& Image::operator=(const Image &other){
-    if(&other != this){
-        this->rows = other.rows;
-        this->cols = other.cols;
-        this->size = other.size;
-        this->channels = other.channels;
-
-        free(this->data);                                           // 必须释放原有的内存，然后再重新申请一块内存
-        this->data = (float *)calloc(other.size, sizeof(float));
-        memcpy(this->data, other.data, other.size * sizeof(float));
-    }
-    return *this;
-}
-
-float &Image::at(int y, int x, int z) const{              // 访问像素函数，加 const 是为了不改变成员, 但可以改变像素值, & 则是引用
-    assert(x < cols && y < rows && z < channels);
-    return data[x + y*cols + z*rows*cols];
-}
 
 Image Image::gray(){                                  // 彩色图转灰度图，三个颜色通道求平均即可
     if(channels == 1) return *this;
@@ -75,6 +24,7 @@ Image Image::gray(){                                  // 彩色图转灰度图�
             im.at(i,j,0) = (*this).at(i, j, 0) / 3.f + (*this).at(i, j, 1) / 3.f + (*this).at(i, j, 2) / 3.f;
     return im;
 }
+
 
 Image Image::resize(int w, int h){                    // 最近邻插值函数
     assert(w>0 & h>0);
@@ -95,6 +45,7 @@ Image Image::resize(int w, int h){                    // 最近邻插值函数
     }
     return im;
 }
+
 
 Image Image::resize(float factor){
     int w = cols * factor;
