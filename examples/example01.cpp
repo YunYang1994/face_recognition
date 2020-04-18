@@ -20,8 +20,8 @@ int main(int argc, char **argv){
         std::cerr << "useage: " << argv[0] << " <image_path>" << " <channels>" << std::endl;
         exit(0);
     }
-
-    Image im = imread(argv[1], atoi(argv[2]));  // 读取图片，设置 channels 变量是为了要知道读取灰度图(channels=1)还是彩色图(channels=3)
+    // 读取图片，设置 channels 变量是为了要知道读取灰度图(channels=1)还是彩色图(channels=3)
+    Image im = imread(argv[1], atoi(argv[2]));  
     imwrite("result.png", im);                  // 保存图片
 
     return 0;
