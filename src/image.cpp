@@ -29,7 +29,7 @@ Image Image::gray(){                                  // 彩色图转灰度图�
 Image Image::resize(int w, int h){                    // 最近邻插值函数
     assert(w>0 & h>0);
 
-    float scale_h = (float)(rows-1) / (h-1);
+    float scale_h = (float)(rows-1) / (h-1);          // 求出 resize 的比例
     float scale_w = (float)(cols-1) / (w-1);
 
     Image im(h, w, channels);
@@ -37,8 +37,8 @@ Image Image::resize(int w, int h){                    // 最近邻插值函数
     for(int i=0; i<h; i++){
         for(int j=0; j<w; j++){
             for(int k=0; k<channels; k++){
-                int ori = round(i * scale_h);
-                int orj = round(j * scale_w);
+                int ori = round(i * scale_h);               // 根据这个比例，求出原图上对应的坐标 (ori, orj)
+                int orj = round(j * scale_w);               // round 四舍五入, 求出最近的整数
                 im.at(i, j, k) = (*this).at(ori, orj, k);
             }
         }
