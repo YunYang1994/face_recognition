@@ -10,8 +10,8 @@
 *===============================================================*/
 
 #include <stdio.h>
+#include <cmath>
 #include <string>
-
 #include "image.hpp"
 #include "stb_image.h"
 
@@ -62,6 +62,11 @@ Image& Image::operator=(const Image &other){
     return *this;
 }
 
+float &Image::at(int y, int x, int z) const{              // 访问像素函数，加 const 是为了不改变成员, 但可以改变像素值, & 则是引用
+    assert(x < cols && y < rows && z < channels);
+    return data[x + y*cols + z*rows*cols];
+}
+
 Image Image::gray(){                                  // 彩色图转灰度图，三个颜色通道求平均即可
     if(channels == 1) return *this;
     Image im(rows, cols, 1);
@@ -71,15 +76,31 @@ Image Image::gray(){                                  // 彩色图转灰度图�
     return im;
 }
 
-Image Image::resize(int w, int h){
-    Image im(w, h, channels);
+Image Image::resize(int w, int h){                    // 最近邻插值函数
+    assert(w>0 & h>0);
+
+    float scale_h = (float)(rows-1) / (h-1);
+    float scale_w = (float)(cols-1) / (w-1);
+
+    Image im(h, w, channels);
+
+    for(int i=0; i<h; i++){
+        for(int j=0; j<w; j++){
+            for(int k=0; k<channels; k++){
+                int ori = round(i * scale_h);
+                int orj = round(j * scale_w);
+                im.at(i, j, k) = (*this).at(ori, orj, k);
+            }
+        }
+    }
     return im;
 }
 
-
-float &Image::at(int y, int x, int z) const{              // 加 const 是为了不改变成员, 但可以改变像素值, & 则是引用
-    assert(x < cols && y < rows && z < channels);
-    return data[x + y*cols + z*rows*cols];
+Image Image::resize(float factor){
+    int w = cols * factor;
+    int h = rows * factor;
+    Image im = this->resize(w, h);
+    return im;
 }
 
 

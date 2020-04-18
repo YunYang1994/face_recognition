@@ -22,12 +22,13 @@ int main(int argc, char **argv){
     }
 
     Image im = imread(argv[1], atoi(argv[2]));
-    Image jm = im.resize(416, 416);
 
     Image gm = im.gray();
+    Image rm = im.resize(2);    // 放大两倍
 
     imwrite("color.png", im);
     imwrite("gray.png",  gm);
+    imwrite("resize.png",rm);
 
     return 0;
 }

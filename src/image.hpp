@@ -34,6 +34,7 @@ class Image{
 
         Image gray();                              // 转灰度图函数
         Image resize(int w, int h);                // 图像的 resize 操作，双线性插值
+        Image resize(float factor);
 };
 
 Image imread(std::string filename, int channels);  // 读取图片
