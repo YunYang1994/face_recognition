@@ -10,8 +10,10 @@
 *===============================================================*/
 
 #include <stdio.h>
+#include <assert.h>
 #include <cmath>
-#include <string>
+#include <cstring>
+
 #include "image.hpp"
 #include "stb_image.h"
 

@@ -12,7 +12,8 @@
 #ifndef IMAGE_HPP
 #define IMAGE_HPP
 
-#include <string>
+#include <cstring>
+#include <assert.h>
 #include <iostream>
 
 class Image{
