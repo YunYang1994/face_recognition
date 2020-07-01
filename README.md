@@ -1,4 +1,4 @@
-In this repository you will learn to build your own neural-network from scratch. To get started make sure you have `git`, a C compiler, and `make` installed. Then run:
+In this repository you will learn to build your own neural-network from scratch. To get started make sure you have `git`, a C/C++ compiler, and `make` installed. Then run:
 
 
 ⏳ Contents
