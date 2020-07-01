@@ -1,20 +1,21 @@
-我本人呢，非常喜欢编程和深度学习，因此把别人喝咖啡的功夫用在了这个仓库上。里面的代码**包含了大量的中文注释，并且几乎每一个操作都是底层实现，没有调用任何第三方库**。我是强烈建议你下载它的，如果你发现了任何的错误或有更好的意见，欢迎提 issue 和给我发邮件: dreameryangyun@sjtu.edu.cn
+In this repository you will learn to build your own neural-network from scratch. To get started make sure you have `git`, a C compiler, and `make` installed. Then run:
 
-⏳ 更新目录
+
+⏳ List of contents
 --------------------
 
-- [x] 2020-04-11 支持读写图片，构建基础图像类 Image，详见 [example01.cpp](https://github.com/YunYang1994/yynet/blob/master/examples/example01.cpp)
-- [x] 2020-04-18 支持图片的 resize，copy，和 gray 等操作，详见 [example02.cpp](https://github.com/YunYang1994/yynet/blob/master/examples/example02.cpp)
+- [x] support to load image，more details see [example01.cpp](https://github.com/YunYang1994/yynet/blob/master/examples/example01.cpp)
+- [x] support to resize, copy and gray in image processing，more details see [example02.cpp](https://github.com/YunYang1994/yynet/blob/master/examples/example02.cpp)
 
 ⚙️ 使用方法
 --------------------
 
-- 下载 mnist 数据
+- download mnist data
 ```bashrc
 $ wget https://pjreddie.com/media/files/mnist.tar.gz
 $ tar xvzf mnist.tar.gz
 ```
-- 编译 example 程序
+- make your example
 ```bashrc
 $ make example01
 $ ./example01 images/sample.png 3
