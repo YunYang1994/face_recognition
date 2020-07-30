@@ -55,7 +55,8 @@ def extract_oneface(image, marigin=16):
         ymax = min(bounding_box[1] + bounding_box[3] + marigin, h)
 
         crop_image = align_image[ymin:ymax, xmin:xmax, :]
-        # "just need only one face"
+        print(crop_image.shape)
+        "just need only one face"
         return crop_image
 
 if __name__ == "__main__":
@@ -87,12 +88,10 @@ if __name__ == "__main__":
 
                 h, w, _ = face.shape
                 image[:h, :w, :] = face
-                cv2.putText(image, "%d/10" %img_idx, (new_w-100, 50),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 2)
 
                 cv2.imshow('detecting face', image)
                 key = cv2.waitKey(30)
-                if key == ord('q') or img_idx == 10:
+                if key == ord('q'):
                     break
                 elif key == ord('s'):
                     cv2.imwrite("./database/%s/%d.jpg" %(args.person, img_idx), face)
@@ -103,7 +102,6 @@ if __name__ == "__main__":
 
     else:
         for img_path in glob.glob(person_path+"/*.jpg"):
-            print(img_path)
             image = cv2.imread(img_path)
             face = extract_oneface(image)
             cv2.imwrite(img_path, face)

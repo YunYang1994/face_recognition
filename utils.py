@@ -16,7 +16,6 @@ import cv2
 import time
 import numpy as np
 
-# persons = ['Jay', 'Sam', 'ChenHe', 'KunLin', 'ZhangHanYu']
 persons = os.listdir("database")
 
 def recognize_face(q_emb, threshold=0.89):
@@ -80,7 +79,7 @@ def detect_face(img, minsize, pnet, rnet, onet, threshold, factor):
         im_data = (im_data-127.5)*0.0078125
         img_x = np.expand_dims(im_data, 0)
         img_y = np.transpose(img_x, (0,2,1,3))
-        out = pnet.predict_on_batch(img_y)
+        out = pnet(img_y)
         out0 = np.transpose(out[0], (0,2,1,3))
         out1 = np.transpose(out[1], (0,2,1,3))
 
@@ -120,7 +119,7 @@ def detect_face(img, minsize, pnet, rnet, onet, threshold, factor):
                 return np.empty()
         tempimg = (tempimg-127.5)*0.0078125
         tempimg1 = np.transpose(tempimg, (3,1,0,2))
-        out = rnet.predict_on_batch(tempimg1)
+        out = rnet(tempimg1)
         out0 = np.transpose(out[0])
         out1 = np.transpose(out[1])
         score = out1[1,:]
@@ -148,7 +147,7 @@ def detect_face(img, minsize, pnet, rnet, onet, threshold, factor):
                 return np.empty()
         tempimg = (tempimg-127.5)*0.0078125
         tempimg1 = np.transpose(tempimg, (3,1,0,2))
-        out = onet.predict_on_batch(tempimg1)
+        out = onet(tempimg1)
         out0 = np.transpose(out[0])
         out1 = np.transpose(out[1])
         out2 = np.transpose(out[2])

@@ -35,11 +35,8 @@ while(cap.isOpened()):
 
         org_image = image.copy()
         # detecting faces
-        # t1 = time.time()
         image = cv2.cvtColor(image ,cv2.COLOR_BGR2RGB)
         total_boxes, points = detect_face(image, 20, pnet, rnet, onet, [0.6, 0.7, 0.7], 0.709)
-        # t2 = time.time()
-        # print("time: %.2fms" %((t2-t1)*1000))
 
         for idx, (bounding_box, keypoints) in enumerate(zip(total_boxes, points.T)):
             bounding_boxes = {

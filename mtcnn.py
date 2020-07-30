@@ -119,8 +119,8 @@ pnet, rnet, onet = PNet(), RNet(), ONet()
 pnet(tf.ones(shape=[1,  12,  12, 3]))
 rnet(tf.ones(shape=[1,  24,  24 ,3]))
 onet(tf.ones(shape=[1,  48,  48, 3]))
-load_weights(pnet, "./weights/det1.npy")
-load_weights(rnet, "./weights/det2.npy")
-load_weights(onet, "./weights/det3.npy")
+load_weights(pnet, "./models/det1.npy")
+load_weights(rnet, "./models/det2.npy")
+load_weights(onet, "./models/det3.npy")
 
 
