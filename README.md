@@ -36,7 +36,7 @@ $ python register_face.py -person Jay
 |Method | LFW(%) | CFP-FP(%) | AgeDB-30(%) | MegaFace(%)| TensorFlow | 权重链接 |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | MobileFaceNet | 99.50 | 88.94 | 95.91 | --- | 35ms | [提取码: xgmo](https://pan.baidu.com/s/1QIYpHYazaPMTI0E15WRGug)
-| MobileFaceNet | 99.77 | 98.27 | 98.28 | 98.47 | 435ms | [下载](https://github.com/YunYang1994/face_recognition/blob/master/weights/mobilefacenet.npy)
+| MobileFaceNet | 99.77 | 98.27 | 98.28 | 98.47 | 435ms | [下载链接](https://github.com/YunYang1994/face_recognition/blob/master/weights/mobilefacenet.npy)
 
 
 识别模型用的是 `MobileFaceNet` 网络，这里直接使用了 [insightface](https://github.com/deepinsight/insightface) 在 ms1m-refine-v1 三百万多万张人脸数据集上训练的模型。这部分工作在 `mxnet` 分支上，你可以通过 `git checkout mxnet` 进行切换。
