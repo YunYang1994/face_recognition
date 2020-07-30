@@ -33,7 +33,7 @@ $ python register_face.py -person Jay
 ## 识别人脸
 --------------------
 
-|Method | LFW(%) | CFP-FP(%) | AgeDB-30(%) | MegaFace(%)| on Macos | 权重链接 |
+|Method | LFW(%) | CFP-FP(%) | AgeDB-30(%) | MegaFace(%)| cpu-time | 权重链接 |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | MobileFaceNet | 99.50 | 88.94 | 95.91 | --- | 35ms | [提取码: xgmo](https://pan.baidu.com/s/1QIYpHYazaPMTI0E15WRGug)
 | IResNet | 99.77 | 98.27 | 98.28 | 98.47 | 435ms | [下载链接](https://github.com/YunYang1994/face_recognition/blob/master/weights/mobilefacenet.npy)
