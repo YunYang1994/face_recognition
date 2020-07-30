@@ -1,10 +1,10 @@
 ## 人脸识别
 --------------------
-这个仓库是使用`TensorFlow 2.0`框架，并基于 [cvpr2019-arcface](https://openaccess.thecvf.com/content_CVPR_2019/papers/Deng_ArcFace_Additive_Angular_Margin_Loss_for_Deep_Face_Recognition_CVPR_2019_paper.pdf) 论文上完成的，其中主要分为四大块：人脸检测、人脸矫正、提取特征和特征比对。各个模块的大小和在 17 款 macbook-pro 的 CPU 上跑耗时如下：
+这个仓库是使用`TensorFlow 2.0`框架，并基于 [cvpr2019-arcface](https://openaccess.thecvf.com/content_CVPR_2019/papers/Deng_ArcFace_Additive_Angular_Margin_Loss_for_Deep_Face_Recognition_CVPR_2019_paper.pdf) 论文上完成的，其中主要分为四大块：人脸检测、人脸矫正、提取特征和特征比对。各个模块的大小和在我的 17 款 macbook-pro 的 CPU 上跑耗时如下：
 
-- 人脸检测：使用的是 mtcnn 网络，模型大小约 1.9MB，耗时约 70ms；
+- 人脸检测：使用的是 mtcnn 网络，模型大小约 1.9MB，耗时约 30ms；
 - 人脸矫正：OpenCV 的仿射变换，耗时约 0.83ms；
-- 提取特征：使用 MobileFaceNet 和 IResNet 网络；
+- 提取特征：使用 MobileFaceNet 和 IResNet 网络，耗时约30ms；
 - 特征比对：使用曼哈顿距离，单次搜索和完成比对耗时约 0.011 ms；
 
 
@@ -35,7 +35,6 @@ $ python register_face.py -person Jay
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | MobileFaceNet | 99.50 | 88.94 | 95.91 | --- | 35ms | [提取码: xgmo](https://pan.baidu.com/s/1QIYpHYazaPMTI0E15WRGug)
 | MobileFaceNet | 99.77 | 98.27 | 98.28 | 98.47 | 435ms | --
-
 
 
 识别模型用的是 `MobileFaceNet` 网络，这里直接使用了 [insightface](https://github.com/deepinsight/insightface) 在 ms1m-refine-v1 三百万多万张人脸数据集上训练的模型。这部分工作在 `mxnet` 分支上，你可以通过 `git checkout mxnet` 进行切换。
