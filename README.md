@@ -7,6 +7,7 @@
 - 提取特征：使用 MobileFaceNet 和 IResNet 网络，耗时约30ms；
 - 特征比对：使用曼哈顿距离，单次搜索和完成比对耗时约 0.011 ms；
 
+![image](https://raw.githubusercontent.com/YunYang1994/face_recognition/master/weights/demo.png)
 
 ## 注册人脸
 --------------------
