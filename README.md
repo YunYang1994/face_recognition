@@ -5,7 +5,7 @@
 - 人脸检测：使用的是 mtcnn 网络，模型大小约 1.9MB，耗时约 30ms；
 - 人脸矫正：OpenCV 的仿射变换，耗时约 0.83ms；
 - 提取特征：使用 MobileFaceNet（或IResNet）网络，耗时约30ms；
-- 特征比对：使用曼哈顿距离，单次搜索和完成比对耗时约 0.011 ms；
+- 特征比对：使用曼哈顿距离，单次搜索和完成比对耗时约 0.0111 ms；
 
 <p align="center">
     <img width="80%" src="https://raw.githubusercontent.com/YunYang1994/face_recognition/master/weights/demo.png" style="max-width:65%;">
